@@ -1,0 +1,61 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+
+    <table>
+      <tr>
+        <th>名前</th>
+      </tr>
+      <tr>
+        <th><%= f.label :姓 %></th>
+        <th><%= f.label :名 %></th>
+      </tr>
+      <tr>
+        <th><%= f.text_field :surname, autofocus: true, autocomplete: "surname" %></th>
+        <th><%= f.text_field :name, autofocus: true, autocomplete: "name" %></th>
+      </tr>
+
+      <tr>
+        <th>電話番号</th>
+      </tr>
+      <tr>
+        <th><%= f.text_field :phone, autofocus: true, autocomplete: "phone" %></th>
+      </tr>
+
+      <tr>
+        <th><%= f.label :email %></th>
+      </tr>
+      <tr>
+        <th><%= f.email_field :email, autofocus: true, autocomplete: "email" %></th>
+      </tr>
+
+      <tr>
+        <th><%= f.label :password %></th>
+      </tr>
+      <tr>
+        <th>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </th>
+      </tr>
+
+      <tr>
+        <th><%= f.label :password_confirmation %></th>
+      </tr>
+      <tr>
+        <th><%= f.password_field :password_confirmation, autocomplete: "new-password" %></th>
+      </tr>
+
+    </table>
+
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
