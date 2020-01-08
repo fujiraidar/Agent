@@ -1,0 +1,24 @@
+
+
+<div class="container">
+
+<h3>記事</h3>
+
+    <%= @info.language %>
+
+    <%= @info.title %>
+
+    <%= @info.body %>
+
+    <% if @info.user_id == current_user.id %>
+
+        <%= link_to "このを編集する", edit_user_engineer_info_path(current_user.id,@engineer,@info) %>
+
+        <%= link_to "このを削除する", user_engineer_info_path(current_user.id,@engineer,@info), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+    <% end %>
+
+    <%= link_to "記事の一覧へ", infos_path %>
+
+
+</div>

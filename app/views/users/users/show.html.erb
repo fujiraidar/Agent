@@ -1,0 +1,21 @@
+
+
+<h3>My page</h3>
+
+
+<p><%= @user.surname %><%= @user.name %>様</p>
+<p>電話番号<%= @user.phone %></p>
+<p>メールアドレス<%= @user.email %></p>
+
+
+
+<% current_user.engineers.each do |e| %>
+
+<% e.infos.each do |i| %>
+
+<% end %>
+<% end %>
+
+<% current_user.helps.each do |h| %>
+
+<% end %>

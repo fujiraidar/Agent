@@ -1,0 +1,19 @@
+<div class="nested-fields well well-compact">
+  <div class="form-group">
+    <%= f.label :開発経験のある言語 %>
+    <%= f.text_field :language %><br>
+    <%= f.label :経験年数 %>
+    <%= f.number_field :experience_year, value: 1 %>年(未満)<br>
+      <%= link_to_remove_association "削除", f %>
+  </div>
+       <%= f.label :実績 %><br>
+  <div class="performance">
+    <%= f.fields_for :performances do |performance| %>
+      <%= render 'performance_fields', f: performance %>
+    <%end%>
+    <div class="links">
+      <%= link_to_add_association "実績を記入する", f, :performances %>
+
+    </div>
+  </div>
+</div>

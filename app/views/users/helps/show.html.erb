@@ -1,0 +1,24 @@
+
+
+<div class="container">
+
+<h3>ヘルプ</h3>
+
+    <%= @help.language %>
+
+    <%= @help.title %>
+
+    <%= @help.help %>
+
+    <% if @help.user_id == current_user.id %>
+
+        <%= link_to "このヘルプを編集する", edit_user_help_path(@help) %>
+
+        <%= link_to "このヘルプを削除する", user_help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+
+    <% end %>
+
+    <%= link_to "ヘルプの一覧へ", user_helps_path %>
+
+
+</div>

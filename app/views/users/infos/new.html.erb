@@ -1,0 +1,23 @@
+
+
+<h2>記事</h2>
+
+<%= form_for @info, url: user_engineer_infos_path(current_user.id,@engineer) , method: :post do |f| %>
+
+<div class="field row">
+  <label>プログラミング言語</label>
+	<%= f.text_field :language ,class: "col-xs-12" %>
+</div>
+
+　<label>タイトル</label>
+	<%= f.text_field :title ,class: "col-xs-12" %>
+
+　<label>本文</label>
+	<%= f.text_area :body ,class: "col-xs-12" %>
+
+	<%= f.submit "登録" %>
+
+	<%= link_to "記事の一覧へ", infos_path %>
+
+
+<% end %>

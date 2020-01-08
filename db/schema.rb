@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_01_07_043058) do
   end
 
   create_table "engineers", force: :cascade do |t|
-    t.integer "profile_image", null: false
+    t.string "profile_image_id", null: false
     t.text "introduction", null: false
     t.integer "rank", null: false
     t.integer "offer", null: false
@@ -51,6 +51,10 @@ ActiveRecord::Schema.define(version: 2020_01_07_043058) do
   end
 
   create_table "helps", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "language", null: false
+    t.string "title", null: false
+    t.text "help", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,14 +63,14 @@ ActiveRecord::Schema.define(version: 2020_01_07_043058) do
     t.integer "engineer_id", null: false
     t.string "title", null: false
     t.text "body", null: false
-    t.integer "language", null: false
+    t.string "language", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "languages", force: :cascade do |t|
     t.integer "engineer_id", null: false
-    t.integer "language", null: false
+    t.string "language", null: false
     t.integer "experience_year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
