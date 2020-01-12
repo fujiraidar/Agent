@@ -2,7 +2,7 @@
 <div class="container">
 <h2> QA </h2>
 
-<%= form_for @help, url: user_helps_path, method: :post do |f| %>
+<%= form_for @help, url: helps_path, method: :post do |f| %>
 
 
   <label>プログラミング言語</label>
@@ -16,7 +16,7 @@
 
 	<%= f.submit "ヘルプする" %>
 
-	<%= link_to "ヘルプの一覧へ", user_helps_path %>
+	<%= link_to "ヘルプの一覧へ", helps_path %>
 
 
 <% end %>

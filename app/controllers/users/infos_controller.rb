@@ -18,9 +18,9 @@ class Users::InfosController < ApplicationController
 
 	def create
 		info = Info.new(info_params)
-		info.user_id = current_user.id
+		info.engineer_id = current_user.id
 		if info.save
-			redirect_to user_engineer_info_path(current_user.id,@engineer,info)
+			redirect_to info_path(info)
 		else
 			render :new
 		end
@@ -29,7 +29,7 @@ class Users::InfosController < ApplicationController
 	def update
 		info = Info.find(params[:id])
 		if info.update(info_params)
-			redirect_to user_engineer_info_path(current_user.id,@engineer,info)
+			redirect_to info_path(info)
 		else
 			render :edit
 		end
@@ -38,12 +38,12 @@ class Users::InfosController < ApplicationController
 	def destroy
 		info = Info.find(params[:id])
 		info.destroy
-		redirect_to infos_path
+		redirect_to user_path(current_user.id)
 	end
 
 	private
 
 	def info_params
-		params.require(:info).permit(:user_id, :language, :title, :body)
+		params.require(:info).permit(:engineer_id, :language, :title, :body)
 	end
 end

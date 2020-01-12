@@ -2,7 +2,7 @@
 
 <h2> QA </h2>
 
-<%= form_for @help, url: user_help_path(@help), method: :patch do |f| %>
+<%= form_for @help, url: help_path(@help), method: :patch do |f| %>
 
 	<%= f.text_field :language  %>
 	<%= f.text_field :title %>

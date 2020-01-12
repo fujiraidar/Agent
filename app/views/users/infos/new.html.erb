@@ -1,23 +1,26 @@
 
 
-<h2>記事</h2>
+<div class="container_info">
 
-<%= form_for @info, url: user_engineer_infos_path(current_user.id,@engineer) , method: :post do |f| %>
+<%= form_for @info, url: infos_path , method: :post do |f| %>
 
-<div class="field row">
-  <label>プログラミング言語</label>
-	<%= f.text_field :language ,class: "col-xs-12" %>
-</div>
+  <div class="form-group">
+  	<%= f.text_field :title, placeholder: "タイトル (サイズは、Header 1)" %>
+  	<%= f.text_field :language, placeholder: "言語" %>
+  </div>
+  <div class="form-group">
 
-　<label>タイトル</label>
-	<%= f.text_field :title ,class: "col-xs-12" %>
+		<%= f.text_area :body, placeholder: "本文", :size => "80x50", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
+  </div>
 
-　<label>本文</label>
-	<%= f.text_area :body ,class: "col-xs-12" %>
-
-	<%= f.submit "登録" %>
-
-	<%= link_to "記事の一覧へ", infos_path %>
-
+  <div class="form-group row">
+  	<div class="col-md-10">
+  		<h2></h2>
+  	</div>
+  	<div class="col-md-2">
+  		<%= f.submit "登録", class: "btn btn-success" %>
+  	</div>
+  </div>
 
 <% end %>
+</div>

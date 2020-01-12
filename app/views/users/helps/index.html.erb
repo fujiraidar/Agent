@@ -2,7 +2,7 @@
 
 <h2>ヘルプ</h2>
 
-<%= link_to "新しくヘルプを作成する", new_user_help_path %>
+<%= link_to "新しくヘルプを作成する", new_help_path %>
 
 <table class="table table-hover table-inverse">
 　<thead>
@@ -18,13 +18,13 @@
   <% @helps.each do |helped| %>
 
     <tr>
-    	<th><%= link_to helped.language, user_help_path(current_user.id,helped) %></th>
+    	<th><%= link_to helped.language, help_path(helped) %></th>
     </tr>
     <tr>
-    	<th><%= link_to helped.title, user_help_path(current_user.id,helped)%></th>
+    	<th><%= link_to helped.title, help_path(helped)%></th>
     </tr>
     <tr>
-    	<th><%= link_to "詳細", user_help_path(current_user.id,helped) %></th>
+    	<th><%= link_to "詳細", help_path(helped) %></th>
     </tr>
 
   <% end %>

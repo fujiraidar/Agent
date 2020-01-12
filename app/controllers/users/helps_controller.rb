@@ -20,7 +20,7 @@ class Users::HelpsController < ApplicationController
 		help = Help.new(help_params)
 		help.user_id = current_user.id
 		if help.save
-			redirect_to user_help_path(current_user.id,help)
+			redirect_to help_path(help)
 		else
 			render :new
 		end
@@ -29,7 +29,7 @@ class Users::HelpsController < ApplicationController
 	def update
 		help = Help.find(params[:id])
 		if help.update(help_params)
-			redirect_to user_help_path(help)
+			redirect_to help_path(help)
 		else
 			render :edit
 		end
@@ -38,7 +38,7 @@ class Users::HelpsController < ApplicationController
 	def destroy
 		help = Help.find(params[:id])
 		help.destroy
-		redirect_to user_helps_path
+		redirect_to helps_path
 	end
 
 	private

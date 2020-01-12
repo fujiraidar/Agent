@@ -2,23 +2,25 @@
 
 <div class="container">
 
-<h3>記事</h3>
+    <p><h2><%= @info.title %></h2></strong></p>
 
-    <%= @info.language %>
+    <div class="row">
+    	<div class="col-md-7 offset-md-2">
+		    <p><strong><%= @info.language %></strong></p>
+		</div>
+		<div class="col-md-3">
+		    <% if @info.engineer_id == current_user.id %>
 
-    <%= @info.title %>
+		        <%= link_to "この記事を編集する", edit_info_path(@info) %>
+		        <%= link_to "この記事を削除する", info_path(@info), method: :delete, "data-confirm" => "本当に削除しますか？" %>
 
-    <%= @info.body %>
+		    <% end %>
+		</div>
+	</div>
 
-    <% if @info.user_id == current_user.id %>
+    <%= @info.body.html_safe %>
 
-        <%= link_to "このを編集する", edit_user_engineer_info_path(current_user.id,@engineer,@info) %>
-
-        <%= link_to "このを削除する", user_engineer_info_path(current_user.id,@engineer,@info), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-
-    <% end %>
-
+    <%= render 'infos', info: @info %>
     <%= link_to "記事の一覧へ", infos_path %>
-
 
 </div>

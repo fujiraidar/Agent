@@ -3,6 +3,14 @@ class Engineer < ApplicationRecord
 	has_many :languages, inverse_of: :engineer
 	accepts_nested_attributes_for :languages, reject_if: :all_blank, allow_destroy: true
 
+    has_many :infos
+
+    belongs_to :user
+
+    has_many :follows, dependent: :destroy
+    has_many :following_users, through: :follows, source: :user
+
+
 	attachment :profile_image
 
 	enum offer:{

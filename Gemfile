@@ -78,3 +78,8 @@ gem 'cocoon'
 
 gem 'pry-byebug'
 
+gem 'rails', '~> 5.2.4'
+gem 'summernote-rails', '~> 0.8.10.0'
+gem 'simple_form'
+gem 'wysiwyg-rails'
+

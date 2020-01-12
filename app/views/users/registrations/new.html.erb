@@ -1,61 +1,44 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
 
 
-    <table>
-      <tr>
-        <th>名前</th>
-      </tr>
-      <tr>
-        <th><%= f.label :姓 %></th>
-        <th><%= f.label :名 %></th>
-      </tr>
-      <tr>
-        <th><%= f.text_field :surname, autofocus: true, autocomplete: "surname" %></th>
-        <th><%= f.text_field :name, autofocus: true, autocomplete: "name" %></th>
-      </tr>
+<div class="container">
 
-      <tr>
-        <th>電話番号</th>
-      </tr>
-      <tr>
-        <th><%= f.text_field :phone, autofocus: true, autocomplete: "phone" %></th>
-      </tr>
+  <div class="mx-auto" style="width: 500px;">
 
-      <tr>
-        <th><%= f.label :email %></th>
-      </tr>
-      <tr>
-        <th><%= f.email_field :email, autofocus: true, autocomplete: "email" %></th>
-      </tr>
+    <h2><strong>会員登録</strong></h2>
 
-      <tr>
-        <th><%= f.label :password %></th>
-      </tr>
-      <tr>
-        <th>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password" %>
-        </th>
-      </tr>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-      <tr>
-        <th><%= f.label :password_confirmation %></th>
-      </tr>
-      <tr>
-        <th><%= f.password_field :password_confirmation, autocomplete: "new-password" %></th>
-      </tr>
+      <div class="form-group">
+        <%= f.label :ユーザー名 %><br />
+        <%= f.text_field :name, class: "col-md-12" %>
+      </div>
 
-    </table>
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-md-12" %>
+      </div>
 
+      <div class="form-group">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "col-md-12" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "col-md-12" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "会員登録", class: "btn btn-success col-md-12" %>
+      </div>
+    <% end %>
+
+    <%= render "companies/shared/links" %>
+
   </div>
-<% end %>
+</div>
 
-<%= render "users/shared/links" %>

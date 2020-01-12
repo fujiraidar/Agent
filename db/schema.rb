@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_043058) do
+ActiveRecord::Schema.define(version: 2020_01_08_075830) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,10 +42,29 @@ ActiveRecord::Schema.define(version: 2020_01_07_043058) do
   end
 
   create_table "engineers", force: :cascade do |t|
-    t.string "profile_image_id", null: false
+    t.integer "user_id"
+    t.string "surname"
+    t.string "name"
+    t.integer "age"
+    t.string "profile_image_id"
     t.text "introduction", null: false
     t.integer "rank", null: false
     t.integer "offer", null: false
+    t.integer "follows_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "info_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "engineer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -64,6 +83,16 @@ ActiveRecord::Schema.define(version: 2020_01_07_043058) do
     t.string "title", null: false
     t.text "body", null: false
     t.string "language", null: false
+    t.integer "favorites_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.integer "company_id"
+    t.string "job"
+    t.integer "status"
+    t.string "salary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -72,6 +101,16 @@ ActiveRecord::Schema.define(version: 2020_01_07_043058) do
     t.integer "engineer_id", null: false
     t.string "language", null: false
     t.integer "experience_year", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.integer "engineer_id"
+    t.integer "company_id"
+    t.string "job"
+    t.integer "status"
+    t.string "salary"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -89,9 +128,7 @@ ActiveRecord::Schema.define(version: 2020_01_07_043058) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "surname"
     t.string "name"
-    t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -1,0 +1,17 @@
+
+
+<%= form_for @job do |f| %>
+
+
+<%= f.label :job %><br>
+<%= f.text_area :job %>
+
+<%= f.label :salary %><br>
+<%= f.text_field :salary %>
+
+<%= f.label :status %><br>
+<%= f.select :status, Job.jobs.keys.to_a, include_blank: true %>
+
+<%= f.submit "登録" %>
+
+<% end %>

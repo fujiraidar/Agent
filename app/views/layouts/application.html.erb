@@ -12,38 +12,63 @@
 
   <body>
     <header class="navbar navbar-fixed-top navbar-inverse">
-   <div class="container">
+
 
     <nav class="nav navbar-nav navbar-left">
-      <span>Agent</span>
+      <div Class="agent_head_image"></div>
     </nav>
 
-     <ul class="nav navbar-nav navbar-right">
+    <ul class="nav nav-tabs head">
 
-      <% if user_signed_in? %>
+     <% if user_signed_in? %>
+      <li class="nav-item">
+        <%= link_to " マイページ", user_path(current_user.id), class: "nav-link fas fa-user",style:  "color:white;" %>
+      </li>
 
-        <li><%= link_to " Mypage", user_path(current_user.id), class: "glyphicon glyphicon-home home" %></li>
-
-        <li><%= link_to " Info", infos_path, class: "glyphicon glyphicon-user users" %></li>
-
-        <li><%= link_to " Engineer", new_user_engineer_path(current_user.id), class: "glyphicon glyphicon-book books" %></li>
-
-        <li><%= link_to " logout" ,destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout" %></li>
-
+      <% if Engineer.where(id: current_user.id).exists? %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle far fa-newspaper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 記事</a>
+        <div class="dropdown-menu">
+          <%= link_to "記事の一覧", infos_path, class: "dropdown-item" %>
+          <%= link_to "記事の投稿", new_info_path, class: "dropdown-item" %>
+          <%= link_to "作成した記事", user_path(current_user.id), class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "ガイド", infos_path, class: "dropdown-item" %>
+        </div>
+      </li>
+      <li class="nav-item">
+        <%= link_to " 求人", infos_path, class: "nav-link fas fa-building",style:  "color:white;" %>
+      </li>
 
       <% else %>
 
-        <li><%= link_to " Home", root_path, class: "glyphicon glyphicon-home home" %></li>
-
-        <li><%= link_to " About", top_about_path, class: "glyphicon glyphicon-link about" %></li>
-
-        <li><%= link_to " sign up", new_user_registration_path, class: "glyphicon glyphicon-edit signup" %></li>
-
-        <li><%= link_to " login", new_user_session_path, class: "glyphicon glyphicon-log-out logout" %></li>
-
+      <li class="nav-item">
+        <%= link_to " エンジニア登録", new_engineer_path, class: "nav-link fas fa-street-view",style:  "color:white;" %>
+      </li>
       <% end %>
-     </ul>
-   </div>
+
+      <li class="nav-item">
+        <%= link_to " ヘルプ", helps_path, class: "nav-link fas fa-hands-helping",style:  "color:white;" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to " ログアウト",destroy_user_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt",style:  "color:white;" %>
+      </li>
+
+     <% else %>
+      <li class="nav-item">
+        <%= link_to " ログイン", new_user_session_path, class: "nav-link fas fa-sign-in-alt",style:  "color:white;" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to " 会員登録", new_user_registration_path, class: "nav-link fas fa-user-plus",style:  "color:white;" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to " ガイド", top_about_path, class: "nav-link fas fa-book",style:  "color:white;" %>
+      </li>
+
+     <% end %>
+    </ul>
+
+
   </header>
     <%= yield %>
   </body>

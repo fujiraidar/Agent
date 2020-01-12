@@ -1,7 +1,12 @@
 class Users::UsersController < ApplicationController
 
 	def show
-		@user = User.find(params[:id])
+        if Engineer.where(id: current_user.id).exists?
+		    @engineer = Engineer.find(current_user.id)
+    		@languages = @engineer.languages
+    		@infos = @engineer.infos
+        end
+		@helps = current_user.helps
 	end
 
 	def edit
@@ -31,7 +36,7 @@ class Users::UsersController < ApplicationController
 
 	private
     def user_params
-        params.require(:user).permit(:surname, :name, :phone)
+        params.require(:user).permit(:name)
     end
 
 

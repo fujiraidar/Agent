@@ -7,20 +7,22 @@ Rails.application.routes.draw do
   }
 
   scope module: :users do
-    resources :users do
-  	  resources :helps
-  	  resources :engineers do
-  		  resources :infos, only: [:new, :show, :create, :edit, :update, :destroy]
-  	  end
-    end
-    resources :infos, only: [:index]
+  	resources :infos
+    resources :users
+  	resources :helps
+  	resources :engineers, only: [:new, :show, :create, :edit, :update, :destroy]
+  	post   '/favorite/:info_id' => 'favorites#favorite',   as: 'favorite'
+    delete '/favorite/:info_id' => 'favorites#unfavorite', as: 'unfavorite'
   end
 
-  scope module: :companies do
+  namespace :companies do
   	resources :companies
+  	resources :engineers, only: [:index]
+  	resources :jobs
+  	resources :offers
   end
 
-  namespace :owners do
+  namespace :admins do
   end
 
   root 'top#top'

@@ -2,7 +2,7 @@
 
 <h2>記事</h2>
 
-<%= form_for @info, url: user_engineer_infos_path(current_user.id,@engineer) , method: :post do |f| %>
+<%= form_for @info, url: info_path , method: :post do |f| %>
 
 <div class="field row">
   <label>プログラミング言語</label>
@@ -17,7 +17,7 @@
 
 	<%= f.submit "更新する" %>
 
-	<%= link_to "戻る", user_engineer_info_path(current_user.id,@engineer,@info) %>
+	<%= link_to "戻る", info_path(@info) %>
 
 	<%= link_to "記事の一覧へ", infos_path %>
 

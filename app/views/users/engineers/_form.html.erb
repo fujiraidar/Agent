@@ -1,6 +1,6 @@
 
   <div id="language">
-    <%= f.label :プログラミングの経験 %><br>
+    <%= f.label :プログラミングの経験, class: "font-weight-normal" %><br>
     <%= f.fields_for :languages do |language| %>
       <%= render 'language_fields', f: language %>
     <% end %>
