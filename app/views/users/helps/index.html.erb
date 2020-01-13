@@ -1,34 +1,21 @@
 
+<div class="container">
+<table class="table table-hover table-sm">
 
-<h2>ヘルプ</h2>
-
-<%= link_to "新しくヘルプを作成する", new_help_path %>
-
-<table class="table table-hover table-inverse">
-　<thead>
-	<tr>
-	<th></th>
-	<th>Title</th>
-	<th>Opinion</th>
-    </tr>
- </thead>
-
-<tbody>
-
-  <% @helps.each do |helped| %>
+    <% @helps.each do |h| %>
 
     <tr>
-    	<th><%= link_to helped.language, help_path(helped) %></th>
-    </tr>
-    <tr>
-    	<th><%= link_to helped.title, help_path(helped)%></th>
-    </tr>
-    <tr>
-    	<th><%= link_to "詳細", help_path(helped) %></th>
+        <td>
+            <p><%= h.user.name %>が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ</p>
+            <%= link_to help_path(h) do %>
+                <p><%= h.title %></p>
+            <% end %>
+            <p><%= h.language %></p>
+        </td>
+        <td></td>
     </tr>
 
-  <% end %>
+    <% end %>
 
-</tbody>
 </table>
-
+</div>

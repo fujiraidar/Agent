@@ -1,25 +1,24 @@
 
 
-<h2>記事</h2>
 
-<%= form_for @info, url: info_path , method: :post do |f| %>
+<div class="container_info">
 
-<div class="field row">
-  <label>プログラミング言語</label>
-	<%= f.text_field :language ,class: "col-xs-12" %>
-</div>
+<%= form_for @info, url: info_path(@info) , method: :patch do |f| %>
 
-　<label>タイトル</label>
-	<%= f.text_field :title ,class: "col-xs-12" %>
+  <div class="form-group">
+  	<%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
+  	<%= f.text_field :language, placeholder: "言語" %>
+  </div>
+  <div class="form-group">
 
-　<label>本文</label>
-	<%= f.text_area :body ,class: "col-xs-12" %>
+		<%= f.text_area :body, placeholder: "本文", :size => "80x50", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
+  </div>
 
-	<%= f.submit "更新する" %>
-
-	<%= link_to "戻る", info_path(@info) %>
-
-	<%= link_to "記事の一覧へ", infos_path %>
-
+  <div class="form-group row">
+  	<div class="col-md-2 offset-md-10">
+  		<%= f.submit "更新する", class: "btn btn-success" %>
+  	</div>
+  </div>
 
 <% end %>
+</div>

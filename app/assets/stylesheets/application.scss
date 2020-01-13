@@ -29,6 +29,15 @@ header {
   margin-bottom: 40px;
 }
 
+body {
+  font-family: -apple-system,Segoe UI,Helvetica Neue,Hiragino Kaku Gothic ProN,"メイリオ",meiryo,sans-serif;
+  background-color: #fdf5f5;
+}
+
+.container {
+  background-color: white;
+}
+
 .agent_head_image {
 	background-image: url(agent_head.jpg);
 	height: 90px;

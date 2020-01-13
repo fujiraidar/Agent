@@ -1,24 +1,26 @@
 
 
+
 <div class="container">
 
-<h3>ヘルプ</h3>
+    <p><h1><%= @help.title %></h1></strong></p>
 
-    <%= @help.language %>
+    <div class="row">
+    	<div class="col-md-7 offset-md-2">
+		    <p><strong><%= @help.language %></strong></p>
+		</div>
+		<div class="col-md-3">
+		    <% if @help.user_id == current_user.id %>
 
-    <%= @help.title %>
+		        <p><%= link_to "このヘルプを編集する", edit_help_path(@help) %></p>
+		        <p><%= link_to "このヘルプを削除する", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 
-    <%= @help.help %>
+		    <% end %>
+		</div>
+	</div>
 
-    <% if @help.user_id == current_user.id %>
+    <%= @help.help.html_safe %>
 
-        <%= link_to "このヘルプを編集する", edit_help_path(@help) %>
-
-        <%= link_to "このヘルプを削除する", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-
-    <% end %>
-
-    <%= link_to "ヘルプの一覧へ", helps_path %>
-
+    <%= link_to "記事の一覧へ", infos_path %>
 
 </div>

@@ -2,15 +2,14 @@
 
 <div class="container clearfix">
 
-  <h2>エンジニア編集</h2>
 
-    <%= form_for @engineer, url: engineer_path(@engneer), method: :patch do |f| %>
+    <%= form_for @engineer, url: engineer_path(@engineer), method: :patch do |f| %>
 
     <div class="row">
 
       <div class="col-md-4">
         <div class="form-group">
-          <%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"200x200" %>
+          <%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"250x250" %>
           <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
         </div>
 
@@ -34,6 +33,10 @@
             <%= f.select :offer, Engineer.offers.keys.to_a, include_blank: "選択して下さい" %>
           </div>
         </div>
+
+        <div class="form-group">
+          <%= f.submit "更新する", class: "btn-lg btn-primary col-md-5" %>
+        </div>
       </div>
 
       <div class="col-md-7 offset-md-1">
@@ -44,11 +47,6 @@
           <%= render 'form', f: f %>
           <%= f.hidden_field :rank, value: "F" %>
 
-        <div class="form-group">
-          <br />
-          <br />
-          <%= f.submit "更新する", class: "btn-lg btn-primary col-md-12" %>
-        </div>
       </div>
     <% end %>
 </div>

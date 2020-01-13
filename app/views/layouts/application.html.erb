@@ -54,6 +54,28 @@
         <%= link_to " ログアウト",destroy_user_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt",style:  "color:white;" %>
       </li>
 
+     <% elsif company_signed_in? %>
+
+      <li class="nav-item">
+        <%= link_to " マイページ", company_path(current_user.id), class: "nav-link fas fa-user",style:  "color:white;"%>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle far fa-newspaper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 求人</a>
+        <div class="dropdown-menu">
+          <%= link_to "求人の一覧", jobs_path, class: "dropdown-item" %>
+          <%= link_to "求人の投稿", new_job_path, class: "dropdown-item" %>
+          <%= link_to "登録した求人", company_path(current_user.id), class: "dropdown-item" %>
+          <div class="dropdown-divider"></div>
+          <%= link_to "ガイド", jobs_path, class: "dropdown-item" %>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to " オファー",new_offer_path, class: "nav-link fas fa-sign-out-alt",style:  "color:white;" %>
+      </li>
+
+
      <% else %>
       <li class="nav-item">
         <%= link_to " ログイン", new_user_session_path, class: "nav-link fas fa-sign-in-alt",style:  "color:white;" %>
@@ -72,4 +94,7 @@
   </header>
     <%= yield %>
   </body>
+  <footer>
+
+  </footer>
 </html>

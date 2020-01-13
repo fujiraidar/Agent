@@ -41,7 +41,7 @@ class Users::EngineersController < ApplicationController
     private
 
     def engineer_params
-    	params.require(:engineer).permit(:user_id, :surname, :name, :age, :profile_image_id, :introduction, :rank, :offer, languages_attributes: [:id, :language ,:experience_year, :description, :done, :_destroy,
+    	params.require(:engineer).permit(:user_id, :surname, :name, :age, :profile_image, :introduction, :rank, :offer, languages_attributes: [:id, :language ,:experience_year, :description, :done, :_destroy,
                                                          performances_attributes: [:id, :performance, :description, :_destroy]])
     end
 end

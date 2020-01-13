@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container mypage">
 
 <div class="row">
 
@@ -7,16 +7,9 @@
 
 	<table class="table">
 
-		<tr>
-			<th><%= current_user.name %></th>
-		</tr>
-		<tr>
-			<th><%= current_user.email %></th>
-		</tr>
-
     <% if Engineer.where(id: current_user.id).exists? %>
         <tr>
-	        <th><%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"150x150" %></th>
+	        <th><%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"250x250" %></th>
 	    </tr>
         <tr>
 	        <th><%= @engineer.surname %><%= @engineer.name %> 様</th>
@@ -35,6 +28,14 @@
 	        </th>
 	    </tr>
     <% end %>
+
+		<tr>
+			<th><%= current_user.name %></th>
+		</tr>
+		<tr>
+			<th><%= current_user.email %></th>
+		</tr>
+
     </table>
   </div>
 
@@ -56,88 +57,62 @@
 	    <div class="tab-content p-2 ">
 	      <div role="tabpanel" class="tab-pane active fade show" id="language">
 	      	<strong>スキル</strong>
-				<table class="table table-bordered table-hover table-sm">
-					<thead>
-						<tr>
-							<th>開発経験のある言語</th>
-							<th>経験年数 <i class="fas fa-arrow-alt-circle-right"></i>実績</th>
-						</tr>
-					</thead>
+				<table class="table table-hover table-sm">
 
 				    <% @languages.each do |l| %>
 
-					<tbody>
 						<tr>
 							<td><%= l.language %></td>
 							<td><%= l.experience_year %>年</td>
+					        <td>
+					            <% l.performances.each do |pe| %>
+							    <p><i class="fas fa-arrow-alt-circle-right"></i>  <%= pe.performance %></p>
+							    <% end %>
+							</td>
 						</tr>
-					</tbody>
 
-					<% l.performances.each do |pe| %>
-
-				    <tbody>
-				    	<tr>
-							<td></td>
-							<td><i class="fas fa-arrow-alt-circle-right"></i>  <%= pe.performance %></td>
-						</tr>
-					</tbody>
-
-				    <% end %>
-				        <tr class="table-active">
-							<td></td>
-							<td></td>
-						</tr>
 					<% end %>
 				</table>
 	      </div>
 
 	      <div role="tabpanel" class="tab-pane fade" id="info">
 	        <strong>投稿した記事</strong>
-				<table class="table table-bordered table-hover table-sm">
-					<thead>
-						<tr>
-							<th>タイトル</th>
-							<th>言語</th>
-							<th></th>
-						</tr>
-					</thead>
+				<table class="table table-hover table-sm">
 
-				    <% @infos.each do |i| %>
+					<% @infos.each do |i| %>
 
-					<tbody>
-						<tr>
-							<td><%= i.title %></td>
-							<td><%= i.language %></td>
-							<td><%= link_to "詳細", info_path(i) %></td>
-						</tr>
-					</tbody>
-
-				    <% end %>
+				    <tr>
+						<td><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"50x50" %></td>
+						<td>
+							<p><%= i.engineer.user.name %>が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿</p>
+							<%= link_to info_path(i) do %>
+							    <p><%= i.title %></p>
+							<% end %>
+						    <p><%= i.language %></p>
+						</td>
+						<td><%= i.favorites_count %></td>
+						<td><%= link_to "編集", edit_info_path(i) %></td>
+					</tr>
+					<% end %>
 		        </table>
 	      </div>
 
 	      <div role="tabpanel" class="tab-pane fade" id="help">
 	      	<strong>投稿したヘルプ</strong>
-				<table class="table table-bordered table-hover table-sm">
-
-					<thead>
-						<tr>
-							<th>タイトル</th>
-							<th>言語</th>
-							<th></th>
-						</tr>
-					</thead>
+				<table class="table table-hover table-sm">
 
 				    <% @helps.each do |h| %>
 
-					<tbody>
-						<tr>
-							<td><%= h.title %></td>
-							<td><%= h.language %></td>
-							<td><%= link_to "詳細", help_path(h) %></td>
-						</tr>
-					</tbody>
-
+                    <tr>
+						<td>
+							<p><%= h.user.name %>が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ</p>
+							<%= link_to help_path(h) do %>
+							    <p><%= h.title %></p>
+							<% end %>
+						    <p><%= h.language %></p>
+						</td>
+						<td><%= link_to "編集", edit_help_path(h) %></td>
+					</tr>
 				    <% end %>
 				</table>
 	      </div>
@@ -156,7 +131,7 @@
 	    <% if @helps.exists? %>
 
 	    <strong>投稿したヘルプ</strong>
-			<table class="table table-bordered table-hover table-sm">
+			<table class="table table-hover table-sm">
 
 				<thead>
 					<tr>

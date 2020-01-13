@@ -83,3 +83,11 @@ gem 'summernote-rails', '~> 0.8.10.0'
 gem 'simple_form'
 gem 'wysiwyg-rails'
 
+
+group :production do
+  gem 'mysql2'
+end
+
+
+
+

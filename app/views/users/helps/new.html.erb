@@ -1,24 +1,23 @@
 
-<div class="container">
-<h2> QA </h2>
+
+<div class="container_info">
 
 <%= form_for @help, url: helps_path, method: :post do |f| %>
 
+  <div class="form-group">
+  	<%= f.text_field :title, placeholder: "ヘルプのタイトル (サイズは、見出し 1)" %>
+  	<%= f.text_field :language, placeholder: "言語" %>
+  </div>
+  <div class="form-group">
 
-  <label>プログラミング言語</label>
-	<%= f.text_field :language ,class: "col-xs-12" %>
+		<%= f.text_area :help, 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
+  </div>
 
-　<label>タイトル</label>
-	<%= f.text_field :title ,class: "col-xs-12" %>
-
-　<label>本文</label>
-	<%= f.text_area :help ,class: "col-xs-12" %>
-
-	<%= f.submit "ヘルプする" %>
-
-	<%= link_to "ヘルプの一覧へ", helps_path %>
-
+  <div class="form-group row">
+  	<div class="col-md-2 offset-md-10">
+  		<%= f.submit "ヘルプ投稿する", class: "btn btn-success" %>
+  	</div>
+  </div>
 
 <% end %>
-
 </div>

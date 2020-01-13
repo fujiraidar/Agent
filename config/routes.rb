@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     delete '/favorite/:info_id' => 'favorites#unfavorite', as: 'unfavorite'
   end
 
-  namespace :companies do
+  scope module: :companies do
   	resources :companies
   	resources :engineers, only: [:index]
   	resources :jobs
