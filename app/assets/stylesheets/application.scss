@@ -1,0 +1,82 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+@import "summernote-bs4";
+
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+header {
+	background-color: #343e7a;
+  margin-bottom: 40px;
+}
+
+body {
+  font-family: -apple-system,Segoe UI,Helvetica Neue,Hiragino Kaku Gothic ProN,"メイリオ",meiryo,sans-serif;
+  background-color: #fdf5f5;
+}
+
+.container {
+  background-color: white;
+}
+
+.agent_head_image {
+	background-image: url(agent_head.jpg);
+	height: 90px;
+  width: 290px;
+}
+
+.top-message1 {
+  margin: 0 auto;
+  font-size: 100px;
+}
+.top-message1 {
+  margin: 0 auto;
+  font-size: 80px;
+}
+
+
+
+a:not([href]):not([tabindex]) {
+  color: white;
+  font-weight: 900;
+}
+a:not([href]):not([tabindex]):hover {
+  color: #fbe99e;
+  font-weight: 900;
+}
+a:-webkit-any-link {
+	color: #343e7a;
+  font-weight: 900;
+}
+a:-webkit-any-link:hover {
+  color: #fbe99e;
+}
+a.dropdown-item {
+  color: black;
+}
+
+thead {
+  background-color: #343e7a;
+  color: white;
+}
+
+

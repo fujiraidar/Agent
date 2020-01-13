@@ -1,0 +1,177 @@
+
+<div class="container mypage">
+
+<div class="row">
+
+  <div class="col-md-3">
+
+	<table class="table">
+
+    <% if Engineer.where(id: current_user.id).exists? %>
+        <tr>
+	        <th><%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"250x250" %></th>
+	    </tr>
+        <tr>
+	        <th><%= @engineer.surname %><%= @engineer.name %> 様</th>
+        </tr>
+        <tr>
+	        <th><%= @engineer.age %> 歳</th>
+	    </tr>
+        <tr>
+	        <th><%= @engineer.introduction %></th>
+	    </tr>
+	    <tr>
+	        <th>
+	        	<%= link_to edit_engineer_path(current_user.id) do %>
+	        	<i class="fas fa-wrench">編集する</i>
+	        	<% end %>
+	        </th>
+	    </tr>
+    <% end %>
+
+		<tr>
+			<th><%= current_user.name %></th>
+		</tr>
+		<tr>
+			<th><%= current_user.email %></th>
+		</tr>
+
+    </table>
+  </div>
+
+
+  <div class="col-md-8 offset-md-1">
+
+
+    <% if Engineer.where(id: current_user.id).exists? %>
+
+		<ul id="myTabs" class="nav nav-tabs">
+	      <li role="presentation" class="active"><a href="#language"  aria-controls="language" role="tab" data-toggle="tab" class="nav-link active">エンジニア</a>
+	      </li>
+	      <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab" class="nav-link">記事</a></li>
+	      <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab" class="nav-link">ヘルプ</a></li>
+	      <li role="presentation"><a href="#offer" aria-controls="offer" role="tab" data-toggle="tab" class="nav-link">オファー</a></li>
+	      <li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab" class="nav-link">チャット</a></li>
+	    </ul>
+
+	    <div class="tab-content p-2 ">
+	      <div role="tabpanel" class="tab-pane active fade show" id="language">
+	      	<strong>スキル</strong>
+				<table class="table table-hover table-sm">
+
+				    <% @languages.each do |l| %>
+
+						<tr>
+							<td><%= l.language %></td>
+							<td><%= l.experience_year %>年</td>
+					        <td>
+					            <% l.performances.each do |pe| %>
+							    <p><i class="fas fa-arrow-alt-circle-right"></i>  <%= pe.performance %></p>
+							    <% end %>
+							</td>
+						</tr>
+
+					<% end %>
+				</table>
+	      </div>
+
+	      <div role="tabpanel" class="tab-pane fade" id="info">
+	        <strong>投稿した記事</strong>
+				<table class="table table-hover table-sm">
+
+					<% @infos.each do |i| %>
+
+				    <tr>
+						<td><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"50x50" %></td>
+						<td>
+							<p><%= i.engineer.user.name %>が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿</p>
+							<%= link_to info_path(i) do %>
+							    <p><%= i.title %></p>
+							<% end %>
+						    <p><%= i.language %></p>
+						</td>
+						<td><%= i.favorites_count %></td>
+						<td><%= link_to "編集", edit_info_path(i) %></td>
+					</tr>
+					<% end %>
+		        </table>
+	      </div>
+
+	      <div role="tabpanel" class="tab-pane fade" id="help">
+	      	<strong>投稿したヘルプ</strong>
+				<table class="table table-hover table-sm">
+
+				    <% @helps.each do |h| %>
+
+                    <tr>
+						<td>
+							<p><%= h.user.name %>が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ</p>
+							<%= link_to help_path(h) do %>
+							    <p><%= h.title %></p>
+							<% end %>
+						    <p><%= h.language %></p>
+						</td>
+						<td><%= link_to "編集", edit_help_path(h) %></td>
+					</tr>
+				    <% end %>
+				</table>
+	      </div>
+
+	      <div role="tabpanel" class="tab-pane fade" id="offer">
+	        <p>offer</p>
+	      </div>
+
+	      <div role="tabpanel" class="tab-pane fade" id="message">
+	        <p>チャット</p>
+	      </div>
+	    </div>
+
+    <% else %>
+
+	    <% if @helps.exists? %>
+
+	    <strong>投稿したヘルプ</strong>
+			<table class="table table-hover table-sm">
+
+				<thead>
+					<tr>
+						<th>タイトル</th>
+						<th>言語</th>
+						<th></th>
+					</tr>
+				</thead>
+
+			    <% @helps.each do |h| %>
+
+				<tbody>
+					<tr>
+						<td><%= h.title %></td>
+						<td><%= h.language %></td>
+						<td><%= link_to "詳細", help_path(h) %></td>
+					</tr>
+				</tbody>
+
+				<% end %>
+			</table>
+
+		<% else %>
+
+		<strong>
+			<p>投稿したヘルプは、ありません</p>
+			<p>ヘルプとは、分からないところを質問したり、</p>
+			<p>自分が投稿した記事のURLを教えてあげたりする機能です。</p>
+		</strong>
+		    <p><%= link_to "エンジニア登録する", new_engineer_path %>ことによって、記事を投稿することができます。</p>
+		    <p><%= link_to "ヘルプを投稿する", new_help_path %></p>
+		    <p><%= link_to "記事を探す", infos_path %></p>
+
+		<% end %>
+    <% end %>
+
+
+  </div>
+</div>
+</div>
+
+
+

@@ -1,0 +1,26 @@
+
+
+<div class="container">
+
+    <p><h1><%= @info.title %></h1></strong></p>
+
+    <div class="row">
+    	<div class="col-md-7 offset-md-2">
+		    <p><strong><%= @info.language %></strong></p>
+		</div>
+		<div class="col-md-3">
+		    <% if @info.engineer_id == current_user.id %>
+
+		        <p><%= link_to "この記事を編集する", edit_info_path(@info) %></p>
+		        <p><%= link_to "この記事を削除する", info_path(@info), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+
+		    <% end %>
+		</div>
+	</div>
+
+    <%= @info.body.html_safe %>
+
+    <%= render 'infos', info: @info %>
+    <%= link_to "記事の一覧へ", infos_path %>
+
+</div>

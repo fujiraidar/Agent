@@ -1,0 +1,18 @@
+
+
+<h3>求人詳細</h3>
+
+<%= @job.company.company_name %>
+
+<%= @job.company.phone %>
+
+<%= @job.company.address %>
+
+<%= @job.job %>
+
+<%= @job.salary %>
+
+<%= link_to "編集する", edit_job_path(@job) %>
+
+<%= link_to "削除する", job_path(@job), method: :delete,
+　　　　　　　　"data-confirm" => "求人登録されているデータが消えてしまいます。本当に削除してよろしいでしょうか？" %>

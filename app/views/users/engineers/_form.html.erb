@@ -1,0 +1,10 @@
+
+  <div id="language">
+    <%= f.label :プログラミングの経験, class: "font-weight-normal" %><br>
+    <%= f.fields_for :languages do |language| %>
+      <%= render 'language_fields', f: language %>
+    <% end %>
+    <div id="links">
+      <%= link_to_add_association '開発経験のある言語を追加する',f, :languages %>
+    </div>
+  </div>
