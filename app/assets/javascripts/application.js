@@ -18,8 +18,11 @@
 //= require summernote-init
 //= require activestorage
 //= require cocoon
-//= require turbolinks
 //= require_tree .
+// There are a few JS dependancies
+// Check the settings to take a look
+// at those as they are necessary.
+
 
 $.summernote.options.lang = "ja-JP";
 
@@ -178,3 +181,38 @@ $.summernote.options.lang = "ja-JP";
     },
   });
 })(jQuery);
+
+$(function(){
+  $('.tab-content>div').hide();
+  $('.tab-content>div').first().slideDown();
+    $('.tab-buttons span').click(function(){
+      var thisclass=$(this).attr('class');
+      $('#lamp').removeClass().addClass('#lamp').addClass(thisclass);
+      $('.tab-content>div').each(function(){
+        if($(this).hasClass(thisclass)){
+          $(this).fadeIn(800);
+        }
+        else{
+          $(this).hide();
+        }
+  });
+  });
+})
+
+$(function(){
+  $('.my-tab-content>div').hide();
+  $('.my-tab-content>div').first().slideDown();
+    $('.my-tab-buttons span').click(function(){
+      var thisclass=$(this).attr('class');
+      $('#my-lamp').removeClass().addClass('#my-lamp').addClass(thisclass);
+      $('.my-tab-content>div').each(function(){
+        if($(this).hasClass(thisclass)){
+          $(this).fadeIn(800);
+        }
+        else{
+          $(this).hide();
+        }
+  });
+  });
+})
+

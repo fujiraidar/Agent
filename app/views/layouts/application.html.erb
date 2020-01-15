@@ -14,80 +14,85 @@
     <header class="navbar navbar-fixed-top navbar-inverse">
 
 
-    <nav class="nav navbar-nav navbar-left">
-      <div Class="agent_head_image"></div>
+    <nav class="nav navbar-nav navbar-left header-title">
+      <h3>Agent</h3>
     </nav>
 
     <ul class="nav nav-tabs head">
 
-     <% if user_signed_in? %>
-      <li class="nav-item">
-        <%= link_to " マイページ", user_path(current_user.id), class: "nav-link fas fa-user",style:  "color:white;" %>
-      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to " マイページ", user_path(current_user.id), class: "nav-link fas fa-user", style: "color:white;" %>
+        </li>
 
-      <% if Engineer.where(id: current_user.id).exists? %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle far fa-newspaper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 記事</a>
-        <div class="dropdown-menu">
-          <%= link_to "記事の一覧", infos_path, class: "dropdown-item" %>
-          <%= link_to "記事の投稿", new_info_path, class: "dropdown-item" %>
-          <%= link_to "作成した記事", user_path(current_user.id), class: "dropdown-item" %>
-          <div class="dropdown-divider"></div>
-          <%= link_to "ガイド", infos_path, class: "dropdown-item" %>
-        </div>
-      </li>
-      <li class="nav-item">
-        <%= link_to " 求人", infos_path, class: "nav-link fas fa-building",style:  "color:white;" %>
-      </li>
+        <% if Engineer.where(id: current_user.id).exists? %>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle far fa-newspaper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;" > 記事</a>
+            <div class="dropdown-menu">
+              <%= link_to "記事の一覧", users_path, class: "dropdown-item" %>
+              <%= link_to "記事の投稿", new_info_path, class: "dropdown-item" %>
+              <%= link_to "作成した記事", user_path(current_user.id), class: "dropdown-item" %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "ガイド", infos_path, class: "dropdown-item" %>
+            </div>
+          </li>
+          <li class="nav-item">
+            <%= link_to " 求人", infos_path, class: "nav-link fas fa-building", style: "color:white;" %>
+          </li>
+
+        <% else %>
+
+          <li class="nav-item">
+            <%= link_to " エンジニア登録", new_engineer_path, class: "nav-link fas fa-street-view", style: "color:white;" %>
+          </li>
+          <% end %>
+
+          <li class="nav-item">
+            <%= link_to " ヘルプ", helps_path, class: "nav-link fas fa-hands-helping",style:  "color:white;" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to " ログアウト",destroy_user_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt", style: "color:white;" %>
+          </li>
+
+      <% elsif company_signed_in? %>
+
+        <li class="nav-item">
+          <%= link_to " マイページ", company_path(current_company.id), class: "nav-link fas fa-user", style: "color:white;"%>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle far fa-newspaper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 求人</a>
+          <div class="dropdown-menu">
+            <%= link_to "求人の一覧", jobs_path, class: "dropdown-item" %>
+            <%= link_to "求人の投稿", new_job_path, class: "dropdown-item" %>
+            <%= link_to "登録した求人", company_path(current_company.id), class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to "ガイド", jobs_path, class: "dropdown-item" %>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to " オファー",new_offer_path, class: "nav-link fas fa-sign-out-alt", style: "color:white;" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to " ログアウト",destroy_company_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt",style:  "color:white;" %>
+        </li>
+
 
       <% else %>
+        <li class="nav-item">
+          <%= link_to " ログイン", new_user_session_path, class: "nav-link fas fa-sign-in-alt", style: "color:white;" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to " 会員登録", new_user_registration_path, class: "nav-link fas fa-user-plus", style: "color:white;" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to " ガイド", top_about_path, class: "nav-link fas fa-book", style: "color:white;" %>
+        </li>
 
-      <li class="nav-item">
-        <%= link_to " エンジニア登録", new_engineer_path, class: "nav-link fas fa-street-view",style:  "color:white;" %>
-      </li>
       <% end %>
-
-      <li class="nav-item">
-        <%= link_to " ヘルプ", helps_path, class: "nav-link fas fa-hands-helping",style:  "color:white;" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to " ログアウト",destroy_user_session_path, method: :delete, class: "nav-link fas fa-sign-out-alt",style:  "color:white;" %>
-      </li>
-
-     <% elsif company_signed_in? %>
-
-      <li class="nav-item">
-        <%= link_to " マイページ", company_path(current_user.id), class: "nav-link fas fa-user",style:  "color:white;"%>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle far fa-newspaper" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 求人</a>
-        <div class="dropdown-menu">
-          <%= link_to "求人の一覧", jobs_path, class: "dropdown-item" %>
-          <%= link_to "求人の投稿", new_job_path, class: "dropdown-item" %>
-          <%= link_to "登録した求人", company_path(current_user.id), class: "dropdown-item" %>
-          <div class="dropdown-divider"></div>
-          <%= link_to "ガイド", jobs_path, class: "dropdown-item" %>
-        </div>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to " オファー",new_offer_path, class: "nav-link fas fa-sign-out-alt",style:  "color:white;" %>
-      </li>
-
-
-     <% else %>
-      <li class="nav-item">
-        <%= link_to " ログイン", new_user_session_path, class: "nav-link fas fa-sign-in-alt",style:  "color:white;" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to " 会員登録", new_user_registration_path, class: "nav-link fas fa-user-plus",style:  "color:white;" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to " ガイド", top_about_path, class: "nav-link fas fa-book",style:  "color:white;" %>
-      </li>
-
-     <% end %>
     </ul>
 
 
@@ -95,6 +100,7 @@
     <%= yield %>
   </body>
   <footer>
-
+    <%= link_to " 企業様の会員登録はこちら", new_company_session_path %>
+    <%= link_to " 企業様のログインページはこちら", new_company_registration_path %>
   </footer>
 </html>

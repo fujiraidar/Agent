@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2020_01_08_075830) do
     t.string "company_phone", null: false
     t.string "surname", null: false
     t.string "name", null: false
+    t.string "company_image_id"
+    t.text "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_companies_on_email", unique: true
@@ -42,12 +44,12 @@ ActiveRecord::Schema.define(version: 2020_01_08_075830) do
   end
 
   create_table "engineers", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "surname"
-    t.string "name"
-    t.integer "age"
+    t.integer "user_id", null: false
+    t.string "surname", null: false
+    t.string "name", null: false
+    t.integer "age", null: false
     t.string "profile_image_id"
-    t.text "introduction", null: false
+    t.text "introduction"
     t.integer "rank", null: false
     t.integer "offer", null: false
     t.integer "follows_count"
@@ -56,15 +58,15 @@ ActiveRecord::Schema.define(version: 2020_01_08_075830) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "info_id"
+    t.integer "user_id", null: false
+    t.integer "info_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "engineer_id"
+    t.integer "user_id", null: false
+    t.integer "engineer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -89,10 +91,12 @@ ActiveRecord::Schema.define(version: 2020_01_08_075830) do
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.integer "company_id"
-    t.string "job"
-    t.integer "status"
-    t.string "salary"
+    t.integer "company_id", null: false
+    t.string "title", null: false
+    t.text "job", null: false
+    t.integer "status", null: false
+    t.string "salary", null: false
+    t.string "job_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -106,11 +110,12 @@ ActiveRecord::Schema.define(version: 2020_01_08_075830) do
   end
 
   create_table "offers", force: :cascade do |t|
-    t.integer "engineer_id"
-    t.integer "company_id"
-    t.string "job"
-    t.integer "status"
-    t.string "salary"
+    t.integer "engineer_id", null: false
+    t.integer "company_id", null: false
+    t.string "title", null: false
+    t.text "job", null: false
+    t.integer "status", null: false
+    t.string "salary", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -128,7 +133,7 @@ ActiveRecord::Schema.define(version: 2020_01_08_075830) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

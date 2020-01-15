@@ -1,6 +1,6 @@
 class Companies::EngineersController < ApplicationController
 
 	def index
-		@engineer = Engineer.all
+		@engineers = Engineer.where(offer: 1)
 	end
 end

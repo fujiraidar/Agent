@@ -1,5 +1,5 @@
 
-<div class="container mypage">
+<div class="container toping">
 
 <div class="row">
 
@@ -8,9 +8,7 @@
 	<table class="table">
 
     <% if Engineer.where(id: current_user.id).exists? %>
-        <tr>
-	        <th><%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"250x250" %></th>
-	    </tr>
+        <%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"255x255" %>
         <tr>
 	        <th><%= @engineer.surname %><%= @engineer.name %> 様</th>
         </tr>
@@ -40,22 +38,23 @@
   </div>
 
 
-  <div class="col-md-8 offset-md-1">
+  <div class="col-md-9 lefting">
 
 
     <% if Engineer.where(id: current_user.id).exists? %>
 
-		<ul id="myTabs" class="nav nav-tabs">
-	      <li role="presentation" class="active"><a href="#language"  aria-controls="language" role="tab" data-toggle="tab" class="nav-link active">エンジニア</a>
-	      </li>
-	      <li role="presentation"><a href="#info" aria-controls="info" role="tab" data-toggle="tab" class="nav-link">記事</a></li>
-	      <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab" class="nav-link">ヘルプ</a></li>
-	      <li role="presentation"><a href="#offer" aria-controls="offer" role="tab" data-toggle="tab" class="nav-link">オファー</a></li>
-	      <li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab" class="nav-link">チャット</a></li>
-	    </ul>
+		<div class='tabs'>
+		  <div class='my-tab-buttons'>
+		    <span class='my-content1'>スキル</span>
+		    <span class='my-content2'>記事</span>
+		    <span class='my-content3'>ヘルプ</span>
+		    <span class='my-content4'>オファー</span>
+		    <span class='my-content5'>チャット</span>
+		    <div id='my-lamp' class='my-content1'></div>
+		  </div>
+		  <div class='my-tab-content'>
 
-	    <div class="tab-content p-2 ">
-	      <div role="tabpanel" class="tab-pane active fade show" id="language">
+		    <div class='my-content1'>
 	      	<strong>スキル</strong>
 				<table class="table table-hover table-sm">
 
@@ -73,31 +72,44 @@
 
 					<% end %>
 				</table>
-	      </div>
+	        </div>
 
-	      <div role="tabpanel" class="tab-pane fade" id="info">
+	        <div class='my-content2'>
 	        <strong>投稿した記事</strong>
 				<table class="table table-hover table-sm">
 
 					<% @infos.each do |i| %>
 
-				    <tr>
-						<td><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"50x50" %></td>
-						<td>
-							<p><%= i.engineer.user.name %>が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿</p>
+				    <tr class="row">
+						<td class="col-md-1"><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+						<td class="col-md-10">
+							<div class="info_created_at">
+								<%= link_to user_path(@user) do %>
+							    	<%= i.engineer.user.name %>
+							    <% end %>
+							        が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿
+							</div>
 							<%= link_to info_path(i) do %>
-							    <p><%= i.title %></p>
+							    <%= i.title %>
 							<% end %>
-						    <p><%= i.language %></p>
+							<div class="info_created_at tag">
+						        <%= i.language %>
+						    </div>
 						</td>
-						<td><%= i.favorites_count %></td>
-						<td><%= link_to "編集", edit_info_path(i) %></td>
+						<td class="col-md-1">
+							<div class="info_created_at">
+								<%= i.favorites_count %>
+							</div>
+							<% if i.engineer.id == current_user.id %>
+					            <%= link_to "編集", edit_info_path(i) %>
+					        <% end %>
+					    </td>
 					</tr>
 					<% end %>
 		        </table>
-	      </div>
+	        </div>
 
-	      <div role="tabpanel" class="tab-pane fade" id="help">
+	        <div class='my-content3'>
 	      	<strong>投稿したヘルプ</strong>
 				<table class="table table-hover table-sm">
 
@@ -105,26 +117,39 @@
 
                     <tr>
 						<td>
-							<p><%= h.user.name %>が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ</p>
+							<div class="info_created_at">
+								<%= link_to user_path(@user) do %>
+							    	<%= h.user.name %>
+							    <% end %>
+							    	が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
+						    </div>
 							<%= link_to help_path(h) do %>
-							    <p><%= h.title %></p>
+							    <%= h.title %>
 							<% end %>
-						    <p><%= h.language %></p>
+							<div class="info_created_at tag">
+						    	<%= h.language %>
+						    </div>
 						</td>
-						<td><%= link_to "編集", edit_help_path(h) %></td>
+						<td>
+							<% if h.user.id == current_user.id %>
+								<%= link_to "編集", edit_help_path(h) %>
+							<% end %>
+						</td>
 					</tr>
 				    <% end %>
 				</table>
-	      </div>
+	        </div>
+	        <div class='my-content4'>
+	        	offer
+	        </div>
+	        <div class='my-content5'>
+	        	tytto
+	        </div>
 
-	      <div role="tabpanel" class="tab-pane fade" id="offer">
-	        <p>offer</p>
 	      </div>
-
-	      <div role="tabpanel" class="tab-pane fade" id="message">
-	        <p>チャット</p>
-	      </div>
-	    </div>
+		</div>
+		<div class='credit'>
+		</div>
 
     <% else %>
 
@@ -133,26 +158,31 @@
 	    <strong>投稿したヘルプ</strong>
 			<table class="table table-hover table-sm">
 
-				<thead>
-					<tr>
-						<th>タイトル</th>
-						<th>言語</th>
-						<th></th>
+				    <% @helps.each do |h| %>
+
+                    <tr>
+						<td>
+							<div class="info_created_at">
+							    <%= link_to user_path(@user) do %>
+							    	<%= h.user.name %>
+							    <% end %>
+							    	が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
+						    </div>
+							<%= link_to help_path(h) do %>
+							    <%= h.title %>
+							<% end %>
+							<div class="info_created_at tag">
+						    	<%= h.language %>
+						    </div>
+						</td>
+						<td>
+							<% if h.user.id == current_user.id %>
+								<%= link_to "編集", edit_help_path(h) %>
+							<% end %>
+						</td>
 					</tr>
-				</thead>
-
-			    <% @helps.each do |h| %>
-
-				<tbody>
-					<tr>
-						<td><%= h.title %></td>
-						<td><%= h.language %></td>
-						<td><%= link_to "詳細", help_path(h) %></td>
-					</tr>
-				</tbody>
-
-				<% end %>
-			</table>
+				    <% end %>
+				</table>
 
 		<% else %>
 

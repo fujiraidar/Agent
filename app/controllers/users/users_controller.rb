@@ -1,13 +1,19 @@
 class Users::UsersController < ApplicationController
 
 	def show
+        @user = User.find(params[:id])
+        @helps = current_user.helps
         if Engineer.where(id: current_user.id).exists?
 		    @engineer = Engineer.find(current_user.id)
     		@languages = @engineer.languages
     		@infos = @engineer.infos
         end
-		@helps = current_user.helps
 	end
+
+    def index
+        @infos = Info.all
+        @helps = Help.all
+    end
 
 	def edit
 		@user = User.find(params[:id])

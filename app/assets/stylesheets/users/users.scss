@@ -1,3 +1,130 @@
 // Place all the styles related to the users::users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+body{
+  padding:0;
+  margin:0;
+  background:#fff;
+}
+
+.tabs{
+  width:100%;
+  margin:10px auto;
+  position:relative;
+}
+.tab-buttons span{
+  font:400 14px 'open sans',sans-serif;
+  color: black;
+  width:33.3%;
+  float:left;
+  text-align:center;
+  line-height:40px;
+}
+.tab-content{
+  padding:15px;
+  background: white;
+  font:400 13px 'open sans',sans-serif;
+  color:#333;
+}
+#lamp{
+  width:33.3%;
+  height: 2px;
+  background: black;
+  display:block;
+  position:absolute;
+  top:40px;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#lamp.content2{
+  left:33.3%;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#lamp.content3{
+  left:66.6%;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#lamp.content1{
+  left:0;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+
+
+
+.my-tab-buttons span{
+  font:400 14px 'open sans',sans-serif;
+  color: black;
+  width:20%;
+  float:left;
+  text-align:center;
+  line-height:40px;
+}
+.my-tab-content{
+  padding:15px;
+  background: white;
+  font:400 13px 'open sans',sans-serif;
+  color:#333;
+}
+#my-lamp{
+  width: 20%;
+  height: 2px;
+  background: black;
+  display:block;
+  position:absolute;
+  top:40px;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#my-lamp.my-content1{
+  left:0;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#my-lamp.my-content2{
+  left:20%;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#my-lamp.my-content3{
+  left:40%;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#my-lamp.my-content4{
+  left:60%;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+#my-lamp.my-content5{
+  left:80%;
+  transition: all .3s ease-in;
+-o-transition: all .3s ease-in;
+-webkit-transition: all .3s ease-in;
+-moz-transition: all .3s ease-in;
+}
+
+

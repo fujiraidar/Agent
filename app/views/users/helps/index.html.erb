@@ -6,13 +6,24 @@
 
     <tr>
         <td>
-            <p><%= h.user.name %>が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ</p>
+            <div class="info_created_at">
+                <%= link_to user_path(h.user) do %>
+                    <%= h.user.name %>
+                <% end %>
+                    が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
+            </div>
             <%= link_to help_path(h) do %>
-                <p><%= h.title %></p>
+                <%= h.title %>
             <% end %>
-            <p><%= h.language %></p>
+            <div class="info_created_at tag">
+                <%= h.language %>
+            </div>
         </td>
-        <td></td>
+        <td>
+            <% if h.user.id == current_user.id %>
+                <%= link_to "編集", edit_help_path(h) %>
+            <% end %>
+        </td>
     </tr>
 
     <% end %>

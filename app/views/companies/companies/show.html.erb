@@ -1,0 +1,89 @@
+<div class="container mypage">
+
+<div class="row">
+
+  <div class="col-md-3">
+
+	<table class="table">
+
+		<tr>
+	        <th><%= attachment_image_tag @company, :company_image, fallback: "no_image.jpg", size:"250x250" %></th>
+	    </tr>
+		<tr>
+	        <th><%= @company.company_name %></th>
+	    </tr>
+	    <tr>
+	        <th><%= @company.company_address %></th>
+	    </tr>
+	    <tr>
+	        <th><%= @company.phone %></th>
+	    </tr>
+	    <tr>
+	        <th><%= @engineer.introduction %></th>
+	    </tr>
+        <tr>
+	        <th><%= @company.surname %><%= @company.name %> 様</th>
+        </tr>
+
+        <% if @company == current_company %>
+	    <tr>
+	        <th>
+	        	<%= link_to edit_company_path(current_company.id) do %>
+	        	<i class="fas fa-wrench">編集する</i>
+	        	<% end %>
+	        </th>
+	    </tr>
+	    <% end %>
+
+    </table>
+  </div>
+
+
+  <div class="col-md-8 offset-md-1">
+
+
+
+		<ul id="myTabs" class="nav nav-tabs">
+	      <li role="presentation" class="active"><a href="#job"  aria-controls="job" role="tab" data-toggle="tab" class="nav-link active">公開求人</a>
+	      </li>
+	      <li role="presentation"><a href="#offer" aria-controls="offer" role="tab" data-toggle="tab" class="nav-link">オファー</a></li>
+	      <li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab" class="nav-link">チャット</a></li>
+	    </ul>
+
+	    <div class="tab-content p-2 ">
+	      <div role="tabpanel" class="tab-pane active fade show" id="job">
+	      	<table class="table table-hover table-sm">
+
+				<% @job.each do |j| %>
+
+			    <tr>
+					<td><%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", size:"50x50" %></td>
+					<td>
+						<p><%= i.company.company_name %> <%= j.created_at.strftime('%Y/%m/%d') %>に登録</p>
+						<%= link_to job_path(j) do %>
+						    <p><%= j.title %></p>
+						<% end %>
+					    <p><%= j.salary %></p>
+					</td>
+					<td><%= link_to "編集", edit_info_path(i) %></td>
+				</tr>
+				<% end %>
+	        </table>
+	      </div>
+
+
+	      <div role="tabpanel" class="tab-pane fade" id="offer">
+	        <p>offer</p>
+	      </div>
+
+	      <div role="tabpanel" class="tab-pane fade" id="message">
+	        <p>チャット</p>
+	      </div>
+	    </div>
+
+  </div>
+</div>
+</div>
+
+
+

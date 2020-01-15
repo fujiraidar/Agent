@@ -4,16 +4,30 @@
 
 	<% @infos.each do |i| %>
 
-	<tr>
-		<td><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"50x50" %></td>
-		<td>
-			<p><%= i.engineer.user.name %>が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿</p>
+	<tr class="row">
+		<td class="col-md-1"><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"65x65" %></td>
+		<td class="col-md-10">
+			<div class="info_created_at">
+				<%= link_to user_path(i.engineer) do %>
+			    	<%= i.engineer.user.name %>
+			    <% end %>
+			        が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿
+			</div>
 			<%= link_to info_path(i) do %>
-			    <p><%= i.title %></p>
+			    <%= i.title %>
 			<% end %>
-		    <p><%= i.language %></p>
+			<div class="info_created_at tag">
+		    	<%= i.language %>
+		    </div>
 		</td>
-		<td><%= i.favorites_count %></td>
+		<td class="col-md-1">
+			<div class="info_created_at">
+				<%= i.favorites_count %>
+			</div>
+			<% if i.engineer.id == current_user.id %>
+	            <%= link_to "編集", edit_info_path(i) %>
+	        <% end %>
+	    </td>
 	</tr>
 
 	<% end %>
