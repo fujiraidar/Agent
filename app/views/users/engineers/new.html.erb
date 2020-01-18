@@ -1,9 +1,6 @@
 
 
-
-
 <div class="container clearfix toping">
-
 
 
     <%= form_for @engineer, url: engineers_path, method: :post do |f| %>
@@ -18,21 +15,17 @@
 
         <div class="form-group row">
           <div class="col-md-6">
-            <%= f.label :姓 %><br />
-            <%= f.text_field :surname, class: "col-md-12" %>
+            <%= f.text_field :surname, placeholder:" 姓", class: "col-md-12" %>
           </div>
           <div class="col-md-6">
-            <%= f.label :名 %><br />
-            <%= f.text_field :name, class: "col-md-12" %>
+            <%= f.text_field :name, placeholder:" 名", class: "col-md-12" %>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-5">
-            <%= f.label :年齢 %><br />
-            <%= f.number_field :age, value: 20, class: "col-md-8" %>歳
+            <%= f.number_field :age, placeholder:" 55", class: "col-md-8" %>歳
           </div>
           <div class="col-md-7">
-            <%= f.label :オファー %><br />
             <%= f.select :offer, Engineer.offers.keys.to_a, include_blank: "選択して下さい" %>
           </div>
         </div>
@@ -43,8 +36,7 @@
 
       <div class="col-md-8 lefting">
         <div class="form-group">
-          <%= f.label :自己紹介文 %><br />
-          <%= f.text_area :introduction, class: "col-md-12"%>
+          <%= f.text_area :introduction, placeholder:" 自己紹介文", class: "col-md-12"%>
         </div>
           <%= render 'form', f: f %>
           <%= f.hidden_field :rank, value: "F" %>

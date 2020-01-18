@@ -1,0 +1,25 @@
+
+
+<div class="container">
+
+    <p><h1><%= @offer.title %></h1></p>
+
+    <div class="row">
+    	<div class="col-md-7 offset-md-2">
+		    <p><strong><%= @offer.salary %></strong></p>
+		    <p><strong><%= @offer.status %></strong></p>
+		</div>
+		<div class="col-md-3">
+		    <% if @offer.company_id == current_company.id %>
+
+		        <p><%= link_to "この記事を削除する", offer_path(@offer), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+
+		    <% end %>
+		</div>
+	</div>
+
+    <p><%= @offer.job.html_safe %></p>
+
+    <%= link_to "エンジニアの一覧へ", engineers_path %>
+
+</div>

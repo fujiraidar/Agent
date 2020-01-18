@@ -2,17 +2,31 @@ class Users::UsersController < ApplicationController
 
 	def show
         @user = User.find(params[:id])
-        @helps = current_user.helps
-        if Engineer.where(id: current_user.id).exists?
-		    @engineer = Engineer.find(current_user.id)
-    		@languages = @engineer.languages
-    		@infos = @engineer.infos
+        if params[:q] != nil
+            params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
+            @q_help = Help.ransack(params[:q])
+            help = @q_help.result(distinct: true)
+            @helps = @user.help
+        else
+            @helps = @user.helps
         end
+        @favorites = @user.favorites
+        @follows = @user.follows
 	end
 
     def index
-        @infos = Info.all
-        @helps = Help.all
+        if params[:q] != nil
+            params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
+            @q_info = Info.ransack(params[:q])
+            @infos = @q_info.result(distinct: true)
+            @q_help = Help.ransack(params[:q])
+            @helps = @q_help.result(distinct: true)
+        else
+            @q_info = Info.ransack(params[:q])
+            @infos = @q_info.result(distinct: true)
+            @q_help = Help.ransack(params[:q])
+            @helps = @q_help.result(distinct: true)
+        end
     end
 
 	def edit
@@ -41,9 +55,9 @@ class Users::UsersController < ApplicationController
 
 
 	private
+
     def user_params
         params.require(:user).permit(:name)
     end
-
 
 end

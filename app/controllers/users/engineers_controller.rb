@@ -6,6 +6,11 @@ class Users::EngineersController < ApplicationController
 
 	def show
 		@engineer = Engineer.find(params[:id])
+        @infos = @engineer.infos
+        @languages = @engineer.languages
+        @marks = @engineer.marks
+        @offers = @engineer.offers
+        @offer = Offer.new
 	end
 
     def edit
@@ -17,7 +22,7 @@ class Users::EngineersController < ApplicationController
         engineer.user_id = current_user.id
         engineer.id = current_user.id
     	if engineer.save
-    		redirect_to user_path(current_user.id)
+    		redirect_to engineer_path(current_user.id)
     	else
     		render :new
     	end

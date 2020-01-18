@@ -24,28 +24,61 @@
   clear: both;
 }
 
+
+/* ------ header関連 ------ */
 header {
 	background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
 }
 
 .header-title {
-  padding-left: 50px;
+  margin-left: 50px;
   color: white;
   font-family: 'arial black' ,sans-serif;
 }
+ul {
+  margin-right: 50px;
+}
+ul > a {
+  color: white;
+  margin-right: 25px;
+}
+ul > a:hover {
+  color: white;
+  -webkit-transform: translateY(20px) rotate(-20deg);
+  transform: rotate(3deg);
+}
 
+/* ------ footer関連 ------ */
+
+footer {
+  height: 150px;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
+}
+/* ------ body関連 ------ */
 body {
+  height: 100%;
   font-family: -apple-system,Segoe UI,Helvetica Neue,Hiragino Kaku Gothic ProN,"メイリオ",meiryo,sans-serif;
   background-color: white;
 }
 
+
+/* ------ 余白関連 ------ */
+
 .toping {
   padding-top: 40px;
 }
-
+.bottoming {
+  padding-bottom: 40px;
+}
 .lefting {
   padding-left: 10px;
 }
+.blank {
+  height: 700px;
+}
+
+
+/* ------ TOPページ ------ */
 
 .large-header {
    position: relative;
@@ -87,7 +120,7 @@ body {
 
 @media only screen and (max-width: 768px) {
    .demo .main-title {
-      font-size: 3em;
+    font-size: 3em;
    }
 }
 
@@ -101,25 +134,112 @@ body {
 }
 
 
-a:not([href]):not([tabindex]) {
-  color: black;
-  font-weight: 900;
-}
-a:not([href]):not([tabindex]):hover {
-  color: #fbe99e;
-  font-weight: 900;
-}
-a:-webkit-any-link {
-	color: #343e7a;
-  font-weight: 900;
-}
-a:-webkit-any-link:hover {
-  color: #fbe99e;
-}
-a.dropdown-item {
-  color: black;
+/* ------ リンク ------ */
+
+
+
+
+/* ------ ハンバーガーアイコン ------ */
+
+#hm-icon{
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 10;
 }
 
+.menu-trigger,
+.menu-trigger span {
+  display: inline-block;
+  transition: all .4s;
+  box-sizing: border-box;
+}
+
+.menu-trigger {
+  position: relative;
+  width: 40px;
+  height: 25px;
+}
+
+.menu-trigger span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.menu-trigger span:nth-of-type(1) {
+  top: 0;
+}
+
+.menu-trigger span:nth-of-type(2) {
+  top: 10px;
+}
+
+.menu-trigger span:nth-of-type(3) {
+  bottom: 0;
+}
+
+.menu-trigger.active span:nth-of-type(1) {
+  -webkit-transform: translateY(20px) rotate(-45deg);
+  transform: translateY(10px) rotate(-45deg);
+  background-color: #fff;
+}
+
+.menu-trigger.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.menu-trigger.active span:nth-of-type(3) {
+  -webkit-transform: translateY(-20px) rotate(45deg);
+  transform: translateY(-10px) rotate(45deg);
+  background-color: #fff;
+}
+
+
+/* ------ ハンバーガーアイコンの中身 ------ */
+
+#sp-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  color: #fff;
+  width: 100%;
+  min-height: 100%;
+  display: none;
+  z-index: 9;
+}
+
+#sp-menu li{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#sp-menu a{
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+/* ------ 詳細 ------ */
+
+.show_title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    -webkit-font-feature-settings: "palt";
+    font-feature-settings: "palt";
+    line-height: 1.4;
+}
+
+.show_image {
+  width: 100%;
+  height: 60%;
+}
 
 
 

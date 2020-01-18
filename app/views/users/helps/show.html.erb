@@ -1,13 +1,29 @@
 
 
 
-<div class="container">
+<div class="container toping">
 
-    <p><h1><%= @help.title %></h1></strong></p>
+    <div class="row">
+
+        <div class="col-7 offset-1">
+            <%= @help.user.name %>
+        </div>
+        <div class="col-3">
+            <div class="info_created_at">
+                <%= @help.created_at.strftime('%Y/%m/%d') %>にヘルプ
+            </div>
+        </div>
+    </div>
+
+    <div class="show_title">
+        <%= @help.title %>
+    </div>
 
     <div class="row">
     	<div class="col-md-7 offset-md-2">
-		    <p><strong><%= @help.language %></strong></p>
+            <div class="info_created_at tag">
+                <%= @help.language %>
+            </div>
 		</div>
 		<div class="col-md-3">
 		    <% if @help.user_id == current_user.id %>
@@ -19,8 +35,23 @@
 		</div>
 	</div>
 
-    <%= @help.help.html_safe %>
+    <%= @help.body.html_safe %>
+
+
+    <div id='comment_area'>
+    	<%= render "users/comments/comments", comments: @comments %>
+    </div>
+
+    <% unless @help.user_id == current_user.id %>
+            <div  id="comment_form">
+                <%= render "users/comments/comment_form", comment: @comment, help: @help %>
+            </div>
+    <% end %>
 
     <%= link_to "記事の一覧へ", infos_path %>
 
+  </div>
+
 </div>
+
+

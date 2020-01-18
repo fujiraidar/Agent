@@ -39,6 +39,7 @@ class DeviseCreateCompanies < ActiveRecord::Migration[5.2]
       t.string :name, null: false
       t.string :company_image_id
       t.text :introduction
+      t.integer :marks_count
       t.timestamps null: false
     end
 

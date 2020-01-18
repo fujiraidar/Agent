@@ -1,0 +1,14 @@
+
+
+
+<div class="follow-link" id="follow-link-<%= engineer.id %>">
+  <% if current_user.follows.find_by(engineer_id: engineer.id) %>
+    <%= link_to unfollow_path(engineer.id), method: :delete, remote: true do %>
+        <div class = "unfollow__button">フォロー中</div>
+    <% end %>
+  <% else %>
+    <%= link_to follow_path(engineer.id), method: :post, remote: true do %>
+        <div class = "follow__button">フォローする</div>
+    <% end %>
+  <% end %>
+</div>

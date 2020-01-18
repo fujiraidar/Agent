@@ -1,0 +1,41 @@
+
+
+
+<% if jobs.exists? %>
+
+<table class="table table-hover table-sm toping">
+
+	<% jobs.each do |j| %>
+
+    <tr class="row">
+		<td class="col-md-1"><%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", size:"60x60" %></td>
+		<td class="col-md-10">
+			<div class="info_created_at">
+				<%= link_to cunpany_path(j.company) do %>
+			    	<%= i.company.company_name %>
+			    <% end %>
+			        が<%= j.created_at.strftime('%Y/%m/%d') %>に登録
+			</div>
+			<%= link_to job_path(j) do %>
+			  <div class="index-title">
+			    <%= j.title %>
+			  </div>
+			<% end %>
+			<div class="info_created_at tag">
+		        ・<%= j.salary %>・
+		    </div>
+		</td>
+		<td class="col-md-1">
+			<% if j.company == current_company %>
+	            <%= link_to "編集", edit_job_path(j) %>
+	        <% end %>
+	    </td>
+	</tr>
+	<% end %>
+</table>
+
+<% else %>
+
+    <strong>現在、求人はありません</strong>
+
+<% end %>

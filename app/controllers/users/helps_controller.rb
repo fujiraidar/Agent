@@ -6,6 +6,8 @@ class Users::HelpsController < ApplicationController
 
 	def show
 		@help = Help.find(params[:id])
+		@comment = Comment.new
+		@comments = Comment.where(help_id: @help.id)
 	end
 
 	def edit
@@ -38,12 +40,12 @@ class Users::HelpsController < ApplicationController
 	def destroy
 		help = Help.find(params[:id])
 		help.destroy
-		redirect_to helps_path
+		redirect_to users_path
 	end
 
 	private
 
 	def help_params
-		params.require(:help).permit(:user_id, :language, :title, :help)
+		params.require(:help).permit(:user_id, :language, :title, :body)
 	end
 end

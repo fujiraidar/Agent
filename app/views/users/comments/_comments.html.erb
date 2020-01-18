@@ -1,0 +1,17 @@
+
+
+<div class="toping">
+	<strong>コメント</strong>
+</div>
+
+<% @comments.each do |c| %>
+
+    <% e = c.engineer %>
+
+	<div class="max-area">
+		<% link_to engineer_path(e) do %>
+			<%= e.user.name %>
+		<% end %>
+		→<%= c.comment %>
+	</div>
+<% end %>

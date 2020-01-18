@@ -1,8 +1,7 @@
 
 <div class="nested-fields form-inline">
     <div class="col-md-10">
-        <%= f.label :実績 %><br />
-        <%= f.text_area :performance, class: "col-md-12" %>
+        <%= f.text_area :performance, placeholder:" 開発・経験内容など", class: "col-md-12", size: "100x5" %>
     </div>
     <div class="col-md-2">
         <%= link_to_remove_association "削す", f %>

@@ -15,75 +15,98 @@
 	    <tr>
 	        <th><%= @company.company_address %></th>
 	    </tr>
-	    <tr>
-	        <th><%= @company.phone %></th>
-	    </tr>
-	    <tr>
-	        <th><%= @engineer.introduction %></th>
-	    </tr>
-        <tr>
-	        <th><%= @company.surname %><%= @company.name %> 様</th>
-        </tr>
 
-        <% if @company == current_company %>
+	    <% if user_signed_in? %>
 	    <tr>
-	        <th>
-	        	<%= link_to edit_company_path(current_company.id) do %>
-	        	<i class="fas fa-wrench">編集する</i>
-	        	<% end %>
-	        </th>
+	        <th><%= render 'mark', company: @company %></th>
 	    </tr>
+	    <% end %>
+
+	    <tr>
+	        <th><%= @company.introduction %></th>
+	    </tr>
+
+        <% if company_signed_in? %>
+	        <% if @company == current_company %>
+		    <tr>
+		        <th>
+		        	<%= link_to edit_company_path(current_company.id) do %>
+		        	<i class="fas fa-wrench">編集する</i>
+		        	<% end %>
+		        </th>
+		    </tr>
+		    <% end %>
 	    <% end %>
 
     </table>
   </div>
 
+  <div class="col-md-9">
 
-  <div class="col-md-8 offset-md-1">
+    <% if @company == current_company %>
 
+		<div class='tabs'>
+		  <div class='my-tab-buttons'>
+		    <span class='my-content1'>ニュース</span>
+		    <span class='my-content2'>求人</span>
+		    <span class='my-content3'>マーク</span>
+		    <span class='my-content4'>オファー</span>
+		    <span class='my-content5'>ニュース</span>
+		    <div id='my-lamp' class='my-content1'></div>
+		  </div>
+		  <div class='my-tab-content'>
 
+		    <div class='my-content1'>
+	      	    neews
+	        </div>
 
-		<ul id="myTabs" class="nav nav-tabs">
-	      <li role="presentation" class="active"><a href="#job"  aria-controls="job" role="tab" data-toggle="tab" class="nav-link active">公開求人</a>
-	      </li>
-	      <li role="presentation"><a href="#offer" aria-controls="offer" role="tab" data-toggle="tab" class="nav-link">オファー</a></li>
-	      <li role="presentation"><a href="#message" aria-controls="message" role="tab" data-toggle="tab" class="nav-link">チャット</a></li>
-	    </ul>
+	        <div class='my-content2'>
+	        	<%= render 'companies/jobs/jobs', jobs: @jobs %>
+	        </div>
 
-	    <div class="tab-content p-2 ">
-	      <div role="tabpanel" class="tab-pane active fade show" id="job">
-	      	<table class="table table-hover table-sm">
+	        <div class='my-content3'>
+				<%= render 'users/marks/marks', marks: @marks %>
+	        </div>
 
-				<% @job.each do |j| %>
+	        <div class='my-content4'>
+	        	<%= render 'companies/offers/offers', offers: @offers %>
+	        </div>
 
-			    <tr>
-					<td><%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", size:"50x50" %></td>
-					<td>
-						<p><%= i.company.company_name %> <%= j.created_at.strftime('%Y/%m/%d') %>に登録</p>
-						<%= link_to job_path(j) do %>
-						    <p><%= j.title %></p>
-						<% end %>
-					    <p><%= j.salary %></p>
-					</td>
-					<td><%= link_to "編集", edit_info_path(i) %></td>
-				</tr>
-				<% end %>
-	        </table>
+	        <div class='my-content5'>
+	        	tytto
+	        </div>
+
 	      </div>
+		</div>
 
+	<% else %>
 
-	      <div role="tabpanel" class="tab-pane fade" id="offer">
-	        <p>offer</p>
-	      </div>
+	    <div class='tabs'>
+		  <div class='tab-buttons'>
+		    <span class='content1'>ニュース</span>
+		    <span class='content2'>求人</span>
+		    <span class='content3'>マーク</span>
+		    <div id='lamp' class='content1'></div>
+		  </div>
+		  <div class='tab-content'>
 
-	      <div role="tabpanel" class="tab-pane fade" id="message">
-	        <p>チャット</p>
+		    <div class='content1'>
+		       neews
+	        </div>
+
+	        <div class='content2'>
+	        	<%= render 'companies/jobs/jobs', jobs: @jobs %>
+	        </div>
+
+	        <div class='content3'>
+	        	<%= render 'users/marks/marks', marks: @marks %>
+	        </div>
 	      </div>
 	    </div>
 
-  </div>
+	<% end %>
+
+   </div>
 </div>
 </div>
-
-
 

@@ -10,16 +10,22 @@ Rails.application.routes.draw do
   	resources :infos
     resources :users
   	resources :helps
-  	resources :engineers, only: [:new, :show, :create, :edit, :update, :destroy]
+  	resources :comments, only: [:create]
+  	resources :jobs, only: [:index]
+  	resources :engineers, only: [:new, :show, :edit, :create, :update, :destroy]
   	post   '/favorite/:info_id' => 'favorites#favorite',   as: 'favorite'
     delete '/favorite/:info_id' => 'favorites#unfavorite', as: 'unfavorite'
+    post   '/follow/:engineer_id' => 'follows#follow',   as: 'follow'
+    delete '/follow/:engineer_id' => 'follows#unfollow', as: 'unfollow'
+    post   '/mark/:company_id' => 'marks#mark',   as: 'mark'
+    delete '/mark/:company_id' => 'marks#unmark', as: 'unmark'
   end
 
   scope module: :companies do
   	resources :companies
   	resources :engineers, only: [:index]
-  	resources :jobs
-  	resources :offers
+  	resources :jobs, only: [:new, :show, :edit, :create, :update, :destroy]
+  	resources :offers, only: [:new, :show, :create, :destroy]
   end
 
   namespace :admins do

@@ -2,11 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-input[type="text"] {
-        width: 100%;
-        height: 40px;
-}
+/* ------ 記事、ヘルプ関連 ------ */
 
 .container_info {
 	width: 100%;
@@ -16,10 +12,34 @@ input[type="text"] {
 	margin-right: auto;
 }
 
-input[type="area"] {
+input[type="text"] {
         width: 100%;
         height: 40px;
 }
+
+input[type="area"] {
+        width: 100px;
+        height: 60px;
+}
+
+.info_created_at {
+    font-size: 12px;
+    color: #747474;
+}
+
+.index-title {
+    font-size: 18px;
+}
+
+.tag {
+    background-color: #f1f1f1;
+    border: solid #f1f1f1 2px;
+    border-radius: 7px;
+}
+
+
+
+/* ------ summernote_helper ------ */
 
 .code {
 	box-sizing: inherit;
@@ -30,7 +50,6 @@ input[type="area"] {
     font-family: -apple-system, system-ui, "Segoe UI", "Helvetica Neue", "Hiragino Kaku Gothic ProN", メイリオ, meiryo, sans-serif;
     font-size: 14.4px;
 }
-
 .code-title {
     margin: 0 !important;
     padding: 0 !important;
@@ -44,13 +63,4 @@ input[type="area"] {
     border-radius: 20px;
 }
 
-.info_created_at {
-    font-size: 12px;
-    color: #747474;
-}
 
-.tag {
-    background-color: #f1f1f1;
-    border: solid #f1f1f1 2px;
-    border-radius: 7px;
-}

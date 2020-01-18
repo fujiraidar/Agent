@@ -1,6 +1,8 @@
 
 
-<div class="container">
+<div class="container toping">
+
+  <% if @jobs.exists? %>
   <div class="row">
     <div class="col-md-3">
 
@@ -28,11 +30,16 @@
             	<%= j.company.company_name %>
             <% end %>
           </p>
-        <% end %>
 
         </div>
       </div>
       <% end %>
     </div>
   </div>
+  <% else %>
+  <div class="blank">
+    <h5>現在、求人はありません。</h5>
+    <h5>Currently, there are no jobs.</h5>
+  </div>
+  <% end %>
 </div>

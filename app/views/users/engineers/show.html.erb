@@ -1,0 +1,118 @@
+
+
+<div class="container">
+<div class="toping">
+<div class="row">
+
+  <div class="col-md-3">
+
+	<table class="table">
+
+        <%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"255x255" %>
+        <tr>
+	        <th><%= @engineer.surname %><%= @engineer.name %> 様</th>
+        </tr>
+
+	    <% if user_signed_in? %>
+	    <% unless @engineer.id == current_user.id %>
+		    <tr>
+		        <th><%= render 'users/engineers/follow', engineer: @engineer %></th>
+		    </tr>
+		<% end %>
+	    <% elsif company_signed_in? && @engineer.offer == "受け取る" %>
+	        <tr>
+	            <th><%= @engineer.age %> 歳</th>
+	        </tr>
+	        <tr>
+		      <th><%= render 'companies/offers/new_offer', offer: @offer %></th>
+		    </tr>
+		<% else %>
+	    <% end %>
+
+        <tr>
+	        <th><%= @engineer.introduction %></th>
+	    </tr>
+
+	    <% if user_signed_in? %>
+		    <% if @user = current_user %>
+			    <tr>
+			        <th>
+			        	<%= link_to edit_engineer_path(current_user.id) do %>
+			        	<i class="fas fa-wrench">編集する</i>
+			        	<% end %>
+			        </th>
+			    </tr>
+		    <% end %>
+	    <% end %>
+
+    </table>
+  </div>
+
+
+  <div class="col-md-9">
+
+    <% if @engineer.id == current_user.id %>
+
+		<div class='tabs'>
+		  <div class='my-tab-buttons'>
+		    <span class='my-content1'>記事</span>
+		    <span class='my-content2'>スキル</span>
+		    <span class='my-content3'>マーク</span>
+		    <span class='my-content4'>オファー</span>
+		    <span class='my-content5'>チャット</span>
+		    <div id='my-lamp' class='my-content1'></div>
+		  </div>
+		  <div class='my-tab-content'>
+
+		    <div class='my-content1'>
+		    	<%= render 'users/infos/infos', infos: @infos %>
+	        </div>
+
+	        <div class='my-content2'>
+				<%= render 'users/engineers/skill', languages: @languages %>
+	        </div>
+
+	        <div class='my-content3'>
+	      	    <%= render 'users/marks/marks', marks: @marks %>
+	        </div>
+	        <div class='my-content4'>
+	        	<%= render 'companies/offers/offers', offers: @offers %>
+	        </div>
+	        <div class='my-content5'>
+	        	tytto
+	        </div>
+
+	      </div>
+		</div>
+
+	<% else %>
+
+	    <div class='tabs'>
+		  <div class='tab-buttons'>
+		    <span class='content1'>記事</span>
+		    <span class='content2'>スキル</span>
+		    <span class='content3'>マーク</span>
+		    <div id='lamp' class='content1'></div>
+		  </div>
+		  <div class='tab-content'>
+
+		    <div class='content1'>
+		    	<%= render 'users/infos/infos', infos: @infos %>
+	        </div>
+
+	        <div class='content2'>
+				<%= render 'users/engineers/skill', languages: @languages %>
+	        </div>
+
+	        <div class='content3'>
+	        	<%= render 'users/marks/marks', marks: @marks %>
+	        </div>
+	      </div>
+	    </div>
+
+	<% end %>
+</div>
+</div>
+</div>
+</div>
+

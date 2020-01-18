@@ -1,3 +1,26 @@
 // Place all the styles related to the users::follows controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.follow__button {
+	width: 100px;
+	text-align: center;
+	font-size: 14px;
+	color: white;
+	background-color: #148acd;
+	border-radius: 4px;
+	display: inline-block;
+}
+
+.unfollow__button {
+	width: 100px;
+	text-align: center;
+	font-size: 14px;
+	color: black;
+	background-color: white;
+	border: solid #f1f1f1 2px;
+	border-radius: 4px;
+	display: inline-block;
+}
+

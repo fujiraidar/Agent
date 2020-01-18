@@ -2,12 +2,10 @@
 <div class="nested-fields well well-compact">
   <div class="form-group row">
     <div class="col-md-5">
-      <%= f.label :開発経験のある言語, class: "offset-md-1" %><br />
-      <%= f.text_field :language %>
+      <%= f.text_field :language , placeholder:" 開発経験のある言語"%>
     </div>
     <div class="col-md-4">
-      <%= f.label :経験年数, class: "offset-md-1" %><br />
-      <%= f.number_field :experience_year, value: 1, class: "col-md-7" %>年(未満)
+      <%= f.number_field :experience_year, placeholder:"開発・経験", class: "col-md-7" %>年(未満)
     </div>
 
       <%= link_to_remove_association "削す", f %>

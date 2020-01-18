@@ -1,0 +1,34 @@
+
+
+<% if marks.exists? %>
+
+<table class="table table-hover table-sm toping">
+
+	<% marks.enjineer.each do |m| %>
+
+    <tr class="row">
+		<td class="col-md-1"><%= attachment_image_tag m, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+		<td class="col-md-10">
+			<div class="info_created_at">
+				<%= j.created_at.strftime('%Y/%m/%d') %>にマークされました。
+			</div>
+			<%= link_to enjineer_path(m) do %>
+			  <div class="index-title">
+			    <%= m.engineer.surname %> <%= m.engineer.name %>
+			  </div>
+			<% end %>
+			<div class="info_created_at tag">
+		        ・<%= m.age %>歳 <%= m.rank %>ランク
+		    </div>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<% else %>
+
+<strong>no mark</strong>
+
+<p>マークしているAgentは、いません</p>
+
+<% end %>

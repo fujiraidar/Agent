@@ -1,207 +1,54 @@
 
-<div class="container toping">
-
+<div class="container">
+<div class="toping">
 <div class="row">
 
   <div class="col-md-3">
 
 	<table class="table">
 
-    <% if Engineer.where(id: current_user.id).exists? %>
-        <%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"255x255" %>
-        <tr>
-	        <th><%= @engineer.surname %><%= @engineer.name %> 様</th>
-        </tr>
-        <tr>
-	        <th><%= @engineer.age %> 歳</th>
-	    </tr>
-        <tr>
-	        <th><%= @engineer.introduction %></th>
-	    </tr>
-	    <tr>
-	        <th>
-	        	<%= link_to edit_engineer_path(current_user.id) do %>
-	        	<i class="fas fa-wrench">編集する</i>
-	        	<% end %>
-	        </th>
-	    </tr>
-    <% end %>
-
 		<tr>
-			<th><%= current_user.name %></th>
+			<th><%= @user.name %></th>
 		</tr>
 		<tr>
-			<th><%= current_user.email %></th>
+			<th><%= @user.email %></th>
 		</tr>
 
     </table>
   </div>
 
 
-  <div class="col-md-9 lefting">
-
-
-    <% if Engineer.where(id: current_user.id).exists? %>
+  <div class="col-md-9">
 
 		<div class='tabs'>
-		  <div class='my-tab-buttons'>
-		    <span class='my-content1'>スキル</span>
-		    <span class='my-content2'>記事</span>
-		    <span class='my-content3'>ヘルプ</span>
-		    <span class='my-content4'>オファー</span>
-		    <span class='my-content5'>チャット</span>
-		    <div id='my-lamp' class='my-content1'></div>
+		  <div class='tab-buttons'>
+		    <span class='content1'>ヘルプ</span>
+		    <span class='content2'>いいね</span>
+		    <span class='content3'>フォロー</span>
+		    <div id='lamp' class='content1'></div>
 		  </div>
-		  <div class='my-tab-content'>
+		  <div class='tab-content'>
 
-		    <div class='my-content1'>
-	      	<strong>スキル</strong>
-				<table class="table table-hover table-sm">
-
-				    <% @languages.each do |l| %>
-
-						<tr>
-							<td><%= l.language %></td>
-							<td><%= l.experience_year %>年</td>
-					        <td>
-					            <% l.performances.each do |pe| %>
-							    <p><i class="fas fa-arrow-alt-circle-right"></i>  <%= pe.performance %></p>
-							    <% end %>
-							</td>
-						</tr>
-
-					<% end %>
-				</table>
+		    <div class='content1'>
+		    	<%= render 'users/helps/helps', helps: @helps %>
 	        </div>
 
-	        <div class='my-content2'>
-	        <strong>投稿した記事</strong>
-				<table class="table table-hover table-sm">
-
-					<% @infos.each do |i| %>
-
-				    <tr class="row">
-						<td class="col-md-1"><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
-						<td class="col-md-10">
-							<div class="info_created_at">
-								<%= link_to user_path(@user) do %>
-							    	<%= i.engineer.user.name %>
-							    <% end %>
-							        が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿
-							</div>
-							<%= link_to info_path(i) do %>
-							    <%= i.title %>
-							<% end %>
-							<div class="info_created_at tag">
-						        <%= i.language %>
-						    </div>
-						</td>
-						<td class="col-md-1">
-							<div class="info_created_at">
-								<%= i.favorites_count %>
-							</div>
-							<% if i.engineer.id == current_user.id %>
-					            <%= link_to "編集", edit_info_path(i) %>
-					        <% end %>
-					    </td>
-					</tr>
-					<% end %>
-		        </table>
+	        <div class='content2'>
+	        	<%= render 'users/favorites/favorites', favorites: @favorites %>
 	        </div>
 
-	        <div class='my-content3'>
-	      	<strong>投稿したヘルプ</strong>
-				<table class="table table-hover table-sm">
-
-				    <% @helps.each do |h| %>
-
-                    <tr>
-						<td>
-							<div class="info_created_at">
-								<%= link_to user_path(@user) do %>
-							    	<%= h.user.name %>
-							    <% end %>
-							    	が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
-						    </div>
-							<%= link_to help_path(h) do %>
-							    <%= h.title %>
-							<% end %>
-							<div class="info_created_at tag">
-						    	<%= h.language %>
-						    </div>
-						</td>
-						<td>
-							<% if h.user.id == current_user.id %>
-								<%= link_to "編集", edit_help_path(h) %>
-							<% end %>
-						</td>
-					</tr>
-				    <% end %>
-				</table>
-	        </div>
-	        <div class='my-content4'>
-	        	offer
-	        </div>
-	        <div class='my-content5'>
-	        	tytto
+	        <div class='content3'>
+	        	<%= render 'users/follows/follows', follows: @follows %>
 	        </div>
 
 	      </div>
 		</div>
-		<div class='credit'>
-		</div>
-
-    <% else %>
-
-	    <% if @helps.exists? %>
-
-	    <strong>投稿したヘルプ</strong>
-			<table class="table table-hover table-sm">
-
-				    <% @helps.each do |h| %>
-
-                    <tr>
-						<td>
-							<div class="info_created_at">
-							    <%= link_to user_path(@user) do %>
-							    	<%= h.user.name %>
-							    <% end %>
-							    	が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
-						    </div>
-							<%= link_to help_path(h) do %>
-							    <%= h.title %>
-							<% end %>
-							<div class="info_created_at tag">
-						    	<%= h.language %>
-						    </div>
-						</td>
-						<td>
-							<% if h.user.id == current_user.id %>
-								<%= link_to "編集", edit_help_path(h) %>
-							<% end %>
-						</td>
-					</tr>
-				    <% end %>
-				</table>
-
-		<% else %>
-
-		<strong>
-			<p>投稿したヘルプは、ありません</p>
-			<p>ヘルプとは、分からないところを質問したり、</p>
-			<p>自分が投稿した記事のURLを教えてあげたりする機能です。</p>
-		</strong>
-		    <p><%= link_to "エンジニア登録する", new_engineer_path %>ことによって、記事を投稿することができます。</p>
-		    <p><%= link_to "ヘルプを投稿する", new_help_path %></p>
-		    <p><%= link_to "記事を探す", infos_path %></p>
-
-		<% end %>
-    <% end %>
-
 
   </div>
 </div>
 </div>
+</div>
+
 
 
 

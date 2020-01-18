@@ -1,0 +1,26 @@
+
+
+<% if languages.exists? %>
+
+<table class="table table-hover table-sm">
+
+    <% languages.each do |l| %>
+
+		<tr>
+			<td><%= l.language %></td>
+			<td><%= l.experience_year %>年</td>
+	        <td>
+	            <% l.performances.each do |pe| %>
+			    <p><i class="fas fa-arrow-alt-circle-right"></i>  <%= pe.performance %></p>
+			    <% end %>
+			</td>
+		</tr>
+
+	<% end %>
+</table>
+
+<% else %>
+
+<strong>スキルを登録していません</strong>
+
+<% end %>

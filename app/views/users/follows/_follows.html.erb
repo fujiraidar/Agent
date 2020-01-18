@@ -1,0 +1,29 @@
+
+
+
+<% if follows.exists? %>
+
+<table class="table table-hover table-sm toping">
+
+	<% follows.enjineer.each do |f| %>
+
+    <tr class="row">
+		<td class="col-md-1"><%= attachment_image_tag f, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+		<td class="col-md-10">
+			<%= link_to enjineer_path(m) do %>
+			  <div class="index-title">
+			    <%= f.user.name %>
+			  </div>
+			<% end %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<% else %>
+
+<strong>no follow</strong>
+
+<p>フォローしているAgentは、いません</p>
+
+<% end %>

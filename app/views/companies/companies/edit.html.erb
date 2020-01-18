@@ -6,25 +6,25 @@
 
 	    <div class="row">
 
-	      　<div class="col-md-4">
+	      　<div class="col-12 col-lg-3">
 		        <div class="form-group">
-		          <%= attachment_image_tag @company, :profile_image, fallback: "no_image.jpg", size:"250x250" %>
-		          <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+		          <%= attachment_image_tag @company, :company_image, fallback: "no_image.jpg", size:"250x250" %>
+		          <%= f.attachment_field :company_image, placeholder: "プロフィール画像" %>
 		        </div>
 
 		        <div class="form-group row">
 		          <div class="col-md-6">
-		            <%= f.label :姓(担当者) %><br />
+		            <%= f.label :姓 %>(担当者)<br />
 		            <%= f.text_field :surname, class: "col-md-12" %>
 		          </div>
 		          <div class="col-md-6">
-		            <%= f.label :名(担当者) %><br />
+		            <%= f.label :名 %>(担当者)<br />
 		            <%= f.text_field :name, class: "col-md-12" %>
 		          </div>
 		        </div>
 	      　</div>
 
-	      　<div class="col-md-7 offset-md-1">
+	      　<div class="col-12 col-lg-7 offset-md-1">
 		        <div class="form-group">
 		          <%= f.label :会社紹介文 %><br />
 		          <%= f.text_area :introduction, class: "col-md-12"%>

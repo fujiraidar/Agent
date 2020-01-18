@@ -10,6 +10,8 @@ body{
   background:#fff;
 }
 
+
+/* ------ Tabメニュー(index) ------ */
 .tabs{
   width:100%;
   margin:10px auto;
@@ -64,6 +66,7 @@ body{
 }
 
 
+/* ------ Tabメニュー(mypage) ------ */
 
 .my-tab-buttons span{
   font:400 14px 'open sans',sans-serif;
@@ -125,6 +128,19 @@ body{
 -o-transition: all .3s ease-in;
 -webkit-transition: all .3s ease-in;
 -moz-transition: all .3s ease-in;
+}
+
+/* ------ 検索 ------ */
+
+.search_field {
+  border-radius: 5px;
+  position: relative;
+  border: solid black 2px;
+}
+
+.s-button {
+  position: absolute;
+  right: 0;
 }
 
 

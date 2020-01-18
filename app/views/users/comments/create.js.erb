@@ -1,0 +1,5 @@
+
+
+$('#comment_area').html("<%= escape_javascript(render 'users/comments/comments', comments: @comments, help: @help ) %>");
+$('#comment_form').html("<%= escape_javascript(render 'users/comments/comment_form',  comment: @comment, help: @help ) %>");
+

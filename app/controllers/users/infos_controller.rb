@@ -38,7 +38,7 @@ class Users::InfosController < ApplicationController
 	def destroy
 		info = Info.find(params[:id])
 		info.destroy
-		redirect_to user_path(current_user.id)
+		redirect_to users_path
 	end
 
 	private

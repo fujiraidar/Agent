@@ -3,6 +3,13 @@ class Companies::CompaniesController < ApplicationController
 	def show
 		@company = Company.find(params[:id])
 		@jobs = @company.jobs
+		@marks = @company.marks
+		@offers = @company.offers
+	end
+
+	def index
+		@companies = Company.all
+		@offer = Offer.new
 	end
 
 	def edit

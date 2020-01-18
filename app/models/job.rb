@@ -2,6 +2,8 @@ class Job < ApplicationRecord
 
 	belongs_to :company
 
+	attachment :job_image
+
 	enum job:{
 		正社員: 1,
 		契約社員: 2,
