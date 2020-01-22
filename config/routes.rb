@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :admins
   devise_for :companies
   devise_for :users, controllers: {
@@ -11,7 +12,6 @@ Rails.application.routes.draw do
     resources :users
   	resources :helps
   	resources :comments, only: [:create]
-  	resources :jobs, only: [:index]
   	resources :engineers, only: [:new, :show, :edit, :create, :update, :destroy]
   	post   '/favorite/:info_id' => 'favorites#favorite',   as: 'favorite'
     delete '/favorite/:info_id' => 'favorites#unfavorite', as: 'unfavorite'
@@ -19,16 +19,23 @@ Rails.application.routes.draw do
     delete '/follow/:engineer_id' => 'follows#unfollow', as: 'unfollow'
     post   '/mark/:company_id' => 'marks#mark',   as: 'mark'
     delete '/mark/:company_id' => 'marks#unmark', as: 'unmark'
+    resources :rooms
+    get '/withdraw/:id' => 'users#withdraw', as: 'withdraw'
   end
 
   scope module: :companies do
   	resources :companies
   	resources :engineers, only: [:index]
-  	resources :jobs, only: [:new, :show, :edit, :create, :update, :destroy]
+  	resources :jobs
+  	resources :topics
   	resources :offers, only: [:new, :show, :create, :destroy]
   end
 
   namespace :admins do
+  	resources :admins, only: [:index]
+  	resources :users, only: [:index, :update, :destroy]
+  	resources :engineers, only: [:index, :update, :destroy]
+  	resources :companies, only: [:index, :update, :destroy]
   end
 
   root 'top#top'

@@ -4,7 +4,7 @@ class Job < ApplicationRecord
 
 	attachment :job_image
 
-	enum job:{
+	enum status:{
 		正社員: 1,
 		契約社員: 2,
 		アルバイト: 3,

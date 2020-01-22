@@ -1,11 +1,27 @@
 class Engineer < ApplicationRecord
 
+    acts_as_paranoid
+
+    validates :surname, presence: true,
+                   length: { maximum: 20 }
+
+    validates :name, presence: true,
+                   length: { maximum: 20 }
+
+    validates :age, numericality: { only_integer: true }, allow_blank: true
+    validates :age, presence: true, if: :offer_ok?
+    def offer_ok?
+      offer == "受け取る"
+    end
+
+    validates :offer, presence: true
+
 	has_many :languages, inverse_of: :engineer
 	accepts_nested_attributes_for :languages, reject_if: :all_blank, allow_destroy: true
 
     has_many :infos
     has_many :comments
-    has_many :offers
+    has_many :offers, dependent: :destroy
 
     belongs_to :user
 

@@ -23,7 +23,12 @@
 	    <% end %>
 
 	    <tr>
-	        <th><%= @company.introduction %></th>
+	        <th>
+	        	会社紹介
+	        	<div class="info_created_at tag">
+	        		<%= simple_format(@company.introduction) %>
+	            </div>
+	        </th>
 	    </tr>
 
         <% if company_signed_in? %>
@@ -31,7 +36,7 @@
 		    <tr>
 		        <th>
 		        	<%= link_to edit_company_path(current_company.id) do %>
-		        	<i class="fas fa-wrench">編集する</i>
+		        	<i class="fas fa-wrench info_created_at">編集する</i>
 		        	<% end %>
 		        </th>
 		    </tr>
@@ -47,17 +52,17 @@
 
 		<div class='tabs'>
 		  <div class='my-tab-buttons'>
-		    <span class='my-content1'>ニュース</span>
+		    <span class='my-content1'>トピック</span>
 		    <span class='my-content2'>求人</span>
 		    <span class='my-content3'>マーク</span>
 		    <span class='my-content4'>オファー</span>
-		    <span class='my-content5'>ニュース</span>
+		    <span class='my-content5'>メッセージ</span>
 		    <div id='my-lamp' class='my-content1'></div>
 		  </div>
 		  <div class='my-tab-content'>
 
 		    <div class='my-content1'>
-	      	    neews
+	      	    <%= render 'companies/topics/topics', topics: @topics %>
 	        </div>
 
 	        <div class='my-content2'>
@@ -83,7 +88,7 @@
 
 	    <div class='tabs'>
 		  <div class='tab-buttons'>
-		    <span class='content1'>ニュース</span>
+		    <span class='content1'>トピック</span>
 		    <span class='content2'>求人</span>
 		    <span class='content3'>マーク</span>
 		    <div id='lamp' class='content1'></div>
@@ -91,7 +96,7 @@
 		  <div class='tab-content'>
 
 		    <div class='content1'>
-		       neews
+		       　<%= render 'companies/topics/topics', topics: @topics %>
 	        </div>
 
 	        <div class='content2'>

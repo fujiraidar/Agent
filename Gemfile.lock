@@ -67,7 +67,7 @@ GEM
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
     builder (3.2.4)
-    byebug (11.0.1)
+    byebug (11.1.0)
     capybara (3.30.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -199,6 +199,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redcarpet (2.3.0)
     refile-mini_magick (0.2.0)
       mini_magick (~> 4.0)
       refile (~> 0.5)
@@ -291,6 +292,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   cocoon
+  coderay
   coffee-rails (~> 4.2)
   devise
   jbuilder (~> 2.5)
@@ -303,6 +305,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.4)
   ransack
+  redcarpet (~> 2.3.0)
   refile!
   refile-mini_magick
   sass-rails (~> 5.0)

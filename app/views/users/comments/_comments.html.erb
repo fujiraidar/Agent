@@ -6,11 +6,9 @@
 
 <% @comments.each do |c| %>
 
-    <% e = c.engineer %>
-
 	<div class="max-area">
-		<% link_to engineer_path(e) do %>
-			<%= e.user.name %>
+		<% link_to user_path(c) do %>
+			<%= c.user.name %>
 		<% end %>
 		→<%= c.comment %>
 	</div>

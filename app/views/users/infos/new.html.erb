@@ -4,6 +4,8 @@
 
 <%= form_for @info, url: infos_path , method: :post do |f| %>
 
+<%= render 'layouts/error_messages', model: f.object %>
+
   <div class="form-group">
   	<%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
   	<%= f.text_field :language, placeholder: "言語" %>
@@ -21,3 +23,40 @@
 
 <% end %>
 </div>
+
+
+<div class='container'>
+<h1>新規投稿</h1>
+<%= form_with model:@info, local: true do |f| %>
+<div class='form-group'>
+<%= f.label :title %>
+<%= f.text_field :title, class: 'form-control', id: 'info_title' %>
+<%= f.text_field :language, placeholder: "言語" %>
+</div>
+<div class='form-group'>
+<div id='editor'>
+<%= f.label :body %>
+<%= f.text_area :body, rows: 5, class: 'form-control', id: 'info_body', "v-model" => "input", name: "info[body]" %>
+<div v-html='input | marked'></div>
+
+<%= f.submit nil, class: 'btn btn-success' %>
+</div>
+</div>
+<% end %>
+
+<!-- リアルタイムプレビュー -->
+<script type="text/javascript">
+window.onload = function() {
+new Vue({
+el: '#editor',
+data: {
+input: '<%== j @info.body %>',
+},
+filters: {
+marked: marked,
+},
+});
+};
+</script>
+</div>
+

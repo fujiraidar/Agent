@@ -2,38 +2,50 @@
 
 <div class="container toping">
 
+  <%= search_form_for @q, url:companies_path do |f| %>
+
+    <div class="search_field">
+      <%= f.text_field :company_name %>
+      <%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button" do %>
+          <i class="fa fa-search"></i>
+      <% end %>
+    </div>
+  <% end %>
+
+
+
   <% if @companies.exists? %>
   <div class="row">
     <div class="col-md-3">
 
       <% @companies.each do |c| %>
 
-      <div class="card">
-        <%= link_to company_path(c) do %>
-          <%= attachment_image_tag c, :company_image, fallback: "no_image.jpg", size:"200x200", class: "card-img-top" %>
-        <% end %>
-        <div class="card-body row">
-            <strong class="card-title ">
-              <%= link_to company_path(c) do %>
-                <%= c.company_name %>
-              <% end %>
-            </strong>
-          </div>
-        </div>
+      <tr class="row">
+        <td class="col-md-1">
+          <%= link_to company_path(c) do %>
+            <%= attachment_image_tag c, :company_image, fallback: "no_image.jpg", size:"70x70"%>
+          <% end %>
+        </td>
+        <td class="col-md-3">
+          <%= link_to company_path(c) do %>
+            <strong><%= c.company_name %></strong>
+          <% end %>
+        </td>
+        <td class="col-md-8">
+          <%= c.introduction %>
+        </td>
+      </tr>
 
-          <p class="card-text">
-            <%= c.introduction %>
-          </p>
-
-        </div>
-      </div>
-      <% end %>
     </div>
   </div>
+  <% end %>
+  <%= paginate @companies %>
+
   <% else %>
   <div class="blank">
-    <h5>現在、登録している企業はありません。</h5>
-    <h5>Currently, there are no companies.</h5>
+    <h5>お探しの企業はありません。</h5>
+    <h5>There are no companies to look for.</h5>
   </div>
   <% end %>
 </div>
+

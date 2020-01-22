@@ -1,0 +1,29 @@
+
+
+<div class="toping">
+
+<% if helps.exists? %>
+
+    <div class="search_field">
+		<%= search_form_for @q_help, url:users_path, remote: true do |f| %>
+        <div class="search_field">
+		    <%= f.text_field :title_or_body_or_language_cont_any %>
+
+			<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button", id: "search_button" do %>
+			    <i class="fa fa-search"></i>
+			<% end %>
+		</div>
+
+		<% end %>
+    </div>
+
+	<ul class='help'>
+    	<%= render 'users/helps/helps', helps: helps %>
+	</ul>
+<% else %>
+
+	<strong>There is notan help</strong>
+
+<% end %>
+
+</div>

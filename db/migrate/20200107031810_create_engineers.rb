@@ -11,6 +11,7 @@ class CreateEngineers < ActiveRecord::Migration[5.2]
       t.integer :rank, null: false
       t.integer :offer, null: false
       t.integer :follows_count
+      t.datetime :deleted_at
       t.timestamps
     end
   end

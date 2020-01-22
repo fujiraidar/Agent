@@ -1,0 +1,40 @@
+
+
+<div class="container toping">
+
+  <% if @engineers.exists? %>
+  <div class="row">
+    <div class="col-md-3">
+
+      <% @engineers.each do |e| %>
+
+      <tr class="row">
+        <td class="col-md-1">
+            <%= attachment_image_tag e, :profile_image, fallback: "no_image.jpg", size:"70x70"%>
+        </td>
+        <td class="col-md-3">
+            <%= c.surname %><%= c.name %><br/ >
+        	<%= c.age %><br/ >
+            オファー<%= c.offer %>/フォロワー<%= c.follows_count%>
+        </td>
+        <td class="col-md-7">
+            <%= e.introduction %>
+        </td>
+        <td class="col-md-1">
+          <%= e.marks_count %>マーク<br/ >
+          <%= link_to "復元", admins_engineer(e), method: :patch, "data-confirm" => "復元するよ？" %><br/ >
+          <%= link_to "削除", admins_engineer(e), method: :delete, "data-confirm" => "削除するよ？" %>
+        </td>
+      </tr>
+
+    </div>
+  </div>
+  <% end %>
+  <%= paginate @engineers %>
+
+  <% else %>
+  <div class="blank">
+    <h5>No Agent</h5>
+  </div>
+  <% end %>
+</div>

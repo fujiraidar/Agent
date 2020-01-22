@@ -5,6 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <script src="https://kit.fontawesome.com/65370e92be.js" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.js'></script>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -67,14 +69,22 @@
             <li><%= link_to "エンジニア", engineers_path %></li>
             <li><%= link_to "ガイド", top_about_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-            <li><%= link_to "お問い合わせ", destroy_user_session_path %></li>
+            <li><%= link_to "その他", withdraw_path(current_user.id) %></li>
           <% elsif company_signed_in? %>
             <li><%= link_to "マイページ", company_path(current_company.id) %></li>
-            <li><%= link_to "求人の投稿", new_job_path %></li>
             <li><%= link_to "エンジニア一覧", engineers_path %></li>
+            <li><%= link_to "トピックの投稿", new_topic_path %></li>
+            <li><%= link_to "求人の投稿", new_job_path %></li>
+            <li><%= link_to "求人の一覧", jobs_path %></li>
+            <li><%= link_to "企業の一覧", companies_path %></li>
+            <li><%= link_to "記事の一覧", users_path %></li>
             <li><%= link_to "ガイド", top_about_path %></li>
             <li><%= link_to "ログアウト",destroy_company_session_path, method: :delete %></li>
             <li><%= link_to "お問い合わせ",destroy_company_session_path %></li>
+          <% elsif admin_signed_in? %>
+            <li><%= link_to "ユーザー", admins_admins_path %></li>
+            <li><%= link_to "ユーザー", admins_users_path %></li>
+            <li><%= link_to "企業", admin_companies_path %></li>
           <% else %>
             <li><%= link_to "ログイン", new_user_session_path %></li>
             <li><%= link_to "新規会員登録", new_user_registration_path %></li>

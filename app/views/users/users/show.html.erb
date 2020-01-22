@@ -13,6 +13,11 @@
 		<tr>
 			<th><%= @user.email %></th>
 		</tr>
+		<% if Engineer.find_by(id: @user) %>
+		<tr>
+			<th><%= link_to "AgentPage", engineer_path(@user) %></th>
+		</tr>
+		<% end %>
 
     </table>
   </div>
@@ -30,7 +35,7 @@
 		  <div class='tab-content'>
 
 		    <div class='content1'>
-		    	<%= render 'users/helps/helps', helps: @helps %>
+		    	<%= render 'users/helps/helps_search', helps: @helps %>
 	        </div>
 
 	        <div class='content2'>

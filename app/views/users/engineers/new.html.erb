@@ -5,6 +5,8 @@
 
     <%= form_for @engineer, url: engineers_path, method: :post do |f| %>
 
+    <%= render 'layouts/error_messages', model: f.object %>
+
     <div class="row">
 
       <div class="col-md-4">
@@ -23,7 +25,7 @@
         </div>
         <div class="form-group row">
           <div class="col-md-5">
-            <%= f.number_field :age, placeholder:" 55", class: "col-md-8" %>歳
+            <%= f.number_field :age, placeholder:" 20",min: 1, max:100, class: "col-md-8" %>歳
           </div>
           <div class="col-md-7">
             <%= f.select :offer, Engineer.offers.keys.to_a, include_blank: "選択して下さい" %>

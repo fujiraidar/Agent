@@ -1,17 +1,40 @@
 
 
-<%= form_for @job do |f| %>
 
+<div class="container clearfix toping">
 
-<%= f.label :job %><br>
-<%= f.text_area :job %>
+　　　<%= form_for @job do |f| %>
 
-<%= f.label :salary %><br>
-<%= f.text_field :salary %>
+    <%= render 'layouts/error_messages', model: f.object %>
 
-<%= f.label :status %><br>
-<%= f.select :status, Job.jobs.keys.to_a, include_blank: true %>
+    <div class="row">
 
-<%= f.submit "登録" %>
+      <div class="col-12 col-lg-4">
+        <div class="form-group">
+          <%= attachment_image_tag @job, :job_image, fallback: "no_image.jpg", size:"200x200" %>
+          <%= f.attachment_field :job_image, placeholder: "プロフィール画像" %>
+        </div>
+      </div>
+      <div class="col-12 col-lg-8 lefting toping">
+        <div class="form-group">
+            <%= f.text_field :title, placeholder:" タイトル", class: "col-md-12" %>
+        </div>
+        <div class="form-group">
+            <%= f.text_field :salary, placeholder:" 給与", class: "col-md-12" %>
+        </div>
+        <div class="form-group">
+            <%= f.select :status, Job.statuses.keys.to_a, placeholder:" 雇用形態の選択" %>
+        </div>
+      </div>
 
-<% end %>
+      <div class="col-12 toping">
+        <div class="form-group">
+          <%= f.text_area :job, placeholder:" 仕事内容", class: "col-12", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js"%>
+        </div>
+        <div class="form-group">
+          <%= f.submit "登録する", class: "btn-lg btn-primary"  %>
+        </div>
+      </div>
+    <% end %>
+
+</div>

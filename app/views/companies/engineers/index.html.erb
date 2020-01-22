@@ -1,74 +1,59 @@
 
 
+
+
 <div class="container toping">
-  <div class="row">
-    <div class="col-md-3">
 
-      <% @engineers.each do |e| %>
+<% if @engineers.exists? %>
 
-      <div class="card">
+  <%= search_form_for @q, url:engineers_path do |f| %>
+    <div class="search_field">
+      <%= f.text_field :user_name_or_surname_or_name_or_age_or_introduction_or_languages_language_cont_any %>
+    <%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button", id: "search_button" do %>
+        <i class="fa fa-search"></i>
+    <% end %>
+    </div>
+
+  <% end %>
+
+ <div class="toping">
+ <table class="table table-hover table-sm">
+  <% @engineers.each do |e| %>
+
+    <tr class="row">
+      <td class="col-md-1">
         <%= link_to user_path(e) do %>
-          <%= attachment_image_tag e, :profile_image, fallback: "no_image.jpg", size:"200x200", class: "card-img-top" %>
+          <%= attachment_image_tag e, :profile_image, fallback: "no_image.jpg", size:"70x70"%>
         <% end %>
-        <div class="card-body row">
-          <div class="col-md-8">
-            <strong class="card-title ">
-              <%= link_to user_path(e) do %>
-                <%= e.surname %> <%= e.name %>
-              <% end %>
-            </strong>
-          </div>
-          <div class="col-md-4">
-            <%= e.age %>歳
-          </div>
-        </div>
-
+      </td>
+      <td class="col-md-8">
+        <strong>
+          <%= link_to engineer_path(e) do %>
+            <%= e.surname %> <%= e.name %>
+          <% end %>
+         <%= e.age %>歳
+        </strong>
 
         <% e.languages.each do |l| %>
-
-          <p class="card-text">
-            <div class="row">
-              <div class="col-md-5">
-                <%= l.language %>
-              </div>
-              <div class="col-md-5">
-                <%= l.experience_year %>年
-              </div>
-            </div>
-          </p>
-        <% end %>
-
-      <% if company_signed_in? %>
-        <div class="container text-center">
-          <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#post">オファー</button>
-            <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <%= form_for @offer, url: offers_path, method: :post do |f| %>
-                    <div class="modal-body">
-                      <%= f.text_field :title, class: "form-control", placeholder: "タイトル(職種など)" %>
-                      <%= f.text_field :salary, class: "form-control", placeholder: "給与" %>
-                      <%= f.select :status, Offer.statuses.keys.to_a, class: "form-control" %>
-                      <%= f.text_area :job, class: "form-control", placeholder: "仕事内容" %>
-                      <%= f.hidden_field :engineer_id, value: e.id %>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                      <%= f.submit "投稿する", class: "btn btn-primary" %>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-          </div>
-
-      <% end %>
-
+        <div class="tag">
+          <%= l.language %>・<%= l.experience_year %>年
         </div>
-      </div>
-      <% end %>
-    </div>
+        <% end %>
+      </td>
+    </tr>
+
+  <% end %>
+
+    <%= paginate @engineers %>
+  </table>
+
+<% else %>
+
+  <div class="blank">
+    <h5>お探しの企業はありません。</h5>
+    <h5></h5>
   </div>
+
+<% end %>
 </div>
-
-
+</div>

@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -63,6 +64,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 
+gem 'paranoia'
+
 gem 'bootstrap', '~> 4.3.1'
 
 gem 'jquery-rails'
@@ -72,17 +75,14 @@ gem 'kaminari', '~> 0.17.0'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
-gem 'paranoia'
-
 gem 'cocoon'
-
-gem 'pry-byebug'
-
-gem 'rails', '~> 5.2.4'
 
 gem 'summernote-rails', '~> 0.8.10.0'
 
 gem 'ransack'
+
+gem 'redcarpet', '~> 2.3.0'
+gem 'coderay'
 
 
 group :production do

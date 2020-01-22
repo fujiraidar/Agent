@@ -1,5 +1,11 @@
 
 
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div class="container toping">
 
     <div class="row">
@@ -37,7 +43,7 @@
 		</div>
 	</div>
 
-    <%= @info.body.html_safe %>
+    <%= (@info.body).html_safe %>
 
     <% unless @info.engineer_id == current_user.id %>
 

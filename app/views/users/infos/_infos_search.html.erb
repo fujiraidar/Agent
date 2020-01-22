@@ -1,0 +1,28 @@
+
+<div class="toping">
+
+<% if infos.exists? %>
+
+	<%= search_form_for @q_info, url:users_path, remote: true do |f| %>
+
+		<div class="search_field">
+		    <%= f.text_field :title_or_body_or_language_cont_any %>
+			<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button" do %>
+			    <i class="fa fa-search"></i>
+			<% end %>
+		</div>
+	<% end %>
+
+    <%= sort_link(@q_info, :favorites_count, "ランキング") %>
+	<ul class='info'>
+    	<%= render 'users/infos/infos', infos: infos %>
+	</ul>
+
+<% else %>
+
+		<strong>記事が、ありません</strong>
+
+<% end %>
+
+</div>
+
