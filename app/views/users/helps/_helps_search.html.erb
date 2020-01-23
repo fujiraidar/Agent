@@ -4,7 +4,6 @@
 
 <% if helps.exists? %>
 
-    <div class="search_field">
 		<%= search_form_for @q_help, url:users_path, remote: true do |f| %>
         <div class="search_field">
 		    <%= f.text_field :title_or_body_or_language_cont_any %>
@@ -15,11 +14,10 @@
 		</div>
 
 		<% end %>
-    </div>
 
-	<ul class='help'>
+	<div class='help'>
     	<%= render 'users/helps/helps', helps: helps %>
-	</ul>
+	</div>
 <% else %>
 
 	<strong>There is notan help</strong>

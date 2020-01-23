@@ -84,6 +84,7 @@ gem 'ransack'
 gem 'redcarpet', '~> 2.3.0'
 gem 'coderay'
 
+gem 'payjp'
 
 group :production do
   gem 'mysql2'

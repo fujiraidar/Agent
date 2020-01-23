@@ -33,13 +33,24 @@
 
         <% if company_signed_in? %>
 	        <% if @company == current_company %>
-		    <tr>
-		        <th>
-		        	<%= link_to edit_company_path(current_company.id) do %>
-		        	<i class="fas fa-wrench info_created_at">編集する</i>
-		        	<% end %>
-		        </th>
-		    </tr>
+			    <tr>
+			        <th>
+			        	<%= link_to edit_company_path(current_company.id) do %>
+			        	<i class="fas fa-wrench info_created_at">編集する</i>
+			        	<% end %>
+			        </th>
+			    </tr>
+			    <% unless current_company.company_payments.exists? %>
+				    <tr>
+				        <th><%= link_to "お支払", new_company_company_payment_path(current_company.id) %></th>
+				    </tr>
+				<% else %>
+				    <% current_company.company_payments.each do |c| %>
+				    <tr>
+				        <th><p>利用期限は、<%= c.created_at.next_year.strftime('%Y/%m/%d') %>です。</p></th>
+				    </tr>
+				    <% end %>
+				<% end %>
 		    <% end %>
 	    <% end %>
 

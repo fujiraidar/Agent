@@ -33,7 +33,7 @@
 			</td>
 			<td class="col-md-1">
 				<div class="info_created_at">
-					<i class="far fa-heart"></i> <%= i.favorites_count %>
+					<i class="far fa-heart"> <%= i.favorites_count %></i>
 				</div>
 				<% if user_signed_in? %>
 				<% if @engineer.id == current_user.id %>

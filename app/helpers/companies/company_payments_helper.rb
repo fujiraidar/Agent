@@ -1,0 +1,2 @@
+module Companies::CompanyPaymentsHelper
+end

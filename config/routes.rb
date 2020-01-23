@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   end
 
   scope module: :companies do
-  	resources :companies
+  	resources :companies do
+  		resource :company_payment, only: [:new, :create]
+  	end
   	resources :engineers, only: [:index]
   	resources :jobs
   	resources :topics

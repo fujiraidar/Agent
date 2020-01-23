@@ -35,6 +35,7 @@ class Users::UsersController < ApplicationController
             @infos = Info.page(params[:page]).per(10)
             @helps = Help.page(params[:page]).per(10)
         end
+        @good_infos = Info.all.order('favorites_count desc').page(params[:page]).per(10)
         render :index
     end
 
@@ -57,6 +58,15 @@ class Users::UsersController < ApplicationController
         @user.destroy
         redirect_to root_path
 	end
+
+    def pay
+        Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
+        charge = Payjp::Charge.create(
+        amount: 500,
+        card: params['payjp-token'],
+        currency: 'jpy'
+        )
+    end
 
 
 	private
