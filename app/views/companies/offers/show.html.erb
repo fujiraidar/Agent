@@ -5,7 +5,7 @@
   </div>
 <% end %>
 
-<div class="container">
+<div class="container whiting">
 
     <p><h1><%= @offer.title %></h1></p>
 
@@ -16,12 +16,21 @@
 		</div>
 		<div class="col-md-3">
 			<% if company_signed_in? %>
-		    <% if @offer.company_id == current_company.id %>
+			    <% if @offer.company_id == current_company.id %>
 
-		        <p><%= link_to "このオファーを削除する", offer_path(@offer), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+			        <p><%= link_to "このオファーを削除する", offer_path(@offer), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 
-		    <% end %>
-		    <% end %>
+			    <% end %>
+		    <% elsif user_signed_in? %>
+		        <% if @offer.engineer_id == current_user.id %>
+				    <%= form_for @box, remote: true, url:boxes_path, method: :post do |f| %>
+				    <%= f.hidden_field :company_id, value: @offer.company_id %>
+				    <%= f.hidden_field :engineer_id, value: @offer.engineer_id %>
+				    <%= f.submit :返答 %>
+				    <% end %>
+				<% end %>
+			<% else %>
+			<% end %>
 		</div>
 	</div>
 

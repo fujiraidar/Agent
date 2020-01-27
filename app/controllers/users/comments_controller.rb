@@ -5,7 +5,7 @@ class Users::CommentsController < ApplicationController
 	def create
         @comment = Comment.new(comment_params)
         @help = @comment.help
-        @comments = Comment.all
+        @comments = Comment.where(help_id: @help.id)
         @comment.user_id = current_user.id
         if @comment.save
             @comment = Comment.new

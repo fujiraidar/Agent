@@ -82,9 +82,12 @@ gem 'summernote-rails', '~> 0.8.10.0'
 gem 'ransack'
 
 gem 'redcarpet', '~> 2.3.0'
+gem 'rouge'
 gem 'coderay'
 
 gem 'payjp'
+
+
 
 group :production do
   gem 'mysql2'

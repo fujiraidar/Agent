@@ -1,0 +1,9 @@
+
+
+
+	<%= form_for interview, remote: true, url:interviews_path, method: :post do |f| %>
+	    <div class='form-group toping'>
+	      <%= f.text_area :message , size: "12x3"%> <%= f.submit :送信 %>
+	      <%= f.hidden_field :box_id, value: box.id %>
+	    </div>
+	<% end %>

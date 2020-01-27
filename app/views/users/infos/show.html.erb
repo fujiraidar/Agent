@@ -6,7 +6,7 @@
   </div>
 <% end %>
 
-<div class="container toping">
+<div class="container toping whiting">
 
     <div class="row">
 		<div class="col-1">
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 
-    <%= (@info.body).html_safe %>
+    <%= (markdown(@info.body)).html_safe %>
 
     <% unless @info.engineer_id == current_user.id %>
 

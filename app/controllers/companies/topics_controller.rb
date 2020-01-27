@@ -11,6 +11,18 @@ class Companies::TopicsController < ApplicationController
 		@topic = Topic.find(params[:id])
 	end
 
+	def index
+		if params[:q] != nil
+            params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
+            @q_topic = Topic.ransack(params[:q])
+            @topics = @q_topic.result(distinct: true).page(params[:page]).per(10)
+        else
+            @q_topic = Topic.ransack(params[:q])
+            @topics = Topic.page(params[:page]).per(10)
+        end
+        render :index
+	end
+
 	def edit
 	end
 

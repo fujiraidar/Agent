@@ -1,55 +1,67 @@
 
 
-<div class="container toping">
+<div class="container">
 
-<% if @jobs.exists? %>
+  <div class="row">
 
-    <%= search_form_for @q, url:jobs_path do |f| %>
-      <div class="search_field">
-	    <%= f.text_field :title_or_status_or_salary_or_job_cont_any %>
+    <div class="col-2 toping">
+      <%= render 'layouts/sidebar' %>
+    </div>
 
-		<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button", id: "search_button" do %>
-		    <i class="fa fa-search"></i>
-		<% end %>
-	  </div>
+  <div class="col-10 whiting toping">
 
-	<% end %>
+    <% if @jobs.exists? %>
+
+      <%= search_form_for @q, url:jobs_path do |f| %>
+
+        <div class="search_field">
+        <%= f.text_field :title_or_status_or_salary_or_job_cont_any %>
+
+      	<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button", id: "search_button" do %>
+      	    <i class="fa fa-search"></i>
+      	<% end %>
+        </div>
+
+      <% end %>
 
 
-	<div class="row bottoming">
+      <div class="row bottoming">
 
-    <% @jobs.each do |j| %>
+        <% @jobs.each do |j| %>
 
-    <div class="col-12 col-lg-3 toping">
-    <div class="card">
-        <%= link_to company_path(j.company) do %>
-          <%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", class: "card-img-top job-images" %>
+        <div class="col-12 col-lg-3 toping">
+        <div class="card">
+            <%= link_to company_path(j.company) do %>
+              <%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", class: "card-img-top job-images" %>
+            <% end %>
+            <div class="card-body row">
+                <h5 class="card-title col-12 ">
+                  	<%= link_to job_path(j) do %>
+                    	<%= j.title %>
+                  	<% end %>
+                </h5>
+      		<p class="card-text col-10 offset-1 tag">
+      			・<%= j.status %><br />
+      			・<%= j.salary %>
+      		</p>
+      		<p class="card-text col-10 offset-1">
+      			<%= link_to company_path(j.company) do %>
+      				<%= j.company.company_name %>
+      			<% end %>
+      		</p>
+      	</div>
+      </div>
+        </div>
         <% end %>
-        <div class="card-body row">
-            <h5 class="card-title col-12 ">
-              	<%= link_to job_path(j) do %>
-                	<%= j.title %>
-              	<% end %>
-            </h5>
-			<p class="card-text col-10 offset-1 tag">
-				・<%= j.status %><br />
-				・<%= j.salary %>
-			</p>
-			<p class="card-text col-10 offset-1">
-				<%= link_to company_path(j.company) do %>
-					<%= j.company.company_name %>
-				<% end %>
-			</p>
-		</div>
-	</div>
-    </div>
-    <% end %>
-    </div>
+        </div>
 
-<% else %>
-  <div class="blank">
-    <h5>お探しの、求人はありません。</h5>
-    <h5>There are no jobs to look for.</h5>
+      <% else %>
+      <div class="blank">
+        <h5>お探しの、求人はありません。</h5>
+        <h5>There are no jobs to look for.</h5>
+      </div>
+      <% end %>
+      </div>
+
   </div>
-  <% end %>
 </div>

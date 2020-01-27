@@ -1,0 +1,47 @@
+
+
+<div class="container_info toping">
+
+<%= form_for @draft, url: draft_path(@draft) , method: :patch, remote: true do |f| %>
+
+<%= render 'layouts/error_messages', model: f.object %>
+
+  <div class="form-group">
+  	<%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
+  	<%= f.text_field :language, placeholder: "言語" %>
+  </div>
+  <div class="form-group row">
+    <div class="col-6">
+		  <%= f.text_area :body, placeholder: "本文", :size => "80x50", id: "md-textarea" %>
+    </div>
+    <div class="col-6">
+      <div  id="preview_area">
+        <%= render 'preview', draft: @draft %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+  	<div class="col-md-2 offset-md-5">
+  		<%= f.submit "更新", class: "btn btn-primary" %>
+  	</div>
+  </div>
+<% end %>
+
+
+  <%= form_for @info, url: infos_path, method: :post do |f| %>
+
+   <%= render 'layouts/error_messages', model: f.object %>
+
+  	<%= f.hidden_field :title, value: @draft.title %>
+  	<%= f.hidden_field :language, value: @draft.language %>
+    <%= f.hidden_field :body, value: @draft.body %>
+
+  <div class="form-group row">
+  	<div class="col-md-2 offset-md-10">
+  		<%= f.submit "投稿する", class: "btn btn-success" %>
+  	</div>
+  </div>
+<% end %>
+
+</div>

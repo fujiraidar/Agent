@@ -1,0 +1,12 @@
+
+
+<% interviews.each do |i| %>
+
+    <div class="info_created_at tag">
+	    <%= i.created_at.strftime('%Y/%m/%d %H:%M') %><br />
+	</div>
+
+	<div class="max-area">
+		→<%= i.message %><br />
+	</div><br />
+<% end %>

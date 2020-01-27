@@ -6,7 +6,7 @@
   </div>
 <% end %>
 
-<div class="container">
+<div class="container whiting">
 <div class="toping">
 <div class="row">
 
@@ -28,6 +28,9 @@
 	            <tr>
 	            	<th><%= @engineer.surname %><%= @engineer.name %> 様</th>
             	</tr>
+            	<tr>
+		            <th><%= link_to "下書き", drafts_path %></th>
+	            </tr>
 		    <% else %>
 		        <tr>
 		            <th>
@@ -120,7 +123,7 @@
 	        	<%= render 'companies/offers/offers', offers: @offers %>
 	        </div>
 	        <div class='my-content5'>
-	        	tytto
+	        	<%= render 'users/boxes/boxes', boxes: @boxes %>
 	        </div>
 
 	      </div>

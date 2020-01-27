@@ -13,8 +13,7 @@ class Users::UsersController < ApplicationController
             @helps = @user.help
         else
             @q_help = Help.ransack(params[:q])
-            @helps = @user.helps
-            @helps = Help.page(params[:page]).per(10)
+            @helps = @user.helps.page(params[:page]).per(10)
         end
         @favorites = @user.favorites
         @favorites = Favorite.page(params[:page]).per(10)
@@ -58,15 +57,6 @@ class Users::UsersController < ApplicationController
         @user.destroy
         redirect_to root_path
 	end
-
-    def pay
-        Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
-        charge = Payjp::Charge.create(
-        amount: 500,
-        card: params['payjp-token'],
-        currency: 'jpy'
-        )
-    end
 
 
 	private

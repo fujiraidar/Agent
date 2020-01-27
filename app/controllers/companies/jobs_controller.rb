@@ -1,7 +1,9 @@
 class Companies::JobsController < ApplicationController
 
     before_action :signed_in?
+    before_action :authenticate_company!, only: [:new, :create]
 	before_action :correct_company, only: [:edit, :update, :destroy]
+	before_action :company_paymented?, only: [:new, :create, :edit, :update]
 
 	def new
 		@job = Job.new
@@ -67,6 +69,12 @@ class Companies::JobsController < ApplicationController
         if user_signed_in? or current_company != @job.company
             redirect_to users_path
         end
+    end
+
+    def company_paymented?
+    	unless current_company.company_payments.exists?
+    		redirect_to new_company_company_payment_path(current_company.id)
+    	end
     end
 
 end

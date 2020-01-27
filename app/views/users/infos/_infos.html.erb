@@ -10,7 +10,12 @@
 		<% @engineer = Engineer.with_deleted.find_by(id: i.engineer_id) %>
 
 	    <tr class="row">
-			<td class="col-md-1"><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+			<td class="col-md-1">
+				<% unless @engineer.deleted_at.nil? %>
+				no image
+				<% else %>
+				<%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+				<% end %>
 			<td class="col-md-10">
 				<div class="info_created_at">
 					<% unless @engineer.deleted_at.nil? %>

@@ -1,5 +1,7 @@
 class Companies::CompanyPaymentsController < ApplicationController
 
+    before_action :authenticate_company!
+    before_action :company_paymented
 
 	def new
 		@company_payment = CompanyPayment.new
@@ -18,19 +20,32 @@ class Companies::CompanyPaymentsController < ApplicationController
 
 	      respond_to do |format|
 	        if @company_payment.save
-	          # ここに決済完了メール送る処理書くとよいと思います。
 	          format.html { redirect_to company_path(@company), notice: '購入しました。' }
 	        end
 	      end
-    end
-  rescue Payjp::CardError
-    respond_to do |format|
-      format.html { redirect_to company_path(@company), notice: 'カードエラーが発生しました' }
-    end
-  end
+	    end
+	    rescue Payjp::CardError
+	      respond_to do |format|
+	          format.html { redirect_to company_path(@company), notice: 'カードエラーが発生しました' }
+	    end
+	end
 
   private
+
     def company_payment_params
       params.require(:company_payment).permit(:name)
     end
+
+    def company_paymented
+    	if current_company.company_payments.exists?
+    		redirect_to company_path(current_company.id)
+    	end
+    end
+
+    def company_paymented?
+    	unless current_company.company_payments.exists?
+    		redirect_to new_company_company_payment_path(current_company.id)
+    	end
+    end
+
 end

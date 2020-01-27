@@ -6,10 +6,13 @@
 
 <% @comments.each do |c| %>
 
-	<div class="max-area">
-		<% link_to user_path(c) do %>
-			<%= c.user.name %>
-		<% end %>
-		→<%= c.comment %>
+
+    <%= link_to user_path(c.help.user) do %>
+    <div class="info_created_at tag">
+	    <%= c.help.user.name %><br />
 	</div>
+	<% end %>
+	<div class="max-area">
+		→<%= c.comment %><br />
+	</div><br />
 <% end %>

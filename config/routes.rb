@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   scope module: :users do
   	resources :infos
+  	resources :drafts
     resources :users
   	resources :helps
   	resources :comments, only: [:create]
@@ -20,12 +21,15 @@ Rails.application.routes.draw do
     post   '/mark/:company_id' => 'marks#mark',   as: 'mark'
     delete '/mark/:company_id' => 'marks#unmark', as: 'unmark'
     resources :rooms
+    get '/ranking' => 'infos#ranking', as: 'ranking'
     get '/withdraw/:id' => 'users#withdraw', as: 'withdraw'
+    resources :boxes, only: [:show, :create, :destroy]
+    resources :interviews, only: [:create, :destroy]
   end
 
   scope module: :companies do
   	resources :companies do
-  		resource :company_payment, only: [:new, :create]
+  		resources :company_payments, only: [:new, :create]
   	end
   	resources :engineers, only: [:index]
   	resources :jobs
@@ -38,6 +42,11 @@ Rails.application.routes.draw do
   	resources :users, only: [:index, :update, :destroy]
   	resources :engineers, only: [:index, :update, :destroy]
   	resources :companies, only: [:index, :update, :destroy]
+  	resources :company_payments, only: [:index, :destroy]
+  end
+
+  namespace :api, format: 'json' do
+    get 'infos/preview'
   end
 
   root 'top#top'

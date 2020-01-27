@@ -1,5 +1,7 @@
 class Admins::EngineersController < ApplicationController
 
+	before_action :admin?
+
 	def index
 		@engineers = Engineer.with_deleted
 		@engineers = Engineer.page(params[:page]).per(20)
@@ -13,5 +15,13 @@ class Admins::EngineersController < ApplicationController
 	def destroy
 		@engineer = Engineer.find(params[:id])
 		@engineer.destroy
+	end
+
+	private
+
+	def admin?
+		unless admin_signed_in?
+			redirect_to root_path
+		end
 	end
 end

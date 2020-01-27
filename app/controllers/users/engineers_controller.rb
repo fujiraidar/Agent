@@ -12,10 +12,9 @@ class Users::EngineersController < ApplicationController
 	def show
 		@engineer = Engineer.find(params[:id])
         @languages = @engineer.languages
-        @marks = @engineer.marks
-        @marks = Mark.page(params[:page]).per(10)
-        @offers = @engineer.offers
-        @offers = Offer.page(params[:page]).per(10)
+        @marks = @engineer.marks.page(params[:page]).per(10)
+        @offers = @engineer.offers.page(params[:page]).per(10)
+        @boxes = @engineer.boxes.page(params[:page]).per(10)
         @offer = Offer.new
 
         if params[:q] != nil
@@ -67,15 +66,10 @@ class Users::EngineersController < ApplicationController
     def update
     	if @engineer.update(engineer_params)
             flash[:notice] = "Agent情報の更新 完了!!！"
-    		redirect_to user_path(current_user.id)
+    		redirect_to engineer_path(current_user.id)
     	else
     		render :edit
     	end
-    end
-
-    def destroy
-    	@engineer.destroy
-    	redirect_to infos_path
     end
 
     private

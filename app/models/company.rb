@@ -12,6 +12,7 @@ class Company < ApplicationRecord
   has_many :jobs, dependent: :destroy
   has_many :offers, dependent: :destroy
   has_many :company_payments, dependent: :destroy
+  has_many :boxes, dependent: :destroy
 
   has_many :marks, dependent: :destroy
   has_many :marking_users, through: :marks, source: :engineer

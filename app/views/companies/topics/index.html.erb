@@ -1,0 +1,30 @@
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-2 toping">
+            <%= render 'layouts/sidebar' %>
+        </div>
+
+        <div class="col-10 whiting toping">
+
+
+            <%= search_form_for @q_topic, url:topics_path, remote: true do |f| %>
+
+                <div class="search_field">
+                    <%= f.text_field :title_or_body_or_language_cont_any %>
+                    <%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button" do %>
+                        <i class="fa fa-search"></i>
+                    <% end %>
+                </div>
+            <% end %>
+
+            <div class='topic toping'>
+                <%= render 'companies/topics/topics', topics: @topics %>
+            </div>
+
+        </div>
+    </div>
+</div>

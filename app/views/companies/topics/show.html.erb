@@ -34,11 +34,13 @@
 		    </div>
 		</div>
 		<div class="col-3">
+			<% if company_signed_in? %>
 		    <% if @topic.company_id == current_company.id %>
 
 		        <p><%= link_to "この記事を編集する", edit_topic_path(@topic) %></p>
 		        <p><%= link_to "この記事を削除する", topic_path(@topic), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 
+		    <% end %>
 		    <% end %>
 		</div>
 	</div>

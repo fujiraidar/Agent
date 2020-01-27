@@ -1,10 +1,13 @@
 class Companies::OffersController < ApplicationController
 
     before_action :signed_in?
+    before_action :authenticate_company!, only: [:create]
     before_action :correct_company, only: [:destroy]
+    before_action :company_paymented?, only: [:create]
 
     def show
         @offer = Offer.find(params[:id])
+        @box = Box.new
         if user_signed_in?
             unless @offer.engineer_id == current_user.id
                 redirect_to user_path(current_user.id)

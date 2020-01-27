@@ -1,5 +1,7 @@
 class Admins::UsersController < ApplicationController
 
+	before_action :admin?
+
 	def index
 		@users = User.with_deleted
 		@users = User.page(params[:page]).per(20)
@@ -13,5 +15,13 @@ class Admins::UsersController < ApplicationController
 	def destroy
 		@user = User.find(params[:id])
 		@user.destroy
+	end
+
+	private
+
+	def admin?
+		unless admin_signed_in?
+			redirect_to root_path
+		end
 	end
 end

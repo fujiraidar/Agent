@@ -1,0 +1,2 @@
+module Users::InterviewsHelper
+end

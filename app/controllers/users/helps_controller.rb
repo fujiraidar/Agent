@@ -14,13 +14,25 @@ class Users::HelpsController < ApplicationController
 		@comments = Comment.where(help_id: @help.id)
 	end
 
+	def index
+		if params[:q] != nil
+            params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
+            @q_help = Help.ransack(params[:q])
+            @helps = @q_help.result(distinct: true).page(params[:page]).per(10)
+        else
+            @q_help = Help.ransack(params[:q])
+            @helps = Help.page(params[:page]).per(10)
+        end
+        render :index
+	end
+
 	def edit
 	end
 
 	def create
 		@help = Help.new(help_params)
 		@help.user_id = current_user.id
-		if help.save
+		if @help.save
 			flash[:notice] = "ヘルプの投稿が完了しました！"
 			redirect_to help_path(@help)
 		else

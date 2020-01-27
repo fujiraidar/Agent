@@ -1,4 +1,4 @@
-<div class="container mypage">
+<div class="container mypage whiting">
 
 <div class="row">
 
@@ -47,7 +47,7 @@
 				<% else %>
 				    <% current_company.company_payments.each do |c| %>
 				    <tr>
-				        <th><p>利用期限は、<%= c.created_at.next_year.strftime('%Y/%m/%d') %>です。</p></th>
+				        <th><p>利用期限は、<%= c.created_at.next_year.strftime('%Y/%m/%d') %>までです。</p></th>
 				    </tr>
 				    <% end %>
 				<% end %>
@@ -81,7 +81,7 @@
 	        </div>
 
 	        <div class='my-content3'>
-				<%= render 'users/marks/marks', marks: @marks %>
+				<%= render 'companies/companies/marks', marks: @marks %>
 	        </div>
 
 	        <div class='my-content4'>
@@ -89,7 +89,7 @@
 	        </div>
 
 	        <div class='my-content5'>
-	        	tytto
+	        	<%= render 'companies/companies/boxes', boxes: @boxes %>
 	        </div>
 
 	      </div>
@@ -107,7 +107,7 @@
 		  <div class='tab-content'>
 
 		    <div class='content1'>
-		       　<%= render 'companies/topics/topics', topics: @topics %>
+		        <%= render 'companies/topics/topics', topics: @topics %>
 	        </div>
 
 	        <div class='content2'>
@@ -115,8 +115,9 @@
 	        </div>
 
 	        <div class='content3'>
-	        	<%= render 'users/marks/marks', marks: @marks %>
+	        	<%= render 'companies/companies/marks', marks: @marks %>
 	        </div>
+
 	      </div>
 	    </div>
 

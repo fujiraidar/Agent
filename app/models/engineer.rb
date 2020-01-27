@@ -20,8 +20,10 @@ class Engineer < ApplicationRecord
 	accepts_nested_attributes_for :languages, reject_if: :all_blank, allow_destroy: true
 
     has_many :infos
+    has_many :drafts, dependent: :destroy
     has_many :comments
     has_many :offers, dependent: :destroy
+    has_many :boxes, dependent: :destroy
 
     belongs_to :user
 

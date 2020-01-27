@@ -6,10 +6,11 @@ class Companies::CompaniesController < ApplicationController
 
 	def show
 		@company = Company.find(params[:id])
-		@topics = @company.topics
+		@topics = @company.topics.page(params[:page]).per(10)
 		@jobs = @company.jobs
 		@marks = @company.marks
 		@offers = @company.offers
+		@boxes = @company.boxes
 	end
 
 	def index

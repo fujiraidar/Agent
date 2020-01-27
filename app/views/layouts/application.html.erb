@@ -8,13 +8,16 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.10/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.js"></script>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header class="navbar navbar-default navbar-dark bg-dark  lg-10">
+    <header class="navbar navbar-default navbar-dark lg-10">
       <nav class="nav navbar-nav navbar-left">
             <h2 class="header-title">Agent</h2>
       </nav>
@@ -29,7 +32,7 @@
               <%= current_user.name %>
             <% end %>
 
-            <%= link_to "Search", users_path %>
+            <%= link_to "Search", infos_path %>
 
             <% if Engineer.where(id: current_user.id).exists? %>
                 <%= link_to "MyAgent", engineer_path(current_user.id) %>
@@ -56,7 +59,7 @@
         <ul>
           <% if user_signed_in? %>
             <li><%= link_to "MyPage", user_path(current_user.id) %></li>
-            <li><%= link_to "検索", users_path %></li>
+            <li><%= link_to "記事の一覧", infos_path %></li>
             <% if Engineer.where(id: current_user.id).exists? %>
               <li><%= link_to "MyAgent", engineer_path(current_user.id) %></li>
               <li><%= link_to "記事の投稿", new_info_path %></li>
@@ -78,13 +81,14 @@
             <li><%= link_to "求人の投稿", new_job_path %></li>
             <li><%= link_to "求人の一覧", jobs_path %></li>
             <li><%= link_to "企業の一覧", companies_path %></li>
-            <li><%= link_to "記事の一覧", users_path %></li>
+            <li><%= link_to "記事の一覧", infos_path %></li>
             <li><%= link_to "ガイド", top_about_path %></li>
             <li><%= link_to "ログアウト",destroy_company_session_path, method: :delete %></li>
             <li><%= link_to "お問い合わせ",destroy_company_session_path %></li>
           <% elsif admin_signed_in? %>
-            <li><%= link_to "ユーザー", admins_admins_path %></li>
-            <li><%= link_to "ユーザー", admins_users_path %></li>
+            <li><%= link_to "お問い合わせ", admins_admins_path %></li>
+            <li><%= link_to "企業の期限", admins_company_payments_path %></li>
+            <li><%= link_to "ユーザー", admins_infos_path %></li>
             <li><%= link_to "企業", admin_companies_path %></li>
           <% else %>
             <li><%= link_to "ログイン", new_user_session_path %></li>
