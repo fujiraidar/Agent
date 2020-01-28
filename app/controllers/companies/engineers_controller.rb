@@ -6,10 +6,10 @@ class Companies::EngineersController < ApplicationController
 		if params[:q] != nil
             params[:q]['user_name_or_surname_or_name_or_age_or_introduction_or_languages_language_cont_any'] = params[:q]['user_name_or_surname_or_name_or_age_or_introduction_or_languages_language_cont_any'].split(/[\p{blank}\s]+/)
             @q = Engineer.ransack(params[:q])
-            @engineers = @q.result(distinct: true).page(params[:page]).per(10)
+            @engineers = @q.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
             @q = Engineer.ransack(params[:q])
-            @engineers = Engineer.page(params[:page]).per(10)
+            @engineers = Engineer.page(params[:page]).per(10).order("created_at DESC")
         end
 		@offer = Offer.new
 	end

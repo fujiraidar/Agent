@@ -88,8 +88,10 @@
           <% elsif admin_signed_in? %>
             <li><%= link_to "お問い合わせ", admins_admins_path %></li>
             <li><%= link_to "企業の期限", admins_company_payments_path %></li>
-            <li><%= link_to "ユーザー", admins_infos_path %></li>
-            <li><%= link_to "企業", admin_companies_path %></li>
+            <li><%= link_to "ユーザー", admins_users_path %></li>
+            <li><%= link_to "Agent", admins_engineers_path %></li>
+            <li><%= link_to "企業", admins_companies_path %></li>
+            <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
           <% else %>
             <li><%= link_to "ログイン", new_user_session_path %></li>
             <li><%= link_to "新規会員登録", new_user_registration_path %></li>
@@ -108,19 +110,21 @@
 
 
   </header>
+  <div class="wrapper">
     <%= yield %>
+  </div>
   </body>
-  <footer>
-    <div class="container toping">
-      <div class="row">
-        <div class="col-md-4">
-          <h2 class="header-title">Agent</h2>
-            <%= link_to "Click here for companies", new_company_registration_path, class: "header-title"%>
-        </div>
-        <div class="col-md-4 offset-md-3">
-          <%= link_to "About", top_about_path, class: "header-title" %>
-        </div>
+    <footer>
+      <div class="container toping">
+        <div class="row">
+          <div class="col-md-4">
+            <h2 class="header-title">Agent</h2>
+              <%= link_to "Click here for companies", new_company_registration_path, class: "header-title"%>
+          </div>
+          <div class="col-md-4 offset-md-3">
+            <%= link_to "About", top_about_path, class: "header-title" %>
+          </div>
 
-    </div>
-  </footer>
+      </div>
+    </footer>
 </html>

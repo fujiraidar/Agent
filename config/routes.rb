@@ -9,18 +9,18 @@ Rails.application.routes.draw do
 
   scope module: :users do
   	resources :infos
-  	resources :drafts
-    resources :users
+  	resources :drafts, only: [:index, :edit, :update, :destroy]
+    resources :users, only: [:show, :index, :update, :destroy]
   	resources :helps
   	resources :comments, only: [:create]
-  	resources :engineers, only: [:new, :show, :edit, :create, :update, :destroy]
+  	resources :engineers, only: [:new, :show, :edit, :create, :update]
   	post   '/favorite/:info_id' => 'favorites#favorite',   as: 'favorite'
     delete '/favorite/:info_id' => 'favorites#unfavorite', as: 'unfavorite'
     post   '/follow/:engineer_id' => 'follows#follow',   as: 'follow'
     delete '/follow/:engineer_id' => 'follows#unfollow', as: 'unfollow'
     post   '/mark/:company_id' => 'marks#mark',   as: 'mark'
     delete '/mark/:company_id' => 'marks#unmark', as: 'unmark'
-    resources :rooms
+    resources :rooms, only: [:show, :create]
     get '/ranking' => 'infos#ranking', as: 'ranking'
     get '/withdraw/:id' => 'users#withdraw', as: 'withdraw'
     resources :boxes, only: [:show, :create, :destroy]

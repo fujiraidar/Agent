@@ -7,12 +7,12 @@
 <% @comments.each do |c| %>
 
 
-    <%= link_to user_path(c.help.user) do %>
-    <div class="info_created_at tag">
-	    <%= c.help.user.name %><br />
+    <%= link_to user_path(c.user) do %>
+    <div class="comment_name">
+	    <%= c.user.name %><br />
 	</div>
 	<% end %>
 	<div class="max-area">
-		→<%= c.comment %><br />
+		<%= simple_format(c.comment) %><br />
 	</div><br />
 <% end %>

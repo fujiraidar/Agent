@@ -1,10 +1,16 @@
 
 
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div class="container">
 
     <div class="row">
 
-        <div class="col-2 toping">
+        <div class="col-2 toping sideright">
             <%= render 'layouts/sidebar' %>
         </div>
 
@@ -28,7 +34,9 @@
 
         <% else %>
 
-                <strong>記事が、ありません</strong>
+            <div class="toping">
+                <h5 class="toping">There are no helps</h5>
+            </div>
 
         <% end %>
 

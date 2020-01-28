@@ -4,7 +4,7 @@
 
   <div class="row">
 
-    <div class="col-2 toping">
+    <div class="col-2 toping sideright">
       <%= render 'layouts/sidebar' %>
     </div>
 
@@ -29,22 +29,22 @@
 
         <% @jobs.each do |j| %>
 
-        <div class="col-12 col-lg-3 toping">
+        <div class="col-12 col-md-6 col-lg-3 toping">
         <div class="card">
             <%= link_to company_path(j.company) do %>
               <%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", class: "card-img-top job-images" %>
             <% end %>
             <div class="card-body row">
-                <h5 class="card-title col-12 ">
+                <div class="card-title col-12 ">
                   	<%= link_to job_path(j) do %>
                     	<%= j.title %>
                   	<% end %>
-                </h5>
-      		<p class="card-text col-10 offset-1 tag">
+                </div>
+      		<p class="card-text col-10 offset-1 info_created_at tag">
       			・<%= j.status %><br />
       			・<%= j.salary %>
       		</p>
-      		<p class="card-text col-10 offset-1">
+      		<p class="card-text col-10 offset-1 info_created_at">
       			<%= link_to company_path(j.company) do %>
       				<%= j.company.company_name %>
       			<% end %>
@@ -56,12 +56,13 @@
         </div>
 
       <% else %>
-      <div class="blank">
-        <h5>お探しの、求人はありません。</h5>
-        <h5>There are no jobs to look for.</h5>
-      </div>
-      <% end %>
-      </div>
 
+        <div class="toping lefting">
+            <h5 class="toping">There are no jobs</h5>
+        </div>
+
+      <% end %>
+  </div>
   </div>
 </div>
+

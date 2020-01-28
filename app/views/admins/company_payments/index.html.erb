@@ -4,36 +4,7 @@
 
   <% if @company_payments.exists? %>
 
-    <% @company_payments each do |c| %>
-		<% if Datetime.now < c.created_at.next_year %>
-
-	      <tr class="row">
-	        <td class="col-1">
-	            <%= attachment_image_tag c.company, :company_image, fallback: "no_image.jpg", size:"70x70"%>
-	        </td>
-	        <td class="col-3">
-	            <%= c.company.company_name %><br/ >
-	            <%= c.company.company_phone %><br/ >
-	            <%= c.company.company_address %>
-	        </td>
-	        <td class="col-6">
-	        	開始<%= c.created_at.strftime('%Y/%m/%d') %><br />
-	            終了<%= c.created_at.next_year.strftime('%Y/%m/%d') %>
-	        </td>
-	        <td class="col-1">
-	        	<%= link_to "削除", admins_company_payment_path(c), method: :delete, "data-confirm" => "STOP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ok??????????????????????" %>
-	        </td>
-	      </tr>
-
-
-		<% end %>
-	<% end %>
-
-
-
-
-	<strong>期限はまだです↓</strong>
-	  <div class="row ">
+	<table class="table table-hover table-sm toping">
 
 	      <% @company_payments.each do |c| %>
 
@@ -50,9 +21,12 @@
 	        	開始<%= c.created_at.strftime('%Y/%m/%d') %><br />
 	            終了<%= c.created_at.next_year.strftime('%Y/%m/%d') %>
 	        </td>
+	        <td class="col-1">
+	        	<%= link_to "削除", admins_company_payment_path(c), method: :delete, "data-confirm" => "STOP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ok??????????????????????" %>
+	        </td>
 	      </tr>
 	      <% end %>
-	    </div>
+	</table>
 
     <%= paginate @company_payments %>
 

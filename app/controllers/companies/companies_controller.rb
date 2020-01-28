@@ -6,17 +6,16 @@ class Companies::CompaniesController < ApplicationController
 
 	def show
 		@company = Company.find(params[:id])
-		@topics = @company.topics.page(params[:page]).per(10)
-		@jobs = @company.jobs
-		@marks = @company.marks
-		@offers = @company.offers
-		@boxes = @company.boxes
+		@topics = @company.topics.page(params[:page]).per(10).order("created_at DESC")
+		@jobs = @company.jobs.order("created_at DESC")
+		@marks = @company.marks.order("created_at DESC")
+		@offers = @company.offers.order("created_at DESC")
+		@boxes = @company.boxes.order("created_at DESC")
 	end
 
 	def index
 		@q = Company.ransack(params[:q])
-        @companies = @q.result(distinct: true)
-		@companies = Company.page(params[:page]).per(10)
+        @companies = @q.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
 		@offer = Offer.new
 	end
 

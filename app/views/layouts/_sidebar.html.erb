@@ -2,68 +2,152 @@
 <div class="sidebar_all" >
 <% if user_signed_in? %>
 
-	<%= link_to infos_path do %>
-		<div class="sidebar">Article</div>
+	<% if controller_name == 'infos' && controller.action_name == 'index' %>
+	    <%= link_to infos_path do %>
+			<div class="sidebar_click">Article</div>
+		<% end %>
+	<% else %>
+		<%= link_to infos_path do %>
+			<div class="sidebar">Article</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to ranking_path do %>
-		<div class="sidebar">Ranking</div>
+    <% if controller_name == 'infos' && controller.action_name == 'ranking' %>
+	    <%= link_to ranking_path do %>
+			<div class="sidebar_click">Ranking</div>
+		<% end %>
+	<% else %>
+		<%= link_to ranking_path do %>
+			<div class="sidebar">Ranking</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to helps_path do %>
-		<div class="sidebar">Help</div>
+    <% if controller_name == 'helps' %>
+		<%= link_to helps_path do %>
+			<div class="sidebar_click">Help</div>
+		<% end %>
+	<% else %>
+	    <%= link_to helps_path do %>
+			<div class="sidebar">Help</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to engineers_path do %>
-		<div class="sidebar">Agent</div>
-	<% end %>
+    <% if controller_name == 'engineers' %>
+		<%= link_to engineers_path do %>
+			<div class="sidebar_click">Agent</div>
+		<% end %>
+	<% else %>
+		<%= link_to engineers_path do %>
+			<div class="sidebar">Agent</div>
+		<% end %>
+    <% end %>
 
   <% if Engineer.where(id: current_user.id).exists? %>
 
-	<%= link_to topics_path do %>
-		<div class="sidebar">Topic</div>
+    <% if controller_name == 'topics' %>
+		<%= link_to topics_path do %>
+			<div class="sidebar_click">Topic</div>
+		<% end %>
+	<% else %>
+		<%= link_to topics_path do %>
+			<div class="sidebar">Topic</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to companies_path do %>
-		<div class="sidebar">Company</div>
+    <% if controller_name == 'companies' %>
+		<%= link_to topics_path do %>
+			<div class="sidebar_click">Company</div>
+		<% end %>
+	<% else %>
+		<%= link_to companies_path do %>
+			<div class="sidebar">Company</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to jobs_path do %>
-		<div class="sidebar">Job</div>
+    <% if controller_name == 'jobs' %>
+		<%= link_to topics_path do %>
+			<div class="sidebar_click">Job</div>
+		<% end %>
+	<% else %>
+		<%= link_to jobs_path do %>
+			<div class="sidebar">Job</div>
+		<% end %>
 	<% end %>
 
   <% end %>
 
 <% elsif company_signed_in? %>
 
-    <%= link_to engineers_path do %>
-		<div class="sidebar">Agent</div>
+    <% if controller_name == 'engineers' %>
+		<%= link_to engineers_path do %>
+			<div class="sidebar_click">Agent</div>
+		<% end %>
+	<% else %>
+		<%= link_to engineers_path do %>
+			<div class="sidebar">Agent</div>
+		<% end %>
+    <% end %>
+
+    <% if controller_name == 'topics' %>
+		<%= link_to topics_path do %>
+			<div class="sidebar_click">Topic</div>
+		<% end %>
+	<% else %>
+		<%= link_to topics_path do %>
+			<div class="sidebar">Topic</div>
+		<% end %>
 	<% end %>
 
-    <%= link_to topics_path do %>
-		<div class="sidebar">Topic</div>
+	<% if controller_name == 'companies' %>
+		<%= link_to topics_path do %>
+			<div class="sidebar_click">Company</div>
+		<% end %>
+	<% else %>
+		<%= link_to companies_path do %>
+			<div class="sidebar">Company</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to companies_path do %>
-		<div class="sidebar">Company</div>
-	<% end %>
-
-	<%= link_to jobs_path do %>
-		<div class="sidebar">Job</div>
+	<% if controller_name == 'jobs' %>
+		<%= link_to topics_path do %>
+			<div class="sidebar_click">Job</div>
+		<% end %>
+	<% else %>
+		<%= link_to jobs_path do %>
+			<div class="sidebar">Job</div>
+		<% end %>
 	<% end %>
 
 <% else %>
 
-	<%= link_to infos_path do %>
-		<div class="sidebar">Article</div>
+	<% if controller_name == 'infos' && controller.action_name == 'index' %>
+	    <%= link_to infos_path do %>
+			<div class="sidebar_click">Article</div>
+		<% end %>
+	<% else %>
+		<%= link_to infos_path do %>
+			<div class="sidebar">Article</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to ranking_path do %>
-		<div class="sidebar">Ranking</div>
+    <% if controller_name == 'infos' && controller.action_name == 'ranking' %>
+	    <%= link_to ranking_path do %>
+			<div class="sidebar_click">Ranking</div>
+		<% end %>
+	<% else %>
+		<%= link_to ranking_path do %>
+			<div class="sidebar">Ranking</div>
+		<% end %>
 	<% end %>
 
-	<%= link_to helps_path do %>
-		<div class="sidebar">Help</div>
+    <% if controller_name == 'helps' %>
+		<%= link_to helps_path do %>
+			<div class="sidebar_click">Help</div>
+		<% end %>
+	<% else %>
+	    <%= link_to helps_path do %>
+			<div class="sidebar">Help</div>
+		<% end %>
 	<% end %>
 
 <% end %>

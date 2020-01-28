@@ -12,19 +12,19 @@ class Users::EngineersController < ApplicationController
 	def show
 		@engineer = Engineer.find(params[:id])
         @languages = @engineer.languages
-        @marks = @engineer.marks.page(params[:page]).per(10)
-        @offers = @engineer.offers.page(params[:page]).per(10)
-        @boxes = @engineer.boxes.page(params[:page]).per(10)
+        @marks = @engineer.marks.page(params[:page]).per(10).order("created_at DESC")
+        @offers = @engineer.offers.page(params[:page]).per(10).order("created_at DESC")
+        @boxes = @engineer.boxes.page(params[:page]).per(10).order("created_at DESC")
         @offer = Offer.new
 
         if params[:q] != nil
             params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
             @q_info = Info.ransack(params[:q])
             info = @q_info.result(distinct: true)
-            @infos = @engineer.info.page(params[:page]).per(10)
+            @infos = @engineer.info.page(params[:page]).per(10).order("created_at DESC")
         else
             @q_info = Info.ransack(params[:q])
-            @infos = @engineer.infos.page(params[:page]).per(10)
+            @infos = @engineer.infos.page(params[:page]).per(10).order("created_at DESC")
         end
 
         if user_signed_in?
@@ -53,6 +53,7 @@ class Users::EngineersController < ApplicationController
 
     def create
     	@engineer = Engineer.new(engineer_params)
+        @engineer.ranks_count = 0
         @engineer.user_id = current_user.id
         @engineer.id = current_user.id
     	if @engineer.save
@@ -86,14 +87,14 @@ class Users::EngineersController < ApplicationController
         end
         unless Engineer.with_deleted.find(params[:id]).deleted_at.nil?
             flash[:alert] = "no user!!!!!!!!"
-            redirect_to users_path
+            redirect_to infos_path
         end
     end
 
     def correct_user
         @engineer = Engineer.find(params[:id])
         if current_user != @engineer.user
-            redirect_to users_path
+            redirect_to infos_path
         end
     end
 

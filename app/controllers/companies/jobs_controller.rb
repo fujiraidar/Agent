@@ -17,10 +17,10 @@ class Companies::JobsController < ApplicationController
 		if params[:q] != nil
             params[:q]['title_or_status_or_salary_or_job_cont_any'] = params[:q]['title_or_status_or_salary_or_job_cont_any'].split(/[\p{blank}\s]+/)
             @q = Job.ransack(params[:q])
-            @jobs = @q.result(distinct: true).page(params[:page]).per(10)
+            @jobs = @q.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
             @q = Job.ransack(params[:q])
-            @jobs = Job.page(params[:page]).per(10)
+            @jobs = Job.page(params[:page]).per(10).order("created_at DESC")
         end
 	end
 

@@ -42,6 +42,9 @@
 			    <tr>
 			        <th><%= render 'users/engineers/follow', engineer: @engineer %></th>
 			    </tr>
+			    <tr>
+			        <th class="info_created_at">マーク</th>
+			    </tr>
 			<% end %>
 	    <% elsif company_signed_in? && @engineer.offer == "受け取る" %>
 	        <tr>
@@ -53,6 +56,9 @@
 	        <tr>
 		      <th><%= render 'companies/offers/new_offer', offer: @offer, engineer: @engineer %></th>
 		    </tr>
+		    <tr>
+			    <th class="info_created_at">マーク</th>
+			</tr>
 		<% else %>
 		    <tr>
 	            <th>オファーを許可していません</th>
@@ -73,6 +79,10 @@
 			<% end %>
 		  <% end %>
 		<% end %>
+
+		<tr>
+	        <th><%= @engineer.rank %></th>
+	    </tr>
 
         <tr>
 	        <th class="info_created_at tag"><%= simple_format(@engineer.introduction) %></th>

@@ -6,53 +6,60 @@
   </div>
 <% end %>
 
-<div class="container toping whiting">
+<div class="container toping">
 
-    <div class="row">
-		<div class="col-1">
-			<%= attachment_image_tag @info.engineer, :profile_image, fallback: "no_image.jpg", class: "show_image"%>
-		</div>
-		<div class="col-7">
-			<%= link_to engineer_path(@info.engineer) do %>
-		    	<%= @info.engineer.user.name %>
-		    <% end %>
-		</div>
-		<div class="col-3">
-		    <div class="info_created_at">
-				<%= @info.created_at.strftime('%Y/%m/%d') %>に投稿
+<div class="row">
+    <div class="col-10 showtime">
+	    <div class="row">
+			<div class="col-1">
+				<%= attachment_image_tag @info.engineer, :profile_image, fallback: "no_image.jpg", size: "60X60"%>
 			</div>
-        </div>
-	</div>
-    <div class="show_title">
-	    <%= @info.title %>
-	</div>
-
-    <div class="row">
-    	<div class="col-7 offset-2">
-    		<div class="info_created_at tag">
-		    	<%= @info.language %>
-		    </div>
+			<div class="col-7">
+				<%= link_to engineer_path(@info.engineer) do %>
+			    	<%= @info.engineer.user.name %>
+			    <% end %>
+			</div>
+			<div class="col-3">
+			    <div class="info_created_at">
+					<%= @info.created_at.strftime('%Y/%m/%d') %>に投稿
+				</div>
+	        </div>
 		</div>
-		<div class="col-3">
-		    <% if @info.engineer_id == current_user.id %>
-
-		        <p><%= link_to "この記事を編集する", edit_info_path(@info) %></p>
-		        <p><%= link_to "この記事を削除する", info_path(@info), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
-
-		    <% end %>
+	    <div class="show_title">
+		    <%= @info.title %>
 		</div>
+
+	    <div class="row">
+	    	<div class="col-7 offset-2">
+	    		<div class="info_created_at tag">
+			    	<%= @info.language %>
+			    </div>
+			</div>
+			<div class="col-3">
+			    <% if @info.engineer_id == current_user.id %>
+
+			        <p><%= link_to "この記事を編集する", edit_info_path(@info) %></p>
+			        <p><%= link_to "この記事を削除する", info_path(@info), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+
+			    <% end %>
+			</div>
+		</div>
+
+	    <%= markdown(@info.body) %>
+
+	    <% unless @info.engineer_id == current_user.id %>
+
+	    	<%= render 'favorite', info: @info %>
+
+	    <% end %>
+
+	    <%= link_to "記事の一覧へ", users_path %>
+
+
 	</div>
-
-    <%= (markdown(@info.body)).html_safe %>
-
-    <% unless @info.engineer_id == current_user.id %>
-
-    	<%= render 'favorite', info: @info %>
-
-    <% end %>
-
-    <%= link_to "記事の一覧へ", users_path %>
-
+    <div class="col-2 toping toc">
+        <%= toc(@info.body) %>
     </div>
+</div>
 
 </div>

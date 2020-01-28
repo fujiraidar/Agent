@@ -6,11 +6,11 @@
   </div>
 <% end %>
 
-<div class="container toping">
+<div class="container toping showtime">
 
     <div class="row">
 		<div class="col-1">
-			<%= attachment_image_tag @topic.company, :company_image, fallback: "no_image.jpg", class: "show_image"%>
+			<%= attachment_image_tag @topic.company, :company_image, fallback: "no_image.jpg", size: "60X60"%>
 		</div>
 		<div class="col-7">
 			<%= link_to company_path(@topic.company) do %>

@@ -1,24 +1,22 @@
 class Users::UsersController < ApplicationController
 
-    before_action :authenticate_user!, only: [:show, :edit, :create, :update, :destroy]
+    before_action :authenticate_user!, only: [:show, :create, :update, :destroy ,:withdraw]
     before_action :signed_in?, only: [:show]
-    before_action :correct_user, only: [:edit, :update, :destroy ,:withdraw]
+    before_action :correct_user, only: [:update, :destroy ,:withdraw]
 
 	def show
         @user = User.find(params[:id])
         if params[:q] != nil
             params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
             @q_help = Help.ransack(params[:q])
-            help = @q_help.result(distinct: true).page(params[:page]).per(10)
-            @helps = @user.help
+            help = @q_help.result(distinct: true)
+            @helps = @user.page(params[:page]).per(10).help.order("created_at DESC")
         else
             @q_help = Help.ransack(params[:q])
-            @helps = @user.helps.page(params[:page]).per(10)
+            @helps = @user.helps.page(params[:page]).per(10).order("created_at DESC")
         end
-        @favorites = @user.favorites
-        @favorites = Favorite.page(params[:page]).per(10)
-        @follows = @user.follows
-        @follows = Follow.page(params[:page]).per(10)
+        @favorites = @user.favorites.page(params[:page]).per(10).order("created_at DESC")
+        @follows = @user.follows.page(params[:page]).per(10).order("created_at DESC")
 	end
 
     def index
@@ -38,8 +36,6 @@ class Users::UsersController < ApplicationController
         render :index
     end
 
-	def edit
-	end
 
 	def update
         if @user.update(user_params)
@@ -71,7 +67,7 @@ class Users::UsersController < ApplicationController
         end
         unless User.with_deleted.find(params[:id]).deleted_at.nil?
             flash[:alert] = "no user!!!!!!!!"
-            redirect_to users_path
+            redirect_to infos_path
         end
     end
 
@@ -79,7 +75,7 @@ class Users::UsersController < ApplicationController
     def correct_user
         @user = User.find(params[:id])
         if current_user != @user
-            redirect_to users_path
+            redirect_to infos_path
         end
     end
 

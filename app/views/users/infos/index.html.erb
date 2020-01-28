@@ -1,16 +1,20 @@
 
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
 <div class="container">
 
 	<div class="row">
 
-		<div class="col-2 toping">
+		<div class="col-2 toping sideright">
 			<%= render 'layouts/sidebar' %>
 		</div>
 
 		<div class="col-10 whiting toping">
 
-		<% if @infos.exists? %>
 
 			<%= search_form_for @q_info, url:users_path, remote: true do |f| %>
 
@@ -22,15 +26,9 @@
 				</div>
 			<% end %>
 
-			<div class='info'>
+			<div class='info container'>
 		    	<%= render 'users/infos/infos', infos: @infos %>
 			</div>
-
-		<% else %>
-
-				<strong>記事が、ありません</strong>
-
-		<% end %>
 
 		</div>
 	</div>

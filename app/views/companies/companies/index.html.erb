@@ -4,7 +4,7 @@
 
   <div class="row">
 
-    <div class="col-2 toping">
+    <div class="col-2 toping sideright">
         <%= render 'layouts/sidebar' %>
     </div>
 
@@ -23,7 +23,7 @@
 
 
   <% if @companies.exists? %>
-  <div class="toping">
+  <div class="container toping">
 
     <% @companies.each do |c| %>
 
@@ -31,16 +31,19 @@
       <tr class="row">
         <td class="col-1">
           <%= link_to company_path(c) do %>
-            <%= attachment_image_tag c, :company_image, fallback: "no_image.jpg", size:"70x70"%>
+            <%= attachment_image_tag c, :company_image, fallback: "no_image.jpg", size:"60x60"%>
           <% end %>
         </td>
         <td class="col-3">
           <%= link_to company_path(c) do %>
             <strong><%= c.company_name %></strong>
           <% end %>
+          <div class="info_created_at">
+              マーク数<%= c.marks_count %>
+          </div>
         </td>
         <td class="col-8">
-          <%= c.introduction %>
+          <%= simple_format(c.introduction) %>
         </td>
       </tr>
     </table>
@@ -50,10 +53,11 @@
   <%= paginate @companies %>
 
   <% else %>
-  <div class="blank">
-    <h5>お探しの企業はありません。</h5>
-    <h5>There are no companies to look for.</h5>
-  </div>
+
+    <div class="toping">
+      <h5 class="toping gocenter">There are no companies</h5>
+    </div>
+
   <% end %>
 </div>
 

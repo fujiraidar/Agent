@@ -4,7 +4,7 @@ class User < ApplicationRecord
   acts_as_paranoid
 
   validates :name, presence: true,
-                   length: { minimum: 2 , maximum: 20 }
+                   length: { minimum: 2 , maximum: 15 }
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

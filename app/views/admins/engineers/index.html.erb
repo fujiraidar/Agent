@@ -1,36 +1,34 @@
 
 
-<div class="container toping">
+<div class="container toping showtime">
 
   <% if @engineers.exists? %>
-  <div class="row">
-    <div class="col-md-3">
+    <table class="table table-hover table-sm toping">
 
       <% @engineers.each do |e| %>
 
-      <tr class="row">
+      <tr class="row toping">
         <td class="col-md-1">
             <%= attachment_image_tag e, :profile_image, fallback: "no_image.jpg", size:"70x70"%>
         </td>
         <td class="col-md-3">
-            <%= c.surname %><%= c.name %><br/ >
-        	<%= c.age %><br/ >
-            オファー<%= c.offer %>/フォロワー<%= c.follows_count%>
+            <%= e.surname %><%= e.name %><br/ >
+        	<%= e.age %><br/ >
+            オファー<%= e.offer %>/フォロワー<%= e.follows_count%>
         </td>
         <td class="col-md-7">
             <%= e.introduction %>
         </td>
         <td class="col-md-1">
-          <%= e.marks_count %>マーク<br/ >
-          <%= link_to "復元", admins_engineer(e), method: :patch, "data-confirm" => "復元するよ？" %><br/ >
-          <%= link_to "削除", admins_engineer(e), method: :delete, "data-confirm" => "削除するよ？" %>
+          <%= link_to "復元", admins_engineer_path(e), method: :patch, "data-confirm" => "復元するよ？" %><br/ >
+          <%= link_to "削除", admins_engineer_path(e), method: :delete, "data-confirm" => "削除するよ？" %>
         </td>
       </tr>
 
-    </div>
-  </div>
-  <% end %>
-  <%= paginate @engineers %>
+
+      <% end %>
+    </table>
+    <%= paginate @engineers %>
 
   <% else %>
   <div class="blank">

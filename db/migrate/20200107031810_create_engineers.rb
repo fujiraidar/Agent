@@ -9,6 +9,7 @@ class CreateEngineers < ActiveRecord::Migration[5.2]
       t.string :profile_image_id
       t.text :introduction
       t.integer :rank, null: false
+      t.integer :ranks_count, null: false
       t.integer :offer, null: false
       t.integer :follows_count
       t.datetime :deleted_at

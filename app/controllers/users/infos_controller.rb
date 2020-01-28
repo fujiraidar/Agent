@@ -17,29 +17,40 @@ class Users::InfosController < ApplicationController
 		if params[:q] != nil
             params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
             @q_info = Info.ransack(params[:q])
-            @infos = @q_info.result(distinct: true).page(params[:page]).per(10)
+            @infos = @q_info.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
             @q_info = Info.ransack(params[:q])
-            @infos = Info.page(params[:page]).per(10)
+            @infos = Info.page(params[:page]).per(10).order("created_at DESC")
         end
         render :index
 	end
 
 	def ranking
-		@infos = Info.all.order('favorites_count desc').page(params[:page]).per(10)
+		@infos = Info.all.order('favorites_count desc').page(params[:page]).per(10).order("created_at DESC")
 	end
 
 	def edit
 	end
 
 	def create
-		@info = Info.new(info_params)
-		@info.engineer_id = current_user.id
-		if @info.save
-			flash[:notice] = "記事の投稿が完了しました！"
-			redirect_to info_path(@info)
+		if params[:commit] == "投稿する"
+			@info = Info.new(info_params)
+			@info.engineer_id = current_user.id
+			if @info.save
+				flash[:notice] = "記事の投稿が完了しました！"
+				redirect_to info_path(@info)
+			else
+				render :new
+			end
 		else
-			render :new
+			@draft = Draft.new(info_params)
+			@draft.engineer_id = current_user.id
+			if @draft.save
+				flash[:notice] = "下書き保存しました！"
+				redirect_to engineer_path(current_user.id)
+			else
+				render :new
+			end
 		end
 	end
 
@@ -54,13 +65,13 @@ class Users::InfosController < ApplicationController
 
 	def destroy
 		@info.destroy
-		redirect_to users_path
+		redirect_to infos_path
 	end
 
 	private
 
 	def info_params
-		params.require(:info).permit(:engineer_id, :language, :title, :body)
+		params.require(:info).permit(:engineer_id, :language, :title, :body,)
 	end
 
 	def signed_in?
@@ -73,7 +84,7 @@ class Users::InfosController < ApplicationController
 	def correct_user
         @info = Info.find(params[:id])
         if current_user.id != @info.engineer_id
-            redirect_to users_path
+            redirect_to infos_path
         end
     end
 end

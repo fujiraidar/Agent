@@ -1,43 +1,53 @@
 
 
 <div class="toping">
-<table class="table table-hover table-sm toping">
 
-    <% helps.each do |h| %>
+    <% if helps.exists? %>
+        <table class="table table-hover table-sm toping">
 
-    <tr>
-        <td>
-            <div class="info_created_at">
-            	<% @user = User.with_deleted.find_by(id: h.user_id) %>
-            	<% unless @user.deleted_at.nil? %>
-	                退会済みユーザー
-                <% else %>
-                    <%= link_to user_path(@user) do %>
-	                    <%= @user.name %>
-	                <% end %>
-                <% end %>
-                    が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
-            </div>
-            <%= link_to help_path(h) do %>
-            <div class="index-title">
-                <%= h.title %>
-            </div>
+            <% helps.each do |h| %>
+
+            <tr>
+                <td>
+                    <div class="info_created_at">
+                    	<% @user = User.with_deleted.find_by(id: h.user_id) %>
+                    	<% unless @user.deleted_at.nil? %>
+        	                退会済みユーザー
+                        <% else %>
+                            <%= link_to user_path(@user) do %>
+        	                    <%= @user.name %>
+        	                <% end %>
+                        <% end %>
+                            が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
+                    </div>
+                    <%= link_to help_path(h) do %>
+                    <div class="index-title">
+                        <%= h.title %>
+                    </div>
+                    <% end %>
+                    <div class="info_created_at tag">
+                        <%= h.language %>
+                    </div>
+                </td>
+                <td>
+                    <% if user_signed_in? %>
+        				<% if @user.id == current_user.id %>
+        					<%= link_to "編集", edit_help_path(h) %>
+        				<% end %>
+        			<% end %>
+        		</td>
+            </tr>
+
             <% end %>
-            <div class="info_created_at tag">
-                <%= h.language %>
-            </div>
-        </td>
-        <td>
-            <% if user_signed_in? %>
-				<% if @user.id == current_user.id %>
-					<%= link_to "編集", edit_help_path(h) %>
-				<% end %>
-			<% end %>
-		</td>
-    </tr>
+
+        </table>
+        <%= paginate helps %>
+
+    <% else %>
+
+
+            <h5 class="toping gocenter">There are no articles</h5>
+
 
     <% end %>
-
-</table>
-<%= paginate helps %>
 </div>

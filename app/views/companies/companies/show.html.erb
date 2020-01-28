@@ -15,6 +15,9 @@
 	    <tr>
 	        <th><%= @company.company_address %></th>
 	    </tr>
+	    <tr>
+	        <th class="info_created_at">マーク<%= @company.marks_count %></th>
+	    </tr>
 
 	    <% if user_signed_in? %>
 	    <tr>

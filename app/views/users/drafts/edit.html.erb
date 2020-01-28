@@ -1,48 +1,49 @@
 
 
-<div class="container_info toping">
+<div class="container_info">
 
-<%= form_for @draft, url: draft_path(@draft) , method: :patch, remote: true do |f| %>
+<%= form_for @draft, url: infos_path , method: :post do |f| %>
 
 <%= render 'layouts/error_messages', model: f.object %>
 
   <div class="form-group">
-  	<%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
-  	<%= f.text_field :language, placeholder: "言語" %>
+    <%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
+    <%= f.text_field :language, placeholder: "言語" %>
   </div>
-  <div class="form-group row">
-    <div class="col-6">
-		  <%= f.text_area :body, placeholder: "本文", :size => "80x50", id: "md-textarea" %>
-    </div>
-    <div class="col-6">
-      <div  id="preview_area">
-        <%= render 'preview', draft: @draft %>
+  <div class="form-group">
+
+      <div id='editor'>
+        <%= f.text_area :body, rows: 20, class: 'form-control', "v-model" => "input", name: "info[body]" %>
+        <div v-html='input | marked' class="right_preview"></div>
       </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-2 offset-md-8">
+      <%= f.hidden_field :commit, value:"下書き保存" %>
+      <%= f.submit "下書き更新", class: "btn btn-primary" %>
+    </div>
+    <div class="col-md-2">
+      <%= f.hidden_field :commit, value:"投稿する" %>
+      <%= f.submit "投稿する", class: "btn btn-success" %>
     </div>
   </div>
 
-  <div class="form-group row">
-  	<div class="col-md-2 offset-md-5">
-  		<%= f.submit "更新", class: "btn btn-primary" %>
-  	</div>
-  </div>
-<% end %>
-
-
-
-  <%= form_for @info, url: infos_path, method: :post do |f| %>
-
-   <%= render 'layouts/error_messages', model: f.object %>
-
-  	<%= f.hidden_field :title, value: @draft.title %>
-  	<%= f.hidden_field :language, value: @draft.language %>
-    <%= f.hidden_field :body, value: @draft.body %>
-
-  <div class="form-group row">
-  	<div class="col-md-2 offset-md-10">
-  		<%= f.submit "投稿する", class: "btn btn-success" %>
-  	</div>
-  </div>
 <% end %>
 
 </div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    marked.setOptions({breaks : true});
+    new Vue({
+      el: '#editor',
+      data: {
+        input: '<%= j @draft.body %>',
+      },
+      filters: {
+        marked: marked,
+      },
+    });
+  };
+</script>

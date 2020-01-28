@@ -1,11 +1,10 @@
 
 
 
-<div class="container toping">
+<div class="container toping showtime">
 
   <% if @companies.exists? %>
-  <div class="row">
-    <div class="col-md-3">
+    <table class="table table-hover table-sm toping">
 
       <% @companies.each do |c| %>
 
@@ -24,14 +23,20 @@
         </td>
         <td class="col-md-1">
           <%= c.marks_count %>マーク<br/ >
-          <%= link_to "復元", admins_company(c), method: :patch, "data-confirm" => "復元するよ？" %><br/ >
-          <%= link_to "削除", admins_company(c), method: :delete, "data-confirm" => "削除するよ？" %>
-        </td>
+          <div class="row">
+                <div class="col-1">
+                    <%= link_to "復元", admins_company_path(c), method: :patch, "data-confirm" => "復元するよ？" %>
+                </div>
+                <div class="col-1">
+                    <%= link_to "削除", admins_company_path(c), method: :delete, "data-confirm" => "削除するよ？" %>
+                </div>
+            </div>
+         </td>
       </tr>
 
-    </div>
-  </div>
-  <% end %>
+      <% end %>
+    </table>
+
   <%= paginate @companies %>
 
   <% else %>
@@ -41,4 +46,5 @@
   </div>
   <% end %>
 </div>
+
 

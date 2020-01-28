@@ -1,26 +1,46 @@
 
 
 
-<div class="container_info toping">
+<div class="container_info">
 
 <%= form_for @info, url: info_path(@info) , method: :patch do |f| %>
 
 <%= render 'layouts/error_messages', model: f.object %>
 
   <div class="form-group">
-  	<%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
-  	<%= f.text_field :language, placeholder: "言語" %>
+    <%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
+    <%= f.text_field :language, placeholder: "言語" %>
   </div>
   <div class="form-group">
 
-		<%= f.text_area :body, placeholder: "本文", :size => "80x50", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
+      <div id='editor'>
+        <%= f.text_area :body, rows: 20, class: 'form-control', "v-model" => "input", name: "info[body]" %>
+        <div v-html='input | marked' class="right_preview"></div>
+      </div>
   </div>
 
   <div class="form-group row">
-  	<div class="col-md-2 offset-md-10">
-  		<%= f.submit "更新する", class: "btn btn-success" %>
-  	</div>
+    <div class="col-md-2 offset-md-10">
+      <%= f.submit "投稿する", class: "btn btn-success" %>
+    </div>
   </div>
 
 <% end %>
+
 </div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    marked.setOptions({breaks : true});
+
+    new Vue({
+      el: '#editor',
+      data: {
+        input: '<%= j @info.body %>',
+      },
+      filters: {
+        marked: marked,
+      },
+    });
+  };
+</script>

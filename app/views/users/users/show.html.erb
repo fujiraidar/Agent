@@ -1,4 +1,11 @@
 
+
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div class="container whiting">
 <div class="toping">
 <div class="row">
@@ -10,13 +17,28 @@
 		<tr>
 			<th><%= @user.name %></th>
 		</tr>
+
 		<tr>
 			<th><%= @user.email %></th>
 		</tr>
+
 		<% if Engineer.find_by(id: @user) %>
-		<tr>
-			<th><%= link_to "AgentPage", engineer_path(@user) %></th>
-		</tr>
+			<tr>
+				<th><%= link_to "AgentPage", engineer_path(@user) %></th>
+			</tr>
+		<% end %>
+
+		<% if user_signed_in? %>
+			<% if @user == current_user %>
+				<tr>
+					<th>
+						<%= form_for @user, url: user_path, method: :patch do |f| %>
+						<%= f.text_field :name %>
+						<%= f.submit "ok" %>
+						<% end %>
+					</th>
+				</tr>
+			<% end %>
 		<% end %>
 
     </table>

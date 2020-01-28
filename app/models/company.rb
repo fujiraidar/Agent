@@ -3,6 +3,12 @@ class Company < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   acts_as_paranoid
 
+  validates :company_name, presence: true
+  validates :company_address, presence: true
+  validates :company_phone, presence: true
+  validates :surname, presence: true
+  validates :name, presence: true
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

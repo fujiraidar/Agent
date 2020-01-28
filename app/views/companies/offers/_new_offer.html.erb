@@ -1,5 +1,4 @@
 
-<%= engineer.id %>
 
 <% if company_signed_in? %>
 <%= form_for offer, url: offers_path, method: :post do |f| %>
@@ -15,8 +14,7 @@
               <%= f.text_field :title, class: "form-control", placeholder: "タイトル(職種など)" %>
               <%= f.text_field :salary, class: "form-control", placeholder: "給与" %>
               <%= f.select :status, Offer.statuses.keys.to_a, class: "form-control" %>
-              <%= f.text_area :job, class: "form-control", placeholder: "仕事内容" %>
-              <%= engineer.id %>
+              <%= f.text_area :job, class: "form-control", placeholder: "仕事内容", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

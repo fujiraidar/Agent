@@ -1,7 +1,6 @@
 
 <div class="toping">
 
-<% if infos.exists? %>
 
 	<%= search_form_for @q_info, url:users_path, remote: true do |f| %>
 
@@ -17,11 +16,6 @@
     	<%= render 'users/infos/infos', infos: infos %>
 	</div>
 
-<% else %>
-
-		<strong>記事が、ありません</strong>
-
-<% end %>
 
 </div>
 

@@ -15,10 +15,10 @@ class Companies::TopicsController < ApplicationController
 		if params[:q] != nil
             params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
             @q_topic = Topic.ransack(params[:q])
-            @topics = @q_topic.result(distinct: true).page(params[:page]).per(10)
+            @topics = @q_topic.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
             @q_topic = Topic.ransack(params[:q])
-            @topics = Topic.page(params[:page]).per(10)
+            @topics = Topic.page(params[:page]).per(10).order("created_at DESC")
         end
         render :index
 	end

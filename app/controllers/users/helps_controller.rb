@@ -18,10 +18,10 @@ class Users::HelpsController < ApplicationController
 		if params[:q] != nil
             params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
             @q_help = Help.ransack(params[:q])
-            @helps = @q_help.result(distinct: true).page(params[:page]).per(10)
+            @helps = @q_help.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
             @q_help = Help.ransack(params[:q])
-            @helps = Help.page(params[:page]).per(10)
+            @helps = Help.page(params[:page]).per(10).order("created_at DESC")
         end
         render :index
 	end
@@ -51,7 +51,7 @@ class Users::HelpsController < ApplicationController
 
 	def destroy
 		@help.destroy
-		redirect_to users_path
+		redirect_to helps_path
 	end
 
 	private
@@ -69,7 +69,7 @@ class Users::HelpsController < ApplicationController
 	def correct_user
         @help = Help.find(params[:id])
         if current_user != @help.user
-            redirect_to users_path
+            redirect_to helps_path
         end
     end
 end
