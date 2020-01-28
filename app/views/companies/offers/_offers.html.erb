@@ -12,11 +12,14 @@
 			    <%= link_to company_path(o.company) do %>
 			    	<%= o.company.company_name %>
 			    <% end %>
-			    	が<%= h.created_at.strftime('%Y/%m/%d') %>にオファー
+			    	が<%= o.created_at.strftime('%Y/%m/%d') %>にオファー　to　
+			    <%= link_to engineer_path(o.engineer) do %>
+			    	<%= o.engineer.surname %> <%= o.engineer.name %>さん
+			    <% end %>
 		    </div>
 			<%= link_to offer_path(o) do %>
 			  <div class="index-title">
-			    <%= h.title %>
+			    <%= o.title %>
 			  </div>
 			<% end %>
 			<div class="info_created_at tag">
@@ -29,9 +32,8 @@
 
 <% else %>
 
-<strong>no offer</strong>
-
-<p>オファーしているAgentが、いません</p>
-
+	<div class="toping">
+	    <h5 class="toping gocenter">There are no offers</h5>
+	</div>
 
 <% end %>

@@ -7,11 +7,11 @@
     <% languages.each do |l| %>
 
 		<tr>
-			<td><%= l.language %></td>
-			<td><%= l.experience_year %>年</td>
+			<td><p><%= l.language %></p></td>
+			<td><p><%= l.experience_year %>年</p></td>
 	        <td>
 	            <% l.performances.each do |pe| %>
-			    <p><i class="fas fa-arrow-alt-circle-right"></i>  <%= pe.performance %></p>
+			    <%= simple_format(pe.performance) %>
 			    <% end %>
 			</td>
 		</tr>
@@ -21,6 +21,8 @@
 
 <% else %>
 
-<strong>スキルを登録していません</strong>
+	<div class="toping">
+	    <h5 class="toping gocenter">There are no skills</h5>
+	</div>
 
 <% end %>

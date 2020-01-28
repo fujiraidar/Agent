@@ -1,24 +1,51 @@
 
-<div class="container">
+
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="container whiting">
 <div class="toping">
 <div class="row">
 
-  <div class="col-md-3">
+  <div class="col-12 col-lg-3">
 
 	<table class="table">
 
 		<tr>
 			<th><%= @user.name %></th>
 		</tr>
+
 		<tr>
 			<th><%= @user.email %></th>
 		</tr>
+
+		<% if Engineer.find_by(id: @user) %>
+			<tr>
+				<th><%= link_to "AgentPage", engineer_path(@user) %></th>
+			</tr>
+		<% end %>
+
+		<% if user_signed_in? %>
+			<% if @user == current_user %>
+				<tr>
+					<th>
+						<%= form_for @user, url: user_path, method: :patch do |f| %>
+						<%= f.text_field :name %>
+						<%= f.submit "ok" %>
+						<% end %>
+					</th>
+				</tr>
+			<% end %>
+		<% end %>
 
     </table>
   </div>
 
 
-  <div class="col-md-9">
+  <div class="col-12 col-lg-9">
 
 		<div class='tabs'>
 		  <div class='tab-buttons'>
@@ -30,7 +57,7 @@
 		  <div class='tab-content'>
 
 		    <div class='content1'>
-		    	<%= render 'users/helps/helps', helps: @helps %>
+		    	<%= render 'users/helps/helps_search', helps: @helps %>
 	        </div>
 
 	        <div class='content2'>

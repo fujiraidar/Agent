@@ -1,59 +1,53 @@
 
 
-<% if helps.exists? %>
+<div class="toping">
 
-	<%= search_form_for @q_info, url:users_path do |f| %>
+    <% if helps.exists? %>
+        <table class="table table-hover table-sm toping">
 
-		<div class="search_field">
-		    <%= f.text_field :title_or_body_or_language_cont_any %>
-			<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button" do %>
-			    <i class="fa fa-search"></i>
-			<% end %>
-		</div>
-	<% end %>
+            <% helps.each do |h| %>
 
-    <div class="toping">
-	<table class="table table-hover table-sm toping">
+            <tr>
+                <td>
+                    <div class="info_created_at">
+                    	<% @user = User.with_deleted.find_by(id: h.user_id) %>
+                    	<% unless @user.deleted_at.nil? %>
+        	                退会済みユーザー
+                        <% else %>
+                            <%= link_to user_path(@user) do %>
+        	                    <%= @user.name %>
+        	                <% end %>
+                        <% end %>
+                            が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
+                    </div>
+                    <%= link_to help_path(h) do %>
+                    <div class="index-title">
+                        <%= h.title %>
+                    </div>
+                    <% end %>
+                    <div class="info_created_at tag">
+                        <%= h.language %>
+                    </div>
+                </td>
+                <td>
+                    <% if user_signed_in? %>
+        				<% if @user.id == current_user.id %>
+        					<%= link_to "編集", edit_help_path(h) %>
+        				<% end %>
+        			<% end %>
+        		</td>
+            </tr>
 
-	    <% helps.each do |h| %>
+            <% end %>
 
-	    <tr>
-	        <td>
-	            <div class="info_created_at">
-	                <%= link_to user_path(h.user) do %>
-	                    <%= h.user.name %>
-	                <% end %>
-	                    が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
-	            </div>
-	            <%= link_to help_path(h) do %>
-	            <div class="index-title">
-	                <%= h.title %>
-	            </div>
-	            <% end %>
-	            <div class="info_created_at tag">
-	                <%= h.language %>
-	            </div>
-	        </td>
-	        <td>
-	            <% if user_signed_in? %>
-					<% if h.user.id == current_user.id %>
-						<%= link_to "編集", edit_help_path(h) %>
-					<% end %>
-				<% end %>
-			</td>
-	    </tr>
+        </table>
+        <%= paginate helps %>
 
-	    <% end %>
+    <% else %>
 
-	</table>
-    </div>
 
-<% else %>
+            <h5 class="toping gocenter">There are no articles</h5>
 
-	<strong>
-		<p>投稿したヘルプは、ありません</p>
-		<p>ヘルプとは、分からないところを質問したり、</p>
-		<p>自分が投稿した記事のURLを教えてあげたりする機能です。</p>
-	</strong>
 
-<% end %>
+    <% end %>
+</div>

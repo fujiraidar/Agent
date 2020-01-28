@@ -1,0 +1,50 @@
+
+
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="container toping showtime">
+
+    <div class="row">
+		<div class="col-1">
+			<%= attachment_image_tag @topic.company, :company_image, fallback: "no_image.jpg", size: "60X60"%>
+		</div>
+		<div class="col-7">
+			<%= link_to company_path(@topic.company) do %>
+		    	<%= @topic.company.company_name %>
+		    <% end %>
+		</div>
+		<div class="col-3">
+		    <div class="info_created_at">
+				<%= @topic.created_at.strftime('%Y/%m/%d') %>に投稿
+			</div>
+        </div>
+	</div>
+    <div class="show_title">
+	    <%= @topic.title %>
+	</div>
+
+    <div class="row">
+    	<div class="col-7 offset-2">
+    		<div class="info_created_at tag">
+		    	<%= @topic.language %>
+		    </div>
+		</div>
+		<div class="col-3">
+			<% if company_signed_in? %>
+		    <% if @topic.company_id == current_company.id %>
+
+		        <p><%= link_to "この記事を編集する", edit_topic_path(@topic) %></p>
+		        <p><%= link_to "この記事を削除する", topic_path(@topic), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+
+		    <% end %>
+		    <% end %>
+		</div>
+	</div>
+
+    <%= @topic.body.html_safe %>
+
+</div>

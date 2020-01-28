@@ -1,40 +1,43 @@
 class Users::UsersController < ApplicationController
 
+    before_action :authenticate_user!, only: [:show, :create, :update, :destroy ,:withdraw]
+    before_action :signed_in?, only: [:show]
+    before_action :correct_user, only: [:update, :destroy ,:withdraw]
+
 	def show
         @user = User.find(params[:id])
         if params[:q] != nil
             params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
             @q_help = Help.ransack(params[:q])
             help = @q_help.result(distinct: true)
-            @helps = @user.help
+            @helps = @user.page(params[:page]).per(10).help.order("created_at DESC")
         else
-            @helps = @user.helps
+            @q_help = Help.ransack(params[:q])
+            @helps = @user.helps.page(params[:page]).per(10).order("created_at DESC")
         end
-        @favorites = @user.favorites
-        @follows = @user.follows
+        @favorites = @user.favorites.page(params[:page]).per(10).order("created_at DESC")
+        @follows = @user.follows.page(params[:page]).per(10).order("created_at DESC")
 	end
 
     def index
         if params[:q] != nil
             params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
             @q_info = Info.ransack(params[:q])
-            @infos = @q_info.result(distinct: true)
+            @infos = @q_info.result(distinct: true).page(params[:page]).per(10)
             @q_help = Help.ransack(params[:q])
-            @helps = @q_help.result(distinct: true)
+            @helps = @q_help.result(distinct: true).page(params[:page]).per(10)
         else
             @q_info = Info.ransack(params[:q])
-            @infos = @q_info.result(distinct: true)
             @q_help = Help.ransack(params[:q])
-            @helps = @q_help.result(distinct: true)
+            @infos = Info.page(params[:page]).per(10)
+            @helps = Help.page(params[:page]).per(10)
         end
+        @good_infos = Info.all.order('favorites_count desc').page(params[:page]).per(10)
+        render :index
     end
 
-	def edit
-		@user = User.find(params[:id])
-	end
 
 	def update
-  	    @user = User.find(params[:id])
         if @user.update(user_params)
            flash[:notice] = "変更しました!"
            redirect_to user_path(current_user.id)
@@ -43,12 +46,10 @@ class Users::UsersController < ApplicationController
         end
     end
 
-    def unsubscribe
-    	@user = User.find(params[:id])
+    def withdraw
     end
 
 	def destroy
-		@user = User.find(params[:id])
         @user.destroy
         redirect_to root_path
 	end
@@ -58,6 +59,24 @@ class Users::UsersController < ApplicationController
 
     def user_params
         params.require(:user).permit(:name)
+    end
+
+    def signed_in?
+        if company_signed_in?
+            redirect_to company_path(current_company.id)
+        end
+        unless User.with_deleted.find(params[:id]).deleted_at.nil?
+            flash[:alert] = "no user!!!!!!!!"
+            redirect_to infos_path
+        end
+    end
+
+
+    def correct_user
+        @user = User.find(params[:id])
+        if current_user != @user
+            redirect_to infos_path
+        end
     end
 
 end

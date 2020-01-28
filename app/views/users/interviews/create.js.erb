@@ -1,0 +1,4 @@
+
+
+$('#interview_area').html("<%= escape_javascript(render 'users/interviews/interviews', interviews: @interviews, box: @box ) %>");
+$('#interview_form').html("<%= escape_javascript(render 'users/interviews/interview_form',  interview: @interview, box: @box ) %>");

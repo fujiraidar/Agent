@@ -1,31 +1,32 @@
 
-
-<div class='tabs'>
-  <div class='tab-buttons'>
+<div class='container'>
+<div class='tabs row'>
+  <div class='tab-buttons col-3'>
     <span class='content1'>記事</span>
     <span class='content2'>ランキング</span>
     <span class='content3'>ヘルプ</span>
     <div id='lamp' class='content1'></div>
   </div>
-  <div class='tab-content'>
+  <div class='tab-content col-9'>
 
     <div class='content1'>
     	<div class="container toping">
-			<%= render 'users/infos/infos', infos: @infos %>
+			<%= render 'users/infos/infos_search', infos: @infos %>
 		</div>
     </div>
 
     <div class='content2'>
     	<div class="container toping">
-			<%= render 'users/infos/infos', infos: @infos %>
+			<%= render 'users/infos/infos_search', infos: @good_infos %>
 		</div>
     </div>
 
-    <div class='content3'>
+    <div class='content3'　id='help'>
     	<div class="container toping">
-    		<%= render 'users/helps/helps', helps: @helps %>
+    		<%= render 'users/helps/helps_search', helps: @helps %>
 		</div>
     </div>
 
   </div>
+</div>
 </div>

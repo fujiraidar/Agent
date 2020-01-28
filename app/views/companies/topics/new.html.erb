@@ -1,0 +1,25 @@
+
+
+<div class="container_info toping showtime">
+
+<%= form_for @topic, url: topics_path , method: :post do |f| %>
+
+<%= render 'layouts/error_messages', model: f.object %>
+
+  <div class="form-group">
+  	<%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
+  	<%= f.text_field :language, placeholder: "プログラミング技術に関連するタグ(スペースで区切る)" %>
+  </div>
+  <div class="form-group">
+
+		<%= f.text_area :body, placeholder: "本文", :size => "80x50", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
+  </div>
+
+  <div class="form-group row">
+  	<div class="col-md-2 offset-md-10">
+  		<%= f.submit "投稿する", class: "btn btn-success" %>
+  	</div>
+  </div>
+
+<% end %>
+</div>

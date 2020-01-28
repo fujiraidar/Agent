@@ -1,0 +1,24 @@
+
+
+<div class="container toping showtime">
+
+	<p>
+		<%= link_to engineer_path(@engineer.id) do %>
+			<%= @engineer.surname %> <%= @engineer.name %>さん
+		<% end %>
+		&
+		<%= link_to company_path(@company.id) do %>
+			<%= @company.company_name %>
+		<% end %>
+	</p>
+
+  <div id='interview_area'>
+    	<%= render "users/interviews/interviews", interviews: @interviews, box: @box %>
+    </div>
+
+    <div  id="interview_form">
+        <%= render "users/interviews/interview_form", interview: @interview, box: @box %>
+  </div>
+
+
+</div>

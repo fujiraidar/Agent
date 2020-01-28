@@ -1,20 +1,36 @@
 
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
-<div class="container">
+<div class="container whiting">
 
     <p><h1><%= @offer.title %></h1></p>
 
     <div class="row">
-    	<div class="col-md-7 offset-md-2">
+    	<div class="col-md-7 offset-md-1">
 		    <p><strong><%= @offer.salary %></strong></p>
 		    <p><strong><%= @offer.status %></strong></p>
 		</div>
 		<div class="col-md-3">
-		    <% if @offer.company_id == current_company.id %>
+			<% if company_signed_in? %>
+			    <% if @offer.company_id == current_company.id %>
 
-		        <p><%= link_to "この記事を削除する", offer_path(@offer), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+			        <p><%= link_to "このオファーを削除する", offer_path(@offer), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 
-		    <% end %>
+			    <% end %>
+		    <% elsif user_signed_in? %>
+		        <% if @offer.engineer_id == current_user.id %>
+				    <%= form_for @box, remote: true, url:boxes_path, method: :post do |f| %>
+				    <%= f.hidden_field :company_id, value: @offer.company_id %>
+				    <%= f.hidden_field :engineer_id, value: @offer.engineer_id %>
+				    <%= f.submit :返答 %>
+				    <% end %>
+				<% end %>
+			<% else %>
+			<% end %>
 		</div>
 	</div>
 

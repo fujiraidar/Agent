@@ -4,31 +4,31 @@
 
 <table class="table table-hover table-sm toping">
 
-	<% marks.enjineer.each do |m| %>
+	<% marks.each do |m| %>
+
+	<% c = Company.find_by(id: m.company_id) %>
 
     <tr class="row">
-		<td class="col-md-1"><%= attachment_image_tag m, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+		<td class="col-md-1"><%= attachment_image_tag c, :company_image, fallback: "no_image.jpg", size:"60x60" %></td>
 		<td class="col-md-10">
 			<div class="info_created_at">
-				<%= j.created_at.strftime('%Y/%m/%d') %>にマークされました。
+				<%= m.created_at.strftime('%Y/%m/%d') %>にマークしました。
 			</div>
-			<%= link_to enjineer_path(m) do %>
+			<%= link_to company_path(c) do %>
 			  <div class="index-title">
-			    <%= m.engineer.surname %> <%= m.engineer.name %>
+			    <%= c.company_name %>
 			  </div>
 			<% end %>
-			<div class="info_created_at tag">
-		        ・<%= m.age %>歳 <%= m.rank %>ランク
-		    </div>
 		</td>
 	</tr>
 	<% end %>
 </table>
+<%= paginate marks %>
 
 <% else %>
 
-<strong>no mark</strong>
-
-<p>マークしているAgentは、いません</p>
+	<div class="toping">
+	    <h5 class="toping gocenter">There are no marks</h5>
+	</div>
 
 <% end %>

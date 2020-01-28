@@ -1,4 +1,4 @@
-<div class="container mypage">
+<div class="container mypage whiting">
 
 <div class="row">
 
@@ -15,6 +15,9 @@
 	    <tr>
 	        <th><%= @company.company_address %></th>
 	    </tr>
+	    <tr>
+	        <th class="info_created_at">マーク<%= @company.marks_count %></th>
+	    </tr>
 
 	    <% if user_signed_in? %>
 	    <tr>
@@ -23,18 +26,34 @@
 	    <% end %>
 
 	    <tr>
-	        <th><%= @company.introduction %></th>
+	        <th>
+	        	会社紹介
+	        	<div class="info_created_at tag">
+	        		<%= simple_format(@company.introduction) %>
+	            </div>
+	        </th>
 	    </tr>
 
         <% if company_signed_in? %>
 	        <% if @company == current_company %>
-		    <tr>
-		        <th>
-		        	<%= link_to edit_company_path(current_company.id) do %>
-		        	<i class="fas fa-wrench">編集する</i>
-		        	<% end %>
-		        </th>
-		    </tr>
+			    <tr>
+			        <th>
+			        	<%= link_to edit_company_path(current_company.id) do %>
+			        	<i class="fas fa-wrench info_created_at">編集する</i>
+			        	<% end %>
+			        </th>
+			    </tr>
+			    <% unless current_company.company_payments.exists? %>
+				    <tr>
+				        <th><%= link_to "お支払", new_company_company_payment_path(current_company.id) %></th>
+				    </tr>
+				<% else %>
+				    <% current_company.company_payments.each do |c| %>
+				    <tr>
+				        <th><p>利用期限は、<%= c.created_at.next_year.strftime('%Y/%m/%d') %>までです。</p></th>
+				    </tr>
+				    <% end %>
+				<% end %>
 		    <% end %>
 	    <% end %>
 
@@ -47,17 +66,17 @@
 
 		<div class='tabs'>
 		  <div class='my-tab-buttons'>
-		    <span class='my-content1'>ニュース</span>
+		    <span class='my-content1'>トピック</span>
 		    <span class='my-content2'>求人</span>
 		    <span class='my-content3'>マーク</span>
 		    <span class='my-content4'>オファー</span>
-		    <span class='my-content5'>ニュース</span>
+		    <span class='my-content5'>メッセージ</span>
 		    <div id='my-lamp' class='my-content1'></div>
 		  </div>
 		  <div class='my-tab-content'>
 
 		    <div class='my-content1'>
-	      	    neews
+	      	    <%= render 'companies/topics/topics', topics: @topics %>
 	        </div>
 
 	        <div class='my-content2'>
@@ -65,7 +84,7 @@
 	        </div>
 
 	        <div class='my-content3'>
-				<%= render 'users/marks/marks', marks: @marks %>
+				<%= render 'companies/companies/marks', marks: @marks %>
 	        </div>
 
 	        <div class='my-content4'>
@@ -73,7 +92,7 @@
 	        </div>
 
 	        <div class='my-content5'>
-	        	tytto
+	        	<%= render 'companies/companies/boxes', boxes: @boxes %>
 	        </div>
 
 	      </div>
@@ -83,7 +102,7 @@
 
 	    <div class='tabs'>
 		  <div class='tab-buttons'>
-		    <span class='content1'>ニュース</span>
+		    <span class='content1'>トピック</span>
 		    <span class='content2'>求人</span>
 		    <span class='content3'>マーク</span>
 		    <div id='lamp' class='content1'></div>
@@ -91,7 +110,7 @@
 		  <div class='tab-content'>
 
 		    <div class='content1'>
-		       neews
+		        <%= render 'companies/topics/topics', topics: @topics %>
 	        </div>
 
 	        <div class='content2'>
@@ -99,8 +118,9 @@
 	        </div>
 
 	        <div class='content3'>
-	        	<%= render 'users/marks/marks', marks: @marks %>
+	        	<%= render 'companies/companies/marks', marks: @marks %>
 	        </div>
+
 	      </div>
 	    </div>
 

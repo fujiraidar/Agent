@@ -1,0 +1,40 @@
+
+
+<% if @boxes.exists? %>
+  <div class="toping">
+
+    <% @boxes.each do |b| %>
+
+    <% e = Engineer.find_by(id: b.engineer_id) %>
+
+    <table class="table table-hover table-sm">
+      <tr class="row">
+        <td class="col-1">
+          <%= link_to engineer_path(e) do %>
+            <%= attachment_image_tag e, :profile_image, fallback: "no_image.jpg", size:"70x70"%>
+          <% end %>
+        </td>
+        <td class="col-3">
+          <%= link_to engineer_path(e) do %>
+			  <div class="index-title">
+			    <%= e.surname %> <%= e.name %>さん
+			  </div>
+			<% end %><br />
+			<%= link_to "メッセージを送る",box_path(b) %>
+			<div class="info_created_at tag">
+		        ・<%= e.age %>歳 <%= e.rank %>ランク
+		    </div>
+        </td>
+      </tr>
+    </table>
+
+    <% end %>
+  </div>
+  <%= paginate @boxes %>
+
+  <% else %>
+  <div class="toping">
+    <h5 class="toping gocenter">There are no messages</h5>
+  </div>
+
+  <% end %>

@@ -4,6 +4,8 @@
 
 <%= form_for @help, url: helps_path, method: :post do |f| %>
 
+<%= render 'layouts/error_messages', model: f.object %>
+
   <div class="form-group">
   	<%= f.text_field :title, placeholder: "ヘルプのタイトル (サイズは、見出し 1)" %>
   	<%= f.text_field :language, placeholder: "言語" %>

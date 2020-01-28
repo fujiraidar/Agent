@@ -1,18 +1,55 @@
 
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
-<h3>求人詳細</h3>
 
-<%= @job.company.company_name %>
+<div class="container toping showtime">
 
-<%= @job.company.phone %>
+  <div class="row">
+    <div class="col-1">
+      <%= link_to company_path(@job.company) do %>
+        <%= attachment_image_tag @job.company, :company_image, fallback: "no_image.jpg", class: "show_image" %>
+      <% end %>
+    </div>
+    <div class="col-7">
+      <%= link_to company_path(@job.company) do %>
+        <h3><%= @job.company.company_name %></h3>
+      <% end %>
+    </div>
+    <div class="col-3">
+        <div class="info_created_at">
+          <%= @job.created_at.strftime('%Y/%m/%d') %>に登録
+        </div>
+    </div>
+  </div>
+  <div class="show_title">
+    <%= @job.title %>
+  </div>
+  <div class="row">
+    <div class="col-4">
+        <%= attachment_image_tag @job, :job_image, fallback: "no_image.jpg", class: "col-12 job-images" %>
+    </div>
+    <div class="col-5 lefting toping">
+      <div class="info_created_at tag">
+        ・<%= @job.status %><br />
+        ・<%= @job.salary %>
+      </div>
+    </div>
+    <div class="col-3">
+      <% if company_signed_in? %>
+        <% if @job.company_id == current_company.id %>
+        <%= link_to "この求人情報編集する", edit_job_path(@job) %><br />
+        <%= link_to "この求人情報削除する", job_path(@job), method: :delete, "data-confirm" => "求人登録されているデータが消えてしまいます。本当に削除してよろしいでしょうか？" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-12 toping">
+      <%= @job.job.html_safe %>
+    </div>
+  </div>
+</div>
 
-<%= @job.company.address %>
 
-<%= @job.job %>
-
-<%= @job.salary %>
-
-<%= link_to "編集する", edit_job_path(@job) %>
-
-<%= link_to "削除する", job_path(@job), method: :delete,
-　　　　　　　　"data-confirm" => "求人登録されているデータが消えてしまいます。本当に削除してよろしいでしょうか？" %>

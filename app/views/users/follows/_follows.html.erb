@@ -5,25 +5,27 @@
 
 <table class="table table-hover table-sm toping">
 
-	<% follows.enjineer.each do |f| %>
+    <div class="row">
+    <div class="col-6 col-md-4 col-lg-2">
+	<% follows.each do |f| %>
 
-    <tr class="row">
-		<td class="col-md-1"><%= attachment_image_tag f, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
-		<td class="col-md-10">
-			<%= link_to enjineer_path(m) do %>
-			  <div class="index-title">
-			    <%= f.user.name %>
-			  </div>
-			<% end %>
-		</td>
-	</tr>
+	<% e = Engineer.find_by(id: f.engineer_id) %>
+
+        <%= link_to engineer_path(e) do %>
+            <%= attachment_image_tag e, :profile_image, fallback: "no_image.jpg", class: "col-12 show_image" %>
+		    <div class="index-title col-12">
+		      <%= e.user.name %>
+		    </div>
+		<% end %>
 	<% end %>
+    </div>
 </table>
+<%= paginate follows %>
 
 <% else %>
 
-<strong>no follow</strong>
-
-<p>フォローしているAgentは、いません</p>
+	<div class="toping">
+	    <h5 class="toping gocenter">There are no follows</h5>
+	</div>
 
 <% end %>

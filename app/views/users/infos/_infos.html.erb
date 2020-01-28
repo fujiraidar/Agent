@@ -2,46 +2,46 @@
 
 <% if infos.exists? %>
 
-	<%= search_form_for @q_info, url:users_path do |f| %>
-
-		<div class="search_field">
-		    <%= f.text_field :title_or_body_or_language_cont_any %>
-			<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button" do %>
-			    <i class="fa fa-search"></i>
-			<% end %>
-		</div>
-	<% end %>
-
-
-    <div class="toping">
+<div class="toping">
 	<table class="table table-hover table-sm">
 
 		<% infos.each do |i| %>
 
+		<% @engineer = Engineer.with_deleted.find_by(id: i.engineer_id) %>
+
 	    <tr class="row">
-			<td class="col-md-1"><%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+			<td class="col-md-1">
+				<% unless @engineer.deleted_at.nil? %>
+				no image
+				<% else %>
+				<%= attachment_image_tag i.engineer, :profile_image, fallback: "no_image.jpg", size:"60x60" %></td>
+				<% end %>
 			<td class="col-md-10">
 				<div class="info_created_at">
-					<%= link_to user_path(i.engineer) do %>
-				    	<%= i.engineer.user.name %>
-				    <% end %>
+					<% unless @engineer.deleted_at.nil? %>
+		                退会済みユーザー
+		            <% else %>
+		                <%= link_to engineer_path(@engineer) do %>
+				    		<%= @engineer.user.name %>
+				        <% end %>
+		            <% end %>
 				        が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿
 				</div>
 				<%= link_to info_path(i) do %>
 				  <div class="index-title">
-				    <%= i.title %>
+		    		<%= i.title %>
 				  </div>
 				<% end %>
-				<div class="info_created_at tag">
+				  <div class="info_created_at tag">
 			        <%= i.language %>
-			    </div>
+			      </div>
 			</td>
 			<td class="col-md-1">
 				<div class="info_created_at">
-					<i class="far fa-heart"></i> <%= i.favorites_count %>
+					<i class="far fa-heart"> <%= i.favorites_count %></i>
 				</div>
 				<% if user_signed_in? %>
-				<% if i.engineer.id == current_user.id %>
+				<% if @engineer.id == current_user.id %>
 		            <%= link_to "編集", edit_info_path(i) %>
 		        <% end %>
 		        <% end %>
@@ -49,17 +49,13 @@
 		</tr>
 		<% end %>
     </table>
+    <%= paginate infos %>
 	</div>
 
 <% else %>
 
-		<strong>投稿した記事は、ありません</strong>
-
-	<% link_to new_infos_path do %>
-
-		<strong>Let's write an article</strong>
-
-	<% end %>
+	<div class="toping">
+	    <h5 class="toping gocenter">There are no articles</h5>
+	</div>
 
 <% end %>
-

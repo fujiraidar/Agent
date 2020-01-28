@@ -6,20 +6,21 @@
 
 .container_info {
 	width: 100%;
+    padding-top: 2px;
 	padding-left: 2px;
 	padding-right: 2px;
+    margin-top: auto;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-input[type="text"] {
-        width: 100%;
-        height: 40px;
+.container_info input[type="text"] {
+    width: 100%;
+    height: 40px;
 }
 
-input[type="area"] {
-        width: 100px;
-        height: 60px;
+textarea{
+    width: 100%;
 }
 
 .info_created_at {

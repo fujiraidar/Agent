@@ -1,0 +1,21 @@
+
+
+<div class="container toping tag gocenter">
+
+	<strong>求人募集の投稿と直接スカウトができるオファー機能が使えるようになります。</strong>
+
+	<p class="toping">・12ヶ月プラン お支払金額：1,200,000円</p>
+
+	<p>お支払方法：クレジットカード決済のみ</p>
+
+	<p>返金：なし</p>
+
+    <%= form_for @company_payment, url: company_company_payments_path(current_company.id), method: :post do |f| %>
+
+      <%= f.text_field :name, placeholder: "利用理由(例: 人材採用の為)" %>
+	  <plain>
+	  </plain>
+	<script type="text/javascript" src="https://checkout.pay.jp" class="payjp-button" data-key="pk_test_4ffb4354b93c87393446847e"></script>
+	<% end %>
+
+</div>

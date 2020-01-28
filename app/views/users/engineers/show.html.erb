@@ -1,6 +1,12 @@
 
 
-<div class="container">
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="container whiting">
 <div class="toping">
 <div class="row">
 
@@ -9,28 +15,77 @@
 	<table class="table">
 
         <%= attachment_image_tag @engineer, :profile_image, fallback: "no_image.jpg", size:"255x255" %>
-        <tr>
-	        <th><%= @engineer.surname %><%= @engineer.name %> 様</th>
-        </tr>
 
 	    <% if user_signed_in? %>
-	    <% unless @engineer.id == current_user.id %>
-		    <tr>
-		        <th><%= render 'users/engineers/follow', engineer: @engineer %></th>
-		    </tr>
-		<% end %>
+		    <% if @engineer.id == current_user.id %>
+		        <tr>
+		            <th>
+		            	<%= link_to user_path(@engineer.id) do %>
+							<%= @engineer.user.name %>
+						<% end %>
+		  			</th>
+	            </tr>
+	            <tr>
+	            	<th><%= @engineer.surname %><%= @engineer.name %> 様</th>
+            	</tr>
+            	<tr>
+		            <th><%= link_to "下書き", drafts_path %></th>
+	            </tr>
+		    <% else %>
+		        <tr>
+		            <th>
+		            	<%= link_to user_path(@engineer.id) do %>
+							<%= @engineer.user.name %>
+						<% end %>
+	            	</th>
+	            </tr>
+			    <tr>
+			        <th><%= render 'users/engineers/follow', engineer: @engineer %></th>
+			    </tr>
+			    <tr>
+			        <th class="info_created_at">マーク</th>
+			    </tr>
+			<% end %>
 	    <% elsif company_signed_in? && @engineer.offer == "受け取る" %>
+	        <tr>
+	            <th><%= @engineer.surname %><%= @engineer.name %> 様</th>
+            </tr>
 	        <tr>
 	            <th><%= @engineer.age %> 歳</th>
 	        </tr>
 	        <tr>
-		      <th><%= render 'companies/offers/new_offer', offer: @offer %></th>
+		      <th><%= render 'companies/offers/new_offer', offer: @offer, engineer: @engineer %></th>
 		    </tr>
+		    <tr>
+			    <th class="info_created_at">マーク</th>
+			</tr>
 		<% else %>
+		    <tr>
+	            <th>オファーを許可していません</th>
+            </tr>
 	    <% end %>
 
+        <% if user_signed_in? %>
+		  <% unless @engineer.id == current_user.id %>
+			<% if @isRoom == true %>
+			  <%= link_to "チャットへGo!", room_path(@roomId) %>
+			<% else %>
+			  <%= form_for @room do |f| %>
+			    <%= fields_for @entry do |e| %>
+			      <%= e.hidden_field :user_id, :value=> @user.id %>
+			    <% end %>
+			    <%= f.submit "チャットを始める" %>
+			  <% end %>
+			<% end %>
+		  <% end %>
+		<% end %>
+
+		<tr>
+	        <th><%= @engineer.rank %></th>
+	    </tr>
+
         <tr>
-	        <th><%= @engineer.introduction %></th>
+	        <th class="info_created_at tag"><%= simple_format(@engineer.introduction) %></th>
 	    </tr>
 
 	    <% if user_signed_in? %>
@@ -50,8 +105,7 @@
 
 
   <div class="col-md-9">
-
-    <% if @engineer.id == current_user.id %>
+    <% if user_signed_in? && @engineer.id == current_user.id %>
 
 		<div class='tabs'>
 		  <div class='my-tab-buttons'>
@@ -65,7 +119,7 @@
 		  <div class='my-tab-content'>
 
 		    <div class='my-content1'>
-		    	<%= render 'users/infos/infos', infos: @infos %>
+		    	<%= render 'users/infos/infos_search', infos: @infos %>
 	        </div>
 
 	        <div class='my-content2'>
@@ -79,7 +133,7 @@
 	        	<%= render 'companies/offers/offers', offers: @offers %>
 	        </div>
 	        <div class='my-content5'>
-	        	tytto
+	        	<%= render 'users/boxes/boxes', boxes: @boxes %>
 	        </div>
 
 	      </div>

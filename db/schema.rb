@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_17_012036) do
+ActiveRecord::Schema.define(version: 2020_01_27_030400) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,10 +24,17 @@ ActiveRecord::Schema.define(version: 2020_01_17_012036) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "boxes", force: :cascade do |t|
+    t.integer "engineer_id", null: false
+    t.integer "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
-    t.integer "engineer_id"
-    t.integer "help_id"
-    t.text "comment"
+    t.integer "user_id", null: false
+    t.integer "help_id", null: false
+    t.text "comment", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -48,8 +55,36 @@ ActiveRecord::Schema.define(version: 2020_01_17_012036) do
     t.integer "marks_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["email"], name: "index_companies_on_email", unique: true
     t.index ["reset_password_token"], name: "index_companies_on_reset_password_token", unique: true
+  end
+
+  create_table "company_payments", force: :cascade do |t|
+    t.integer "company_id"
+    t.integer "charge_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "direct_messages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_direct_messages_on_room_id"
+    t.index ["user_id"], name: "index_direct_messages_on_user_id"
+  end
+
+  create_table "drafts", force: :cascade do |t|
+    t.integer "engineer_id", null: false
+    t.string "title", null: false
+    t.text "body", null: false
+    t.string "language", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "engineers", force: :cascade do |t|
@@ -60,10 +95,21 @@ ActiveRecord::Schema.define(version: 2020_01_17_012036) do
     t.string "profile_image_id"
     t.text "introduction"
     t.integer "rank", null: false
+    t.integer "ranks_count", null: false
     t.integer "offer", null: false
     t.integer "follows_count"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_entries_on_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -100,6 +146,13 @@ ActiveRecord::Schema.define(version: 2020_01_17_012036) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "interviews", force: :cascade do |t|
+    t.integer "box_id", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.integer "company_id", null: false
     t.string "title", null: false
@@ -113,8 +166,8 @@ ActiveRecord::Schema.define(version: 2020_01_17_012036) do
 
   create_table "languages", force: :cascade do |t|
     t.integer "engineer_id", null: false
-    t.string "language", null: false
-    t.integer "experience_year", null: false
+    t.string "language"
+    t.integer "experience_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -139,7 +192,23 @@ ActiveRecord::Schema.define(version: 2020_01_17_012036) do
 
   create_table "performances", force: :cascade do |t|
     t.integer "language_id", null: false
-    t.text "performance", null: false
+    t.text "performance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.string "language", null: false
+    t.string "title", null: false
+    t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -151,6 +220,7 @@ ActiveRecord::Schema.define(version: 2020_01_17_012036) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

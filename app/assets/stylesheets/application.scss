@@ -27,7 +27,7 @@
 
 /* ------ header関連 ------ */
 header {
-	background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
+	background-color: #15053b;
 }
 
 .header-title {
@@ -50,16 +50,30 @@ ul > a:hover {
 
 /* ------ footer関連 ------ */
 
-footer {
-  height: 150px;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
+.wrapper{
+    min-height: 100vh;
+    position: relative;
+    box-sizing: border-box;
 }
+
+footer{
+    width: 100%;
+    background-color: #15053b;
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+    position: absolute;
+}
+
+
 /* ------ body関連 ------ */
 body {
   height: 100%;
   font-family: -apple-system,Segoe UI,Helvetica Neue,Hiragino Kaku Gothic ProN,"メイリオ",meiryo,sans-serif;
-  background-color: white;
+  background-color: #f1f1f1;
+  word-break: normal;
 }
+
 
 
 /* ------ 余白関連 ------ */
@@ -75,6 +89,13 @@ body {
 }
 .blank {
   height: 700px;
+}
+.gocenter {
+  text-align: center;
+}
+.whiting{
+  background-color: white;
+  height: 1500px;
 }
 
 
@@ -134,7 +155,7 @@ body {
 }
 
 
-/* ------ リンク ------ */
+
 
 
 
@@ -227,6 +248,9 @@ body {
 
 /* ------ 詳細 ------ */
 
+.showtime {
+  background-color: white;
+}
 .show_title {
     font-size: 4rem;
     font-weight: 700;
@@ -241,5 +265,101 @@ body {
   height: 60%;
 }
 
+img {
+    max-width: 100%;
+    border-radius: 7px;
+}
+
+
+
+/* ------ エラー・サクセスメッセージ ------ */
+
+.alert{
+  border: solid red 2px;
+  color: red;
+}
+
+.flash{
+  border: solid green 2px;
+  color: green;
+  text-align: center;
+}
+
+
+/* ------ プレビュー ------ */
+
+#editor {
+  width: 100%;
+  display: flex;
+}
+
+.form-control {
+  width: 50%;
+}
+.right_preview {
+  padding-top: 5px;
+  padding-left: 15px;
+  width: 50%;
+  background-color: white;
+  border: solid #15053b 1px;
+}
+
+/* ------ 検索 ------ */
+
+.search_field {
+  border-radius: 25px;
+  position: relative;
+  border: solid #15053b 3px;
+}
+.search_field input[type="text"] {
+  border-radius: 20px;
+  width: 100%;
+  height: 40px;
+}
+
+.s-button {
+  position: absolute;
+  right: 0;
+}
+
+
+/* ------ sidebar ------ */
+
+.sidebar {
+  padding-left: 16px;
+  padding: 8px;
+  width: 100%;
+  color: #85837a;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color .08s ease-in-out;
+}
+.sidebar_all .sidebar:hover {
+  background-color: #cfcfcf;
+}
+
+.sideright {
+  padding-right: 0px;
+}
+
+.sidebar_click {
+  background-color: #15053b;
+  color: white;
+  padding-left: 16px;
+  padding: 8px;
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.toc a {
+  color: #85837a;
+}
+
+.toc a:hover {
+  background-color: #cfcfcf;
+}
 
 

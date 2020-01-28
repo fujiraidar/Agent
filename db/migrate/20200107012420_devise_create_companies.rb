@@ -41,6 +41,7 @@ class DeviseCreateCompanies < ActiveRecord::Migration[5.2]
       t.text :introduction
       t.integer :marks_count
       t.timestamps null: false
+      t.datetime :deleted_at
     end
 
     add_index :companies, :email,                unique: true

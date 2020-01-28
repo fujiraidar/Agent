@@ -1,0 +1,36 @@
+
+
+<div class="container showtime">
+
+<table class="table table-hover table-sm toping">
+
+    <% @users.each do |u| %>
+
+    <tr>
+        <td>
+            <div class="info_created_at">
+                <%= u.created_at.strftime('%Y/%m/%d') %>に登録
+            </div>
+
+            <div class="index-title">
+                <%= u.name %>
+            </div>
+            <div class="tag">
+                <%= u.email %>
+            </div>
+            <div class="row">
+                <div class="col-10">
+                    <%= link_to "復元", admins_user_path(u), method: :patch, "data-confirm" => "復元するよ？" %>
+                </div>
+                <div class="col-2">
+                    <%= link_to "削除", admins_user_path(u), method: :delete, "data-confirm" => "削除するよ？" %>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    <% end %>
+
+</table>
+<%= paginate @users %>
+</div>

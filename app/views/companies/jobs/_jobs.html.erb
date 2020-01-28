@@ -11,8 +11,8 @@
 		<td class="col-md-1"><%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", size:"60x60" %></td>
 		<td class="col-md-10">
 			<div class="info_created_at">
-				<%= link_to cunpany_path(j.company) do %>
-			    	<%= i.company.company_name %>
+				<%= link_to company_path(j.company) do %>
+			    	<%= j.company.company_name %>
 			    <% end %>
 			        が<%= j.created_at.strftime('%Y/%m/%d') %>に登録
 			</div>
@@ -22,7 +22,7 @@
 			  </div>
 			<% end %>
 			<div class="info_created_at tag">
-		        ・<%= j.salary %>・
+		        ・<%= j.status %>・<%= j.salary %>
 		    </div>
 		</td>
 		<td class="col-md-1">
@@ -36,6 +36,8 @@
 
 <% else %>
 
-    <strong>現在、求人はありません</strong>
+	<div class="toping">
+	    <h5 class="toping gocenter">There are no jobs</h5>
+	</div>
 
 <% end %>

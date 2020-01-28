@@ -2,9 +2,13 @@ class Job < ApplicationRecord
 
 	belongs_to :company
 
+	validates :title, presence: true
+	validates :language, presence: true
+	validates :job, presence: true
+
 	attachment :job_image
 
-	enum job:{
+	enum status:{
 		正社員: 1,
 		契約社員: 2,
 		アルバイト: 3,

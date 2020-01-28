@@ -1,12 +1,23 @@
 
 
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
-<div class="container toping">
+<% @user = User.with_deleted.find_by(id: @help.user_id) %>
+
+<div class="container toping showtime">
 
     <div class="row">
 
         <div class="col-7 offset-1">
-            <%= @help.user.name %>
+            <% unless @user.deleted_at.nil? %>
+                退会済みユーザー
+            <% else %>
+                <%= @help.user.name %>
+            <% end %>
         </div>
         <div class="col-3">
             <div class="info_created_at">
@@ -26,7 +37,7 @@
             </div>
 		</div>
 		<div class="col-md-3">
-		    <% if @help.user_id == current_user.id %>
+		    <% if @user_id == current_user.id %>
 
 		        <p><%= link_to "このヘルプを編集する", edit_help_path(@help) %></p>
 		        <p><%= link_to "このヘルプを削除する", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
@@ -42,11 +53,9 @@
     	<%= render "users/comments/comments", comments: @comments %>
     </div>
 
-    <% unless @help.user_id == current_user.id %>
-            <div  id="comment_form">
-                <%= render "users/comments/comment_form", comment: @comment, help: @help %>
-            </div>
-    <% end %>
+    <div  id="comment_form">
+        <%= render "users/comments/comment_form", comment: @comment, help: @help %>
+    </div>
 
     <%= link_to "記事の一覧へ", infos_path %>
 

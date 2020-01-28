@@ -1,0 +1,45 @@
+
+
+
+<% if topics.exists? %>
+
+<table class="table table-hover table-sm toping">
+
+	<% topics.each do |t| %>
+
+    <tr class="row">
+		<td class="col-md-1"><%= attachment_image_tag t.company, :company_image, fallback: "no_image.jpg", size:"60x60" %></td>
+		<td class="col-md-10">
+			<div class="info_created_at">
+				<%= link_to company_path(t.company) do %>
+			    	<%= t.company.company_name %>
+			    <% end %>
+			        が<%= t.created_at.strftime('%Y/%m/%d') %>に登録
+			</div>
+			<%= link_to topic_path(t) do %>
+			  <div class="index-title">
+			    <%= t.title %>
+			  </div>
+			<% end %>
+			<div class="info_created_at tag">
+		        <%= t.language %>
+		    </div>
+		</td>
+		<td class="col-md-1">
+			<% if t.company == current_company %>
+	            <%= link_to "編集", edit_topic_path(t) %>
+	        <% end %>
+	    </td>
+	</tr>
+	<% end %>
+</table>
+<%= paginate topics %>
+
+
+<% else %>
+
+	<div class="toping">
+	    <h5 class="toping gocenter">There are no topics</h5>
+	</div>
+
+<% end %>
