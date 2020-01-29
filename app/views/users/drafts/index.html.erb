@@ -3,44 +3,51 @@
 <% if @drafts.exists? %>
 
 <div class="toping">
-<table class="table table-hover table-sm toping">
 
-	<strong>下書き</strong>
+    <div class="row">
+        <div class="col-9">
+	       <strong>下書き</strong>
+        </div>
+        <div class="col-3">
+	       <%= link_to "Back", engineer_path(current_user.id) %>
+       </div>
+   </div>
 
-	<%= link_to "Back", engineer_path(current_user.id) %>
+    <table class="table table-hover table-sm toping">
 
-    <% @drafts.each do |d| %>
+        <% @drafts.each do |d| %>
 
-    <tr>
-        <td>
-            <div class="info_created_at">
-	            <%= d.updated_at.strftime('%Y/%m/%d') %>に保存
-            </div>
+        <tr>
+            <td>
+                <div class="info_created_at">
+    	            <%= d.updated_at.strftime('%Y/%m/%d') %>に保存
+                </div>
 
-            <div class="index-title">
-                <%= d.title %>
-            </div>
+                <div class="index-title">
+                    <%= d.title %>
+                </div>
 
-            <div class="info_created_at tag">
-                <%= d.language %>
-            </div>
-        </td>
-        <td>
-			<%= link_to "Re:Start", edit_draft_path(d) %><br />
-			<%= link_to "Delete", draft_path(d), method: :delete %>
-		</td>
-    </tr>
+                <div class="info_created_at tag">
+                    <%= d.language %>
+                </div>
+            </td>
+            <td>
+    			<%= link_to "Re:Start", edit_draft_path(d) %><br />
+    			<%= link_to "Delete", draft_path(d), method: :delete %>
+    		</td>
+        </tr>
 
-    <% end %>
+        <% end %>
 
-</table>
-<%= paginate @drafts %>
+    </table>
+
+    <%= paginate @drafts %>
+
 </div>
 
 <% else %>
 
-<p>下書きはないよ</p>
+<h5 class="toping gocenter">There are no 下書き</h5>
 
-<p>記事を書こう！！</p>
 
 <% end %>

@@ -30,13 +30,13 @@
 
     <tr class="row">
       <td class="col-1">
-        <%= link_to user_path(e) do %>
+        <%= link_to engineer_path(e), data: {"turbolinks" => false} do %>
           <%= attachment_image_tag e, :profile_image, fallback: "no_image.jpg", size:"60x60"%>
         <% end %>
       </td>
       <td class="col-9">
         <strong>
-          <%= link_to engineer_path(e) do %>
+          <%= link_to engineer_path(e), data: {"turbolinks" => false} do %>
             <%= e.surname %> <%= e.name %>
           <% end %>
          <%= e.age %>歳
@@ -50,7 +50,7 @@
       </td>
       <td class="col-2 info_created_at">
         <br />
-        フォロワー<%= e.follows_count %>人
+        フォロワー<%= e.follows_count %>
       </td>
     </tr>
 

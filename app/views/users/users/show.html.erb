@@ -24,7 +24,7 @@
 
 		<% if Engineer.find_by(id: @user) %>
 			<tr>
-				<th><%= link_to "AgentPage", engineer_path(@user) %></th>
+				<th><%= link_to "AgentPage", engineer_path(@user), data: {"turbolinks" => false} %></th>
 			</tr>
 		<% end %>
 

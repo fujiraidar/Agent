@@ -73,7 +73,9 @@ body {
   background-color: #f1f1f1;
   word-break: normal;
 }
-
+.container {
+  word-break: normal;
+}
 
 
 /* ------ 余白関連 ------ */
@@ -98,66 +100,11 @@ body {
   height: 1500px;
 }
 
+/* ------ リンク ------ */
 
-/* ------ TOPページ ------ */
-
-.large-header {
-   position: relative;
-   width: 100%;
-   background: #111;
-   overflow: hidden;
-   background-size: cover;
-   background-position: center center;
-   z-index: 1;
+a:hover {
+  text-decoration: none;
 }
-
-.demo .large-header {
-   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
-   height: 800px;
-   color: white;
-}
-
-.main-title {
-   position: absolute;
-   margin: 0;
-   padding: 0;
-   color: #F9F1E9;
-   text-align: center;
-   top: 50%;
-   left: 50%;
-   -webkit-transform: translate3d(-50%, -50%, 0);
-   transform: translate3d(-50%, -50%, 0);
-}
-
-.demo .main-title {
-   text-transform: uppercase;
-   font-size: 4.2em;
-   letter-spacing: 0.1em;
-}
-
-.main-title .thin {
-   font-weight: 200;
-}
-
-@media only screen and (max-width: 768px) {
-   .demo .main-title {
-    font-size: 3em;
-   }
-}
-
-.top-message1 {
-  margin: 0 auto;
-  font-size: 100px;
-}
-.top-message1 {
-  margin: 0 auto;
-  font-size: 80px;
-}
-
-
-
-
-
 
 
 /* ------ ハンバーガーアイコン ------ */
@@ -167,6 +114,7 @@ body {
   right: 20px;
   top: 20px;
   z-index: 10;
+  z-index: 2000;
 }
 
 .menu-trigger,
@@ -231,7 +179,7 @@ body {
   width: 100%;
   min-height: 100%;
   display: none;
-  z-index: 9;
+  z-index: 1000;
 }
 
 #sp-menu li{
@@ -311,7 +259,7 @@ img {
   position: relative;
   border: solid #15053b 3px;
 }
-.search_field input[type="text"] {
+.search_field > input[type="text"] {
   border-radius: 20px;
   width: 100%;
   height: 40px;
@@ -361,5 +309,9 @@ img {
 .toc a:hover {
   background-color: #cfcfcf;
 }
+
+
+
+
 
 

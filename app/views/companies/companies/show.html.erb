@@ -20,9 +20,11 @@
 	    </tr>
 
 	    <% if user_signed_in? %>
+	    <% unless Engineer.find_by(id: current_user.id).nil? %>
 	    <tr>
 	        <th><%= render 'mark', company: @company %></th>
 	    </tr>
+	    <% end %>
 	    <% end %>
 
 	    <tr>

@@ -42,8 +42,6 @@
 		<% end %>
     <% end %>
 
-  <% if Engineer.where(id: current_user.id).exists? %>
-
     <% if controller_name == 'topics' %>
 		<%= link_to topics_path do %>
 			<div class="sidebar_click">Topic</div>
@@ -53,6 +51,8 @@
 			<div class="sidebar">Topic</div>
 		<% end %>
 	<% end %>
+
+  <% if Engineer.where(id: current_user.id).exists? %>
 
     <% if controller_name == 'companies' %>
 		<%= link_to topics_path do %>

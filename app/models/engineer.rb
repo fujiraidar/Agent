@@ -52,25 +52,4 @@ class Engineer < ApplicationRecord
     	Agentman: 7,
     }
 
-
-    def rank_up(agent)
-        if agent.ranks_count > 700
-            agent.rank = 7
-        elsif agent.ranks_count > 600
-            agent.rank = 6
-        elsif agent.ranks_count > 500
-            agent.rank = 5
-        elsif agent.ranks_count > 400
-            agent.rank = 4
-        elsif agent.ranks_count > 300
-            agent.rank = 3
-        elsif agent.ranks_count > 200
-            agent.rank = 2
-        elsif agent.ranks_count > 100
-            agent.rank = 1
-        else
-            agent.rank = 0
-        end
-    end
-
 end

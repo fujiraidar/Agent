@@ -1,3 +1,103 @@
 // Place all the styles related to the top controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+/* ------ TOPページ ------ */
+
+.large-header {
+   position: relative;
+   width: 100%;
+   background: #111;
+   overflow: hidden;
+   background-size: cover;
+   background-position: center center;
+   z-index: 1;
+}
+
+.demo .large-header {
+   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
+   height: 800px;
+   color: white;
+}
+
+.main-title {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #F9F1E9;
+   text-align: center;
+   top: 50%;
+   left: 50%;
+   -webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);
+}
+
+.demo .main-title {
+   font-size: 4.2em;
+   letter-spacing: 0.1em;
+}
+
+.main-title .thin {
+   font-weight: 200;
+}
+
+@media only screen and (max-width: 768px) {
+   .demo .main-title {
+    font-size: 3em;
+   }
+}
+
+.top-message1 {
+  margin: 0 auto;
+  font-size: 100px;
+}
+.top-message1 {
+  margin: 0 auto;
+  font-size: 80px;
+}
+
+
+.demo .signup-bottan {
+  position: absolute;
+  top: 80%;
+  left: 40%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.demo .signin-bottan {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.demo .look-bottan {
+  position: absolute;
+  top: 80%;
+  left: 60%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.demo a {
+  margin:0;
+  font-size: 20px;
+  border: solid white 2px;
+  padding: 7px;
+  color: white;
+  text-decoration: none;
+}
+
+.demo a:hover{
+  color: white;
+  background: rgba(255, 255, 255, 0.3);/*背景を半透明に*/
+}
+
+

@@ -21,8 +21,10 @@
 //= require turbolinks
 //= require_tree .
 // There are a few JS dependancies
+
 // Check the settings to take a look
 // at those as they are necessary.
+
 
 $(document).on("turbolinks:load",function(){
   $('.tab-content>div').hide();

@@ -57,4 +57,9 @@ class Companies::OffersController < ApplicationController
             redirect_to users_path
         end
     end
+    def company_paymented?
+        unless current_company.company_payments.exists?
+            redirect_to new_company_company_payment_path(current_company.id)
+        end
+    end
 end

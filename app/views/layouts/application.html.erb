@@ -14,6 +14,21 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      .search_field > input[type="text"] {
+          border-radius: 25px;
+          width: 100%;
+          height: 40px;
+          padding: 5px;
+          border:none;
+          background:none;
+          outline: none;
+      }
+      .search_field {
+        border-radius: 25px;
+        padding: 5px;
+      }
+    </style>
   </head>
 
   <body>
@@ -36,7 +51,7 @@
 
             <% if Engineer.where(id: current_user.id).exists? %>
                 <%= link_to "MyAgent", engineer_path(current_user.id) %>
-                <%= link_to "NewArticle", new_info_path %>
+                <%= link_to "NewArticle", new_info_path, data: {"turbolinks" => false} %>
             <% end %>
 
             <%= link_to "NewHelp", new_help_path %>
@@ -62,7 +77,7 @@
             <li><%= link_to "記事の一覧", infos_path %></li>
             <% if Engineer.where(id: current_user.id).exists? %>
               <li><%= link_to "MyAgent", engineer_path(current_user.id) %></li>
-              <li><%= link_to "記事の投稿", new_info_path %></li>
+              <li><%= link_to "記事の投稿", new_info_path, data: {"turbolinks" => false} %></li>
               <li><%= link_to "ヘルプの投稿", new_help_path %></li>
               <li><%= link_to "求人", jobs_path %></li>
               <li><%= link_to "企業", companies_path %></li>
@@ -70,13 +85,13 @@
               <li><%= link_to "Agent登録", new_engineer_path %></li>
               <li><%= link_to "ヘルプの投稿", new_help_path %></li>
             <% end %>
-            <li><%= link_to "エンジニア", engineers_path %></li>
+            <li><%= link_to "Agents", engineers_path %></li>
             <li><%= link_to "ガイド", top_about_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
             <li><%= link_to "その他", withdraw_path(current_user.id) %></li>
           <% elsif company_signed_in? %>
             <li><%= link_to "マイページ", company_path(current_company.id) %></li>
-            <li><%= link_to "エンジニア一覧", engineers_path %></li>
+            <li><%= link_to "Agent一覧", engineers_path %></li>
             <li><%= link_to "トピックの投稿", new_topic_path %></li>
             <li><%= link_to "求人の投稿", new_job_path %></li>
             <li><%= link_to "求人の一覧", jobs_path %></li>
@@ -95,6 +110,7 @@
           <% else %>
             <li><%= link_to "ログイン", new_user_session_path %></li>
             <li><%= link_to "新規会員登録", new_user_registration_path %></li>
+            <li><%= link_to "TOP", root_path %></li>
             <li><%= link_to "About", top_about_path %></li>
           <% end %>
         </ul>

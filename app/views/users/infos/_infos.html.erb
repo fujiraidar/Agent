@@ -21,7 +21,7 @@
 					<% unless @engineer.deleted_at.nil? %>
 		                退会済みユーザー
 		            <% else %>
-		                <%= link_to engineer_path(@engineer) do %>
+		                <%= link_to engineer_path(@engineer), data: {"turbolinks" => false} do %>
 				    		<%= @engineer.user.name %>
 				        <% end %>
 		            <% end %>

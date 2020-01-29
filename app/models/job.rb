@@ -3,8 +3,9 @@ class Job < ApplicationRecord
 	belongs_to :company
 
 	validates :title, presence: true
-	validates :language, presence: true
+	validates :salary, presence: true
 	validates :job, presence: true
+	validates :status, presence: true
 
 	attachment :job_image
 

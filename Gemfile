@@ -84,6 +84,7 @@ gem 'ransack'
 gem 'redcarpet', '~> 2.3.0'
 gem 'rouge'
 gem 'coderay'
+gem 'marked-rails'
 
 gem 'payjp'
 
