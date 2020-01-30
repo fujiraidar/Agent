@@ -81,7 +81,7 @@
 		<% end %>
 
 		<tr>
-	        <th><%= @engineer.rank %></th>
+	        <th><%= @engineer.rank %><br /><%= link_to "update", engineer_path(current_user.id), method: :patch %></th>
 	    </tr>
 
         <tr>

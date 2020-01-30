@@ -45,7 +45,7 @@
 			</div>
 		</div>
 
-	    <%= markdown(@info.body) %>
+	    <div id="content"><%= @info.body %></div>
 
 	    <% unless @info.engineer_id == current_user.id %>
 
@@ -58,8 +58,13 @@
 
 	</div>
     <div class="col-2 toping toc">
-        <%= toc(@info.body) %>
     </div>
 </div>
 
 </div>
+
+<script>
+console.log(marked('I am using __markdown__.'));
+document.getElementById('content').innerHTML =
+marked('<%= j @info.body %>');
+</script>

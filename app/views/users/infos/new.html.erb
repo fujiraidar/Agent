@@ -31,19 +31,32 @@
 
 <% end %>
 
+<pre><code>&lt;
+  $text = &quot;Hello World!!&quot; ;
+  echo $text ;
+</code></pre>
+
 </div>
 
-<script type="text/javascript">
-  window.onload = function() {
-    marked.setOptions({breaks : true});
-    new Vue({
+<script>
+
+  (function() {
+  marked.setOptions({
+      langPrefix: '',
+      highlight: function(code, lang) {
+          return hljs.highlightAuto(code, [lang]).value;
+      }
+  });
+  new Vue({
       el: '#editor',
       data: {
-        input: '<%= j @info.body %>',
+          input: '<%= j @info.body %>',
       },
       filters: {
-        marked: marked,
-      },
-    });
-  };
+          marked: marked
+      }
+  })
+  }).call(this);
 </script>
+<style src='app/aseets/stylesheets/tomorrow-night.scss'></style>
+
