@@ -1,24 +1,65 @@
-# README
+Agent README
+ 
+## 概要
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+プログラミングに関する記事の投稿や質問を、投稿するアプリです。
+また、求人を探せるWEBアプリケーションです。
+調べても、いい記事がないということがないWEBアプリケーションを目指してます。
 
-Things you may want to cover:
+***デモ***
+ 
+(http://agent.bar)
+ 
+## 機能
+・ユーザー
+- 検索機能(空白でスペースを開けると単語ごとに検索。タイトル、タグ、本文全てを検索。)
+- 質問投稿（ヘルプ）
+- 質問に対するコメント機能
+- 記事のいいね機能(マイページで閲覧可能。ブックマーク機能)
+- フォロー機能(Agentのみフォロー可能)
+- チャット機能（Agentとチャットできる。)
+- 企業のトピックの閲覧・検索
+- Agent登録機能(Agentになれる。オファー"受け取る"を選択すると、記事の内容が良ければ企業からオファーが貰える？。下記の機能が追加される。)
+- 記事投稿(下書き機能付き、書きやすいマークダウン、プレビュー付き)
+- 称号機能(いいね数などによって、称号が与えられる。)
+- 企業・求人検索
+- マーク機能(企業をマークして、アピールや、その企業の最新情報をマイページからすかさずキャッチできる。)
 
-* Ruby version
+・企業
+- トピックの投稿
+- Agent閲覧・検索
+- 決済機能(年間120万円 test 以下の機能利用可)
+- 求人投稿機能
+- オファー機能(Agentに直接オファーすることができる。)
+- メッセージ機能(オファーし、Agentが許可すれば、利用可能)
 
-* System dependencies
+・管理者
 
-* Configuration
+- 削除・復元機能(ユーザー、Agent、企業)
+- 決済管理(決済情報を期日に削除)
 
-* Database creation
 
-* Database initialization
+## 必要要件
+ 
+- プログラミングに少しでも興味がある人
+- プログラミングに関係している企業
+- マナーのある人
 
-* How to run the test suite
+## デプロイ
+ 
+1. AWS
+2. RDS
+3. Route53
+4. EC2
+5. mysql
+ 
+## その他
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+良い記事がない、ということがないように、このアプリには全ての情報があるという
+アプリケーションを目指しております。
+ 
+## 作者
+ 
+藤本僚太
+mail to: fujirider@icloud.com
+ 
