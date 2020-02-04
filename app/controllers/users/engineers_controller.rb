@@ -73,6 +73,33 @@ class Users::EngineersController < ApplicationController
     	end
     end
 
+    def upgrade
+        x = 0
+        @infos = @engineer.infos
+        @infos.each do |i|
+            x = x + i.favorites.count
+        end
+        if x > 500
+            @engineer.rank = 7
+        elsif x > 300
+            @engineer.rank = 6
+        elsif x > 200
+            @engineer.rank = 5
+        elsif x > 100
+            @engineer.rank = 4
+        elsif x > 50
+            @engineer.rank = 3
+        elsif x > 30
+            @engineer.rank = 2
+        elsif x > 10
+            @engineer.rank = 1
+        else
+            @engineer.rank = "駆け出しのAgent"
+        end
+        @engineer.update
+        redirect_to engineer_path(current_user.id)
+    end
+
     private
 
     def engineer_params

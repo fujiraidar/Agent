@@ -85,7 +85,7 @@
 	        	<%= @engineer.rank %><br />
 	        	<% if user_signed_in? %>
 		 		    <% if @user = current_user %>
-	        			<%= link_to "update", engineer_path(current_user.id), method: :patch %>
+	        			<%= link_to "Up Grade", upgrade_path(current_user.id), method: :patch %>
         		    <% end %>
 	    		<% end %>
 

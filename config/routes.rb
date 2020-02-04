@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :rooms, only: [:show, :create]
     get '/ranking' => 'infos#ranking', as: 'ranking'
     get '/withdraw/:id' => 'users#withdraw', as: 'withdraw'
+    patch '/upgrade/:id' => 'engineers#upgrade', as: 'upgrade'
     resources :boxes, only: [:show, :create, :destroy]
     resources :interviews, only: [:create, :destroy]
   end

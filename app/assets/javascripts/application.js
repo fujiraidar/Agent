@@ -219,24 +219,4 @@ $.summernote.options.lang = "ja-JP";
   });
 })(jQuery);
 
-$(document).on("turbolinks:load", function(){
-  window.onload = (function() {
-  marked.setOptions({
-      langPrefix: '',
-      highlight: function(code, lang) {
-          return hljs.highlightAuto(code, [lang]).value;
-      }
-  });
-  new Vue({
-      el: '#editor',
-      data: {
-          input: '<%= j @info.body %>',
-      },
-      filters: {
-          marked: marked
-      }
-  })
-  }).call(this);
-})
-
 
