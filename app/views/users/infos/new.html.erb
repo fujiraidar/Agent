@@ -40,13 +40,15 @@
 
 <script>
 
-  (function() {
+  window.onload = (function() {
+  Vue.filter('<%= j @info.body %>', function (value) {
   marked.setOptions({
       langPrefix: '',
       highlight: function(code, lang) {
           return hljs.highlightAuto(code, [lang]).value;
       }
   });
+  })
   new Vue({
       el: '#editor',
       data: {
@@ -58,5 +60,5 @@
   })
   }).call(this);
 </script>
-<style src='app/aseets/stylesheets/tomorrow-night.scss'></style>
+<!-- <style src='app/aseets/stylesheets/tomorrow-night.scss'></style> -->
 
