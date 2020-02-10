@@ -42,14 +42,14 @@ class Engineer < ApplicationRecord
     }
 
     enum rank:{
-        駆け出しのAgent: 0,
-        進化したAgent: 1,
-        真のAgent: 2,
-        無敵のAgent: 3,
-        奇跡のAgent: 4,
-        唯一無二のAgent: 5,
-        SuperAgent: 6,
-    	Agentman: 7,
+        駆け出しのAgent: 1,
+        進化したAgent: 2,
+        真のAgent: 3,
+        無敵のAgent: 4,
+        奇跡のAgent: 5,
+        唯一無二のAgent: 6,
+        SuperAgent: 7,
+    	Agentman: 8,
     }
 
 end

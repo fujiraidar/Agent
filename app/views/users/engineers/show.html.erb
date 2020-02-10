@@ -19,17 +19,19 @@
 	    <% if user_signed_in? %>
 		    <% if @engineer.id == current_user.id %>
 		        <tr>
-		            <th>
+		            <th class="username">
 		            	<%= link_to user_path(@engineer.id) do %>
 							<%= @engineer.user.name %>
 						<% end %>
 		  			</th>
 	            </tr>
 	            <tr>
-	            	<th><%= @engineer.surname %><%= @engineer.name %> 様</th>
+	            	<th class="user_fullname"><%= @engineer.surname %><%= @engineer.name %> 様</th>
             	</tr>
             	<tr>
-		            <th><%= link_to "下書き", drafts_path %></th>
+		            <th><div class="draft_link col-4 offset-8">
+		            	<%= link_to "下書き", drafts_path %>
+		            </div></th>
 	            </tr>
 		    <% else %>
 		        <tr>
@@ -81,11 +83,42 @@
 		<% end %>
 
 		<tr>
-	        <th>
-	        	<%= @engineer.rank %><br />
+	        <th><% if @engineer.rank == 8 %>
+	        	    <div class="rank_eight">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% elsif @engineer.rank == 7 %>
+	        	    <div class="rank_seven">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% elsif @engineer.rank == 6 %>
+	        	    <div class="rank_six">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% elsif @engineer.rank == 5 %>
+	        	    <div class="rank_five">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% elsif @engineer.rank == 4 %>
+	        	    <div class="rank_four">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% elsif @engineer.rank == 3 %>
+	        	    <div class="rank_three">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% elsif @engineer.rank == 2 %>
+	        	    <div class="rank_two">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% else %>
+	        	    <div class="rank_one">
+		        	    <%= @engineer.rank %>
+		        	</div>
+		        <% end %>
 	        	<% if user_signed_in? %>
 		 		    <% if @user = current_user %>
-	        			<%= link_to "Up Grade", upgrade_path(current_user.id), method: :patch %>
+	        			<%= link_to "Up Grade", evolution_path(current_user.id), method: :patch %>
         		    <% end %>
 	    		<% end %>
 
@@ -101,7 +134,7 @@
 			    <tr>
 			        <th>
 			        	<%= link_to edit_engineer_path(current_user.id) do %>
-			        	<i class="fas fa-wrench">編集する</i>
+			        	<i class="fas fa-wrench info_created_at">編集する</i>
 			        	<% end %>
 			        </th>
 			    </tr>

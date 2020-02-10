@@ -1,8 +1,8 @@
 class Users::EngineersController < ApplicationController
 
-    before_action :authenticate_user!, only: [:new,:edit,:create,:update,:destroy]
+    before_action :authenticate_user!, only: [:new,:edit,:create,:update,:evolution,:destroy]
     before_action :signed_in?, only: [:show]
-    before_action :correct_user, only: [:edit, :update, :destroy]
+    before_action :correct_user, only: [:edit, :update, :evolution, :destroy]
     before_action :already_agent, only: [:new, :create]
 
 	def new
@@ -53,7 +53,6 @@ class Users::EngineersController < ApplicationController
 
     def create
     	@engineer = Engineer.new(engineer_params)
-        @engineer.ranks_count = 0
         @engineer.user_id = current_user.id
         @engineer.id = current_user.id
     	if @engineer.save
@@ -73,31 +72,43 @@ class Users::EngineersController < ApplicationController
     	end
     end
 
-    def upgrade
+    def evolution
         x = 0
         @infos = @engineer.infos
         @infos.each do |i|
             x = x + i.favorites.count
         end
-        if x > 500
-            @engineer.rank = 7
-        elsif x > 300
-            @engineer.rank = 6
-        elsif x > 200
-            @engineer.rank = 5
-        elsif x > 100
-            @engineer.rank = 4
-        elsif x > 50
-            @engineer.rank = 3
-        elsif x > 30
-            @engineer.rank = 2
-        elsif x > 10
-            @engineer.rank = 1
-        else
-            @engineer.rank = "駆け出しのAgent"
+        x = x * 3
+        y = @engineer.follows_count.to_i * 2
+        x = x + y
+        current_user.comments do |c|
+            x = x + 1
         end
-        @engineer.update
-        redirect_to engineer_path(current_user.id)
+        if x > 500
+            @engineer.update(rank: 8)
+            redirect_to engineer_path(current_user.id)
+        elsif x > 300
+            @engineer.update(rank: 7)
+            redirect_to engineer_path(current_user.id)
+        elsif x > 200
+            @engineer.update(rank: 6)
+            redirect_to engineer_path(current_user.id)
+        elsif x > 100
+            @engineer.update(rank: 5)
+            redirect_to engineer_path(current_user.id)
+        elsif x > 50
+            @engineer.update(rank: 4)
+            redirect_to engineer_path(current_user.id)
+        elsif x > 30
+            @engineer.update(rank: 3)
+            redirect_to engineer_path(current_user.id)
+        elsif x > 10
+            @engineer.update(rank: 2)
+            redirect_to engineer_path(current_user.id)
+        else
+            @engineer.update(rank: 1)
+            redirect_to engineer_path(current_user.id)
+        end
     end
 
     private

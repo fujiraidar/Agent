@@ -3,3 +3,108 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+
+.username{
+	font-size: 20px;
+	background-color: #232f3e;
+	border-radius: 7px;
+	text-align: center;
+}
+.username > a {
+	color: white;
+}
+
+.user_fullname{
+	font-size: 13px;
+	background-color: #f1f1f1;
+}
+
+.draft_link{
+	text-align: center;
+	font-size: 12px;
+	height: 20px;
+	border-radius: 3px;
+	background-color: #f1f1f1;
+	border: solid silver 2px;
+}
+
+
+
+
+
+.rank_eight{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: gold;
+	color: #232f3e;
+	border: solid silver 2px;
+}
+.rank_seven{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: silver;
+	color: yellow;
+	border: solid #232f3e 2px;
+}
+.rank_six{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: red;
+	color: yellow;
+	border: solid #232f3e 2px;
+}
+.rank_five{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: #f1f1f1;
+	color: purple;
+	border: solid purple 2px;
+}
+.rank_four{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: purple;
+	color: pink;
+}
+.rank_three{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: pink;
+	color: blue;
+}
+.rank_two{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: blue;
+	color: green;
+}
+.rank_one{
+	text-align: center;
+	padding-top: 5px;
+	width: 100%;
+	height: 35px;
+	border-radius: 3px;
+	background-color: green;
+	color: white;
+}

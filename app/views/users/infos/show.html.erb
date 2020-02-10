@@ -6,13 +6,14 @@
   </div>
 <% end %>
 
+
 <div class="container toping">
 
 <div class="row">
-    <div class="col-10 showtime">
+    <div class="col-9 showtime show_blank">
 	    <div class="row">
 			<div class="col-1">
-				<%= attachment_image_tag @info.engineer, :profile_image, fallback: "no_image.jpg", size: "60X60"%>
+				<%= attachment_image_tag @info.engineer, :profile_image, fallback: "no_image.jpg",class: "show_image"%>
 			</div>
 			<div class="col-7">
 				<%= link_to engineer_path(@info.engineer) do %>
@@ -45,7 +46,9 @@
 			</div>
 		</div>
 
-	    <div id="content"><%= @info.body %></div>
+
+        <article id="content"></article>
+
 
 	    <% unless @info.engineer_id == current_user.id %>
 
@@ -57,14 +60,31 @@
 
 
 	</div>
-    <div class="col-2 toping toc">
+    <div class="col-3 toping toc">
+    	<dl id="list">
+		  <dt>目次</dt>
+		</dl>
     </div>
 </div>
 
 </div>
 
 <script>
-console.log(marked('I am using __markdown__.'));
 document.getElementById('content').innerHTML =
-marked('<%= j @info.body %>');
+html = marked('<%= j @info.body %>');
+$('#content').html(html);
+$('#content pre code').each(function(i, e) {
+    $(e).text(unsanitize($(e).text()));
+    hljs.highlightBlock(e, e.className);
+});
+
+  var countId = 1
+  $("#content h1,#content h2,#content h3,#content h4,#content h5,#content h6").each(function(){
+    var ttl = $(this).text();
+    var lv = this.nodeName.toLowerCase();
+    this.id = 'ttl-' + countId;
+    countId ++;
+    $("#list").append('<dd class="lv_'+lv+'"><a href="#'+this.id+'">'+ttl+'</a></dd>');
+  });
+
 </script>

@@ -27,7 +27,7 @@
 
 /* ------ header関連 ------ */
 header {
-  background-color: #232f3e;
+  background-color: #009cc5;
 }
 
 .header-title {
@@ -209,13 +209,60 @@ a:hover {
 }
 
 .show_image {
-  width: 100%;
-  height: 60%;
+  display: flex;
+    overflow: hidden;
+    border-radius: .2em;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+}
+.show_blank {
+  padding: 32px;
 }
 
 img {
     max-width: 100%;
     border-radius: 7px;
+}
+
+#list {
+  background: #eee;
+    dt {
+      background: #888;
+      padding: 15px;
+      font-weight: bold;
+      color: #fff;
+    }
+    dd {
+      margin: 0 10px;
+      padding: 10px;
+        &:not(:last-child) {
+          border-bottom: 1px dotted #aaa;
+        }
+        &.lv_h2 {
+          padding-left: 15px;
+        }
+        &.lv_h3 {
+          padding-left: 20px;
+        }
+        &.lv_h4 {
+          padding-left: 30px;
+        }
+        &.lv_h5 {
+          padding-left: 35px;
+        }
+        &.lv_h6 {
+          padding-left: 40px;
+        }
+        a {
+          color: #333;
+          text-decoration: none;
+            &::before {
+              content: "-";
+              margin-right: 5px;
+            }
+        }
+    }
 }
 
 
@@ -236,22 +283,47 @@ img {
 
 /* ------ プレビュー ------ */
 
-#editor {
+.editor {
   width: 100%;
   display: flex;
 }
 
-.form-control {
-  width: 50%;
-}
-.right_preview {
-  padding-top: 5px;
-  padding-left: 15px;
-  width: 50%;
-  background-color: white;
-  border: solid #15053b 1px;
+textarea#edit {
+    float: left;
+    overflow: auto;
+    width: 50%;
+    margin: 0;
+    border: none;
+    resize: none;
+    border:  solid 1px #333;
+    min-height: 100vh;
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: auto;
 }
 
+div#preview {
+    float: right;
+    overflow: auto;
+    width: 50%;
+    margin: 0;
+    padding: 10px;
+    padding-top: 5px;
+    padding-left: 15px;
+    width: 50%;
+    background-color: white;
+    border:  solid 1px #333;
+    min-height: 100vh;
+    display: inline-block;
+    vertical-align: top;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow: auto;
+}
 
 
 /* ------ 検索 ------ */
