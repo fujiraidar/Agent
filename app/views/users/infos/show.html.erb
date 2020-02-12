@@ -63,6 +63,11 @@
     <div class="col-3 toping toc">
     	<dl id="list">
 		  <dt>目次</dt>
+		  <dd>
+		  	<%= link_to info_path(@info), data: {"turbolinks" => false} do %>
+		  	    <%= @info.title %>
+		  	<% end %>
+		  </dd>
 		</dl>
     </div>
 </div>
@@ -70,21 +75,25 @@
 </div>
 
 <script>
-document.getElementById('content').innerHTML =
-html = marked('<%= j @info.body %>');
-$('#content').html(html);
-$('#content pre code').each(function(i, e) {
-    $(e).text(unsanitize($(e).text()));
-    hljs.highlightBlock(e, e.className);
+$(document).on("turbolinks:load",function(){
+	document.getElementById('content').innerHTML =
+	html = marked('<%= j @info.body %>');
+	$('#content').html(html);
+	$('#content pre code').each(function(i, e) {
+	    $(e).text(unsanitize($(e).text()));
+	    hljs.highlightBlock(e, e.className);
+	});
 });
 
+$(document).on("turbolinks:load",function(){
   var countId = 1
   $("#content h1,#content h2,#content h3,#content h4,#content h5,#content h6").each(function(){
     var ttl = $(this).text();
     var lv = this.nodeName.toLowerCase();
     this.id = 'ttl-' + countId;
     countId ++;
-    $("#list").append('<dd class="lv_'+lv+'"><a href="#'+this.id+'">'+ttl+'</a></dd>');
+    $("#list").append('<dd class="lv_'+lv+'"><a data-turbolinks="false" href="#'+this.id+'">'+ttl+'</a></dd>');
   });
+});
 
 </script>

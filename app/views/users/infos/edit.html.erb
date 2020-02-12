@@ -1,6 +1,5 @@
 
 
-
 <div class="container_info">
 
 <%= form_for @info, url: info_path(@info) , method: :patch do |f| %>
@@ -8,15 +7,13 @@
 <%= render 'layouts/error_messages', model: f.object %>
 
   <div class="form-group">
-    <%= f.text_field :title, placeholder: "タイトル (サイズは、見出し 1)" %>
-    <%= f.text_field :language, placeholder: "言語" %>
+    <%= f.text_field :title, placeholder: "タイトル" %>
+    <%= f.text_field :language, placeholder: "プログラミング技術に関連するタグ(スペースで区切る)" %>
   </div>
-  <div class="form-group">
-
-      <div id='editor'>
-        <%= f.text_area :body, rows: 20, class: 'form-control', "v-model" => "input", name: "info[body]" %>
-        <div v-html='input | marked' class="right_preview"></div>
-      </div>
+  <%= render 'layouts/marked_usage' %>
+  <div class="form-group editor">
+        <%= f.text_area :body, rows: 30, class: 'form-control', id:"edit", placeholder:"input markdown text" %>
+        <div id="preview"></div>
   </div>
 
   <div class="form-group row">
@@ -29,18 +26,48 @@
 
 </div>
 
-<script type="text/javascript">
-  window.onload = function() {
-    marked.setOptions({breaks : true});
+<script>
+  window.onload = function (){
+    // editをスクロールした時に発火させる
+    edit.addEventListener('scroll', function(){
+      setTimeout( scr(), 500);
+      }, false);
+    // カソールの位置が変わって書き始めてもスクロールするように
+    edit.addEventListener('onkeydown', scr(), false);
 
-    new Vue({
-      el: '#editor',
-      data: {
-        input: '<%= j @info.body %>',
-      },
-      filters: {
-        marked: marked,
-      },
-    });
-  };
+    /* スクロール */
+    function scr(){
+      // edit(左)とpreview(右)を変数に入れる
+      var edit = document.getElementById('edit');
+      var preview = document.getElementById('preview');
+
+      // editとpreviewそれぞれの高さの現在値を取得
+      var editScr = edit.scrollTop;
+      var previewScr = preview.scrollTop;
+
+      // previewの高さを取得
+      var previewHeight = preview.scrollHeight;
+
+      // 全体の高さから現在値の高さをひいて、高さの割合をだす
+      var editHeight = edit.scrollHeight - editScr;
+      var scrPercent = editScr / editHeight;
+
+      // editのスクロールの割合をpreviewにかけて、その分だけpreviewをスクロールさせる
+      preview.scrollTo(0, previewHeight * scrPercent);
+    }
+  }
 </script>
+
+
+<style>
+
+code {
+  background-color: #eee;
+  padding: .1em .4em;
+  color: black;
+  font-size: 100%;
+}
+
+</style>
+
+

@@ -8,59 +8,95 @@
 
 <% @user = User.with_deleted.find_by(id: @help.user_id) %>
 
-<div class="container toping showtime">
+<div class="container toping">
 
-    <div class="row">
+<div class="row">
+    <div class="col-9 showtime show_blank">
+        <div class="row">
+            <div class="col-7">
+                <% unless @user.deleted_at.nil? %>
+                    退会済みユーザー
+                <% else %>
+                    <%= @help.user.name %>
+                <% end %>
+            </div>
+            <div class="col-3">
+                <div class="info_created_at">
+                    <%= @help.created_at.strftime('%Y/%m/%d') %>にヘルプ
+                </div>
+            </div>
+        </div>
+        <div class="show_title">
+            <%= @help.title %>
+        </div>
 
-        <div class="col-7 offset-1">
-            <% unless @user.deleted_at.nil? %>
-                退会済みユーザー
-            <% else %>
-                <%= @help.user.name %>
+        <div class="row">
+            <div class="col-7 offset-2">
+                <div class="info_created_at tag">
+                    <%= @help.language %>
+                </div>
+            </div>
+            <div class="col-3">
+                <% if @user_id == current_user.id %>
+
+                    <p><%= link_to "このヘルプを編集する", edit_help_path(@help) %></p>
+                    <p><%= link_to "このヘルプを削除する", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+
+                <% end %>
+            </div>
+        </div>
+
+
+        <article id="content"></article>
+
+        <div id='comment_area'>
+            <%= render "users/comments/comments", comments: @comments %>
+        </div>
+
+        <div  id="comment_form">
+            <%= render "users/comments/comment_form", comment: @comment, help: @help %>
+        </div>
+
+        <%= link_to "ヘルプの一覧へ", helps_path %>
+
+    </div>
+    <div class="col-3 toping toc">
+        <dl id="list">
+          <dt>目次</dt>
+          <dd>
+            <%= link_to help_path(@help), data: {"turbolinks" => false} do %>
+                <%= @help.title %>
             <% end %>
-        </div>
-        <div class="col-3">
-            <div class="info_created_at">
-                <%= @help.created_at.strftime('%Y/%m/%d') %>にヘルプ
-            </div>
-        </div>
+          </dd>
+        </dl>
     </div>
-
-    <div class="show_title">
-        <%= @help.title %>
-    </div>
-
-    <div class="row">
-    	<div class="col-md-7 offset-md-2">
-            <div class="info_created_at tag">
-                <%= @help.language %>
-            </div>
-		</div>
-		<div class="col-md-3">
-		    <% if @user_id == current_user.id %>
-
-		        <p><%= link_to "このヘルプを編集する", edit_help_path(@help) %></p>
-		        <p><%= link_to "このヘルプを削除する", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
-
-		    <% end %>
-		</div>
-	</div>
-
-    <%= @help.body.html_safe %>
-
-
-    <div id='comment_area'>
-    	<%= render "users/comments/comments", comments: @comments %>
-    </div>
-
-    <div  id="comment_form">
-        <%= render "users/comments/comment_form", comment: @comment, help: @help %>
-    </div>
-
-    <%= link_to "記事の一覧へ", infos_path %>
-
-  </div>
+</div>
 
 </div>
+
+<script>
+$(document).on("turbolinks:load",function(){
+    document.getElementById('content').innerHTML =
+    html = marked('<%= j @help.body %>');
+    $('#content').html(html);
+    $('#content pre code').each(function(i, e) {
+        $(e).text(unsanitize($(e).text()));
+        hljs.highlightBlock(e, e.className);
+    });
+});
+
+$(document).on("turbolinks:load",function(){
+  var countId = 1
+  $("#content h1,#content h2,#content h3,#content h4,#content h5,#content h6").each(function(){
+    var ttl = $(this).text();
+    var lv = this.nodeName.toLowerCase();
+    this.id = 'ttl-' + countId;
+    countId ++;
+    $("#list").append('<dd class="lv_'+lv+'"><a data-turbolinks="false" href="#'+this.id+'">'+ttl+'</a></dd>');
+  });
+});
+
+</script>
+
 
 

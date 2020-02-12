@@ -27,7 +27,7 @@
 
 /* ------ header関連 ------ */
 header {
-  background-color: #009cc5;
+  background-color: #232f3e;
 }
 
 .header-title {
@@ -72,6 +72,7 @@ body {
   font-family: -apple-system,Segoe UI,Helvetica Neue,Hiragino Kaku Gothic ProN,"メイリオ",meiryo,sans-serif;
   background-color: #f1f1f1;
   word-break: normal;
+  color: #4a4a4a;
 }
 .container {
   word-break: normal;
@@ -227,10 +228,12 @@ img {
 
 #list {
   background: #eee;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10px;
     dt {
       background: #888;
       padding: 15px;
-      font-weight: bold;
       color: #fff;
     }
     dd {
@@ -331,7 +334,7 @@ div#preview {
 .search_field {
   border-radius: 25px;
   position: relative;
-  border: solid #15053b 3px;
+  border: solid #232f3e 3px;
 }
 .search_field > input[type="text"] {
   border-radius: 20px;

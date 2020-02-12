@@ -26,34 +26,34 @@
 
           <% if user_signed_in? %>
 
-            <%= link_to user_path(current_user.id) do %>
+            <%= link_to user_path(current_user.id), 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"マイページ" do %>
               <%= current_user.name %>
             <% end %>
 
-            <%= link_to infos_path do %>
+            <%= link_to infos_path, 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"検索画面" do %>
               <i class="fas fa-search"></i>
             <% end %>
 
             <% if Engineer.where(id: current_user.id).exists? %>
-                <%= link_to engineer_path(current_user.id) do %>
+                <%= link_to engineer_path(current_user.id), 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"Agentのマイページ" do %>
                   <i class="fas fa-address-card"></i>
                 <% end %>
-                <%= link_to new_info_path, data: {"turbolinks" => false} do %>
+                <%= link_to new_info_path, data: {"turbolinks" => false}, 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"記事を書く" do %>
                   <i class="fas fa-pen"></i>
                 <% end %>
             <% end %>
 
-                <%= link_to new_help_path do %>
+                <%= link_to new_help_path, 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"質問をする" do %>
                   <i class="fas fa-hands-helping"></i>
                 <% end %>
 
           <% elsif company_signed_in? %>
 
-            <%= link_to company_path(current_company.id) do %>
+            <%= link_to company_path(current_company.id), 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"マイページ" do %>
               <%= current_company.company_name %>様
             <% end %>
 
-            <%= link_to engineers_path do %>
+            <%= link_to engineers_path, 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"人材の情報一覧" do %>
               <i class="fas fa-address-book"></i>
             <% end %>
 
@@ -123,6 +123,11 @@
   </header>
   <div class="wrapper">
     <%= yield %>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $('[data-toggle="tooltip"]').tooltip()
+    </script>
   </div>
   </body>
     <footer>

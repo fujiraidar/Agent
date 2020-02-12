@@ -1,25 +1,74 @@
 
 
-<div class="container_info toping">
+<div class="container_info">
 
 <%= form_for @help, url: help_path(@help), method: :patch do |f| %>
 
 <%= render 'layouts/error_messages', model: f.object %>
 
   <div class="form-group">
-  	<%= f.text_field :title, placeholder: "ヘルプのタイトル (サイズは、見出し 1)" %>
-  	<%= f.text_field :language, placeholder: "言語" %>
+    <%= f.text_field :title, placeholder: "ヘルプのタイトル" %>
+    <%= f.text_field :language, placeholder: "プログラミング技術に関連するタグ(スペースで区切る)" %>
   </div>
-  <div class="form-group">
-
-		<%= f.text_area :body, 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
+  <%= render 'layouts/marked_usage' %>
+  <div class="form-group editor">
+        <%= f.text_area :body, rows: 30, class: 'form-control', id:"edit", placeholder:"input markdown text" %>
+        <div id="preview"></div>
   </div>
 
   <div class="form-group row">
-  	<div class="col-md-2 offset-md-10">
-  		<%= f.submit "更新する", class: "btn btn-success" %>
-  	</div>
+    <div class="col-md-2 offset-md-10">
+      <%= f.submit "ヘルプ投稿する", class: "btn btn-success" %>
+    </div>
   </div>
 
 <% end %>
+
 </div>
+
+<script>
+  window.onload = function (){
+    // editをスクロールした時に発火させる
+    edit.addEventListener('scroll', function(){
+      setTimeout( scr(), 500);
+      }, false);
+    // カソールの位置が変わって書き始めてもスクロールするように
+    edit.addEventListener('onkeydown', scr(), false);
+
+    /* スクロール */
+    function scr(){
+      // edit(左)とpreview(右)を変数に入れる
+      var edit = document.getElementById('edit');
+      var preview = document.getElementById('preview');
+
+      // editとpreviewそれぞれの高さの現在値を取得
+      var editScr = edit.scrollTop;
+      var previewScr = preview.scrollTop;
+
+      // previewの高さを取得
+      var previewHeight = preview.scrollHeight;
+
+      // 全体の高さから現在値の高さをひいて、高さの割合をだす
+      var editHeight = edit.scrollHeight - editScr;
+      var scrPercent = editScr / editHeight;
+
+      // editのスクロールの割合をpreviewにかけて、その分だけpreviewをスクロールさせる
+      preview.scrollTo(0, previewHeight * scrPercent);
+    }
+  }
+</script>
+
+
+<style>
+
+code {
+  background-color: #eee;
+  padding: .1em .4em;
+  color: black;
+  font-size: 100%;
+}
+
+</style>
+
+
+

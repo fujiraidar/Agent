@@ -44,9 +44,6 @@
 			    <tr>
 			        <th><%= render 'users/engineers/follow', engineer: @engineer %></th>
 			    </tr>
-			    <tr>
-			        <th class="info_created_at">マーク</th>
-			    </tr>
 			<% end %>
 	    <% elsif company_signed_in? && @engineer.offer == "受け取る" %>
 	        <tr>
@@ -58,9 +55,6 @@
 	        <tr>
 		      <th><%= render 'companies/offers/new_offer', offer: @offer, engineer: @engineer %></th>
 		    </tr>
-		    <tr>
-			    <th class="info_created_at">マーク</th>
-			</tr>
 		<% else %>
 		    <tr>
 	            <th>オファーを許可していません</th>
@@ -118,7 +112,9 @@
 		        <% end %>
 	        	<% if user_signed_in? %>
 		 		    <% if @user = current_user %>
-	        			<%= link_to "Up Grade", evolution_path(current_user.id), method: :patch %>
+	        			<%= link_to evolution_path(current_user.id), method: :patch, 'data-toggle' => "tooltip", 'data-placement'=>"right", title:"称号の更新" do %>
+	        			<i class="fas fa-upload info_created_at">Up grade</i>
+	        			<% end %>
         		    <% end %>
 	    		<% end %>
 

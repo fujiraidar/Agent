@@ -3,9 +3,8 @@
 <% if company_signed_in? %>
 <%= form_for offer, url: offers_path, method: :post do |f| %>
 <%= f.hidden_field :engineer_id, value: engineer.id %>
-<%= engineer.id %>
 <div class="container text-center">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post">オファー</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post">オファーする</button>
     <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

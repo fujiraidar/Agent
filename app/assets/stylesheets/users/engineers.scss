@@ -3,20 +3,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+/* ------ mypage(Agent_page) ------ */
 
 .username{
 	font-size: 20px;
-	background-color: #232f3e;
-	border-radius: 7px;
-	text-align: center;
+	color: #4a4a4a;
 }
 .username > a {
-	color: white;
+	color: #4a4a4a;
 }
 
 .user_fullname{
 	font-size: 13px;
 	background-color: #f1f1f1;
+	color: #4a4a4a
 }
 
 .draft_link{

@@ -117,7 +117,7 @@ code {
 }
 
 
-pre .filename{
+.filename{
   display: inline-block;
   padding: 0 .25em;
   background-color: #777;
@@ -125,3 +125,11 @@ pre .filename{
   width: 100%;
   padding: 0.5em;
 }
+
+blockquote{
+  border-left: 5px solid #ddd;
+  color: #777;
+  padding: 1em;
+  padding-right: 0;
+}
+

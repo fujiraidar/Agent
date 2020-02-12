@@ -15,11 +15,11 @@
 	<table class="table">
 
 		<tr>
-			<th><%= @user.name %></th>
+			<th class="username"><%= @user.name %></th>
 		</tr>
 
 		<tr>
-			<th><%= @user.email %></th>
+			<th class="info_created_at tag"><%= @user.email %></th>
 		</tr>
 
 		<% if Engineer.find_by(id: @user) %>
@@ -34,7 +34,7 @@
 					<th>
 						<%= form_for @user, url: user_path, method: :patch do |f| %>
 						<%= f.text_field :name %>
-						<%= f.submit "ok" %>
+						<%= f.submit "ok", 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"ユーザーネームの変更" %>
 						<% end %>
 					</th>
 				</tr>

@@ -2,7 +2,7 @@
 
 <%= form_for comment, remote: true, url:comments_path, method: :post do |f| %>
     <div class='form-group toping'>
-      <%= f.text_area :comment , size: "12x3"%> <%= f.submit :送信 %>
+      <%= f.text_area :comment , size: "12x3", placeholder: "質問に対する解答(urlも可能)"%> <%= f.submit :送信 %>
       <%= f.hidden_field :help_id, value: help.id %>
     </div>
 

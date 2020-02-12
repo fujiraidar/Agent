@@ -1,0 +1,377 @@
+
+
+
+<div class="marked_usage">
+  <div data-toggle="modal" data-target="#post" ><a data-toggle="tooltip" data-placement="right" title="Markdownの書き方"><i class="fa fa-question-circle"></i><a></div>
+    <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+            	<h4>Markdownの書き方</h4>
+            	<div class='tabs marked_tab'>
+					  <div class='my-tab-buttons'>
+					    <span class='my-content1'>レイアウト<i class="fa fa-list-ol tabicon"></i></span>
+					    <span class='my-content2'>装飾<i class="fa fa-bold tabicon"></i></span>
+					    <span class='my-content3'>挿入<i class="fa fa-link tabicon"></i></span>
+					    <span class='my-content4'>テーブル<i class="fa fa-table tabicon"></i></span>
+					    <span class='my-content5'>例</span>
+					    <div id='my-lamp' class='my-content1'></div>
+					  </div>
+					  <div class='my-tab-content'>
+
+					    <div class='my-content1'>
+                            <div class="markedtoping">
+					    	<table>
+					    		<tbody>
+					    			<tr>
+					    				<td>
+					    					<h1>見出し h1</h1>
+					    					<h2>見出し h2</h2>
+					    					<h3>見出し h3</h3>
+					    					<h4>見出し h4</h4>
+					    					<h5>見出し h5</h5>
+					    					<h6>見出し h6</h6>
+					    				</td>
+					    				<td>
+					    					<div class="markdown-content">
+<textarea class="heading_code" style="height: 250px;"># 見出し h1
+## 見出し h2
+### 見出し h3
+#### 見出し h4
+##### 見出し h5
+###### 見出し h6</textarea>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<ul>
+												<li>リスト</li>
+												<li>リスト</li>
+												<ul><li>リスト</li></ul>
+											</ul>
+										</td>
+										<td>
+											<div class="markdown-content">
+<textarea class="list_code" style="height: 80px;">- リスト
+- リスト
+ - リスト</textarea>
+			    							</div>
+			    						</td>
+			    					</tr>
+			    					<tr>
+			    						<td>
+			    							<ol>
+			    								<li>番号付きリスト</li>
+			    								<li>番号付きリスト</li>
+			    								<ol><li>番号付きリスト</li></ol>
+			    							</ol>
+			    						</td>
+			    						<td>
+			    							<div class="markdown-content">
+<textarea class="list_code" style="height: 80px;">1. 番号付きリスト
+2. 番号付きリスト
+ 1. 番号付きリスト</textarea>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						    </div>
+
+				        </div>
+
+				        <div class='my-content2'>
+				        	<div class="markedtoping">
+				        	<table>
+				        		<tbody>
+				        			<tr>
+				        				<td>
+				        					<b>太字</b>
+				        				</td>
+				        				<td>
+				        					<div class="markdown-content">
+				        						<textarea class="strong_code" readonly="">**太字**
+__太字__</textarea>
+				        					</div>
+				        				</td>
+				        			</tr>
+				        			<tr>
+				        				<td>
+				        					<i>イタリック</i>
+				        				</td>
+				        				<td>
+				        					<div class="markdown-content">
+				        						<textarea class="emphasis_code" readonly="">*イタリック*
+_イタリック_</textarea>
+				        					</div>
+				        				</td>
+				        			</tr>
+				        			<tr>
+				        				<td>
+				        					<s>打ち消し線</s>
+				        				</td>
+				        				<td>
+				        					<div class="markdown-content">
+				        						<textarea class="strikethrough_code" readonly="">~~打ち消し~~</textarea>
+				        					</div>
+				        				</td>
+				        			</tr>
+				        			<tr class="highlight">
+				        				<td><code>タグ</code></td>
+				        				<td>
+				        					<div class="markdown-content">
+				        						<textarea class="inline_code" readonly="">`tag`</textarea>
+				        					</div>
+				        				</td>
+				        			</tr>
+				        			<tr>
+				        				<td>
+				        					<blockquote>引用<blockquote>引用</blockquote></blockquote>
+				        				</td>
+				        				<td>
+				        					<div class="markdown-content">
+				        						<textarea class="blockquotes_code" readonly="">&gt; text
+&gt;&gt; text</textarea>
+                                            </div>
+                                        </td>
+                                    </tr>
+				        		</tbody>
+				        	</table>
+				        	</div>
+				        </div>
+
+				        <div class='my-content3'>
+				      	    <div class="markedtoping">
+				      	    <table>
+				      	    	<tbody>
+				      	    		<tr>
+				      	    			<td>
+				      	    				<a href="#">リンク</a>
+				      	    			</td>
+				      	    			<td>
+				      	    				<div class="markdown-content">
+				      	    					<textarea class="link_code" readonly="">[title](http://...)</textarea>
+				      	    				</div>
+				      	    			</td>
+				      	    		</tr>
+				      	    		<tr>
+				      	    			<td>画像埋め込み</td>
+				      	    			<td>
+				      	    				<div class="markdown-content">
+				      	    					<textarea class="image_code" readonly="">![alt](http://...)</textarea>
+				      	    				</div>
+				      	    			</td>
+				      	    		</tr>
+				      	    		<tr>
+				      	    			<td>水平線</td>
+				      	    			<td>
+				      	    				<div class="markdown-content">
+				      	    					<textarea class="horizontal_rules_code" readonly="">---</textarea>
+				      	    				</div>
+				      	    			</td>
+				      	    		</tr>
+				      	    		<tr class="highlight">
+				      	    			<td>
+				      	    				<div class="markdown-content">
+				      	    					<sample style="width: 20%;">
+				      	    						<div class="filename">new.html.erb</div>
+				      	    						<code class="ruby hljs">puts
+				      	    							<span class="hljs-string">'Agent'</span>
+				      	    						</code>
+				      	    					</sample>
+				      	    				</div>
+				      	    			</td>
+				      	    			<td>
+				      	    				<div class="markdown-content">
+<textarea class="syntax_code" style="height: 80px">```ruby:new.html.erb
+puts'Agent'
+```</textarea>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>Markdownのエスケープ</td>
+										<td><div class="markdown-content"><textarea class="escape_markdown_code" readonly="">\</textarea></div></td>
+									</tr>
+								</tbody>
+							</table>
+						    </div>
+				        </div>
+				        <div class='my-content4'>
+				        	<div class="markedtoping">
+				        		<textarea class="tablesample_code" style="height: 160px">| ID(left) | Name(right) | Agent(center) |
+|:---|---:|:---:|
+| 1 | Agent | Agentman |
+| 2 | Chris | SuperAgent |
+| 3 | Anna | Agentman |
+| 4 | Gail | Agentman |
+| 5 | Mike | SuperAgent |
+| 6 | Emma | Agentman |</textarea>
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th style="text-align:left">ID(left)</th>
+										<th style="text-align:right">Name(right)</th>
+										<th style="text-align:center">Agent(center)</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="text-align:left">1</td>
+										<td style="text-align:right">Agent</td>
+										<td style="text-align:center">Agentman</td>
+									</tr>
+									<tr>
+										<td style="text-align:left">2</td>
+										<td style="text-align:right">Chris</td>
+										<td style="text-align:center">SuperAgent</td>
+										</tr>
+									<tr>
+										<td style="text-align:left">3</td>
+										<td style="text-align:right">Anna</td>
+										<td style="text-align:center">Agentman</td>
+									</tr>
+									<tr>
+										<td style="text-align:left">4</td>
+										<td style="text-align:right">Gail</td>
+										<td style="text-align:center">Agentman</td>
+									</tr>
+									<tr>
+										<td style="text-align:left">5</td>
+										<td style="text-align:right">Mike</td>
+										<td style="text-align:center">SuperAgent</td>
+									</tr>
+									<tr>
+										<td style="text-align:left">6</td>
+										<td style="text-align:right">Emma</td>
+										<td style="text-align:center">Agentman</td>
+									</tr>
+								</tbody>
+							</table>
+					        </div>
+					    </div>
+
+				        <div class='my-content5'>
+				        	<div class="markedtoping">
+				        	<table>
+				      	    	<tbody>
+				      	    		<tr>
+				      	    			<td>
+				      	    				<h2 id="-h2">見出し h2</h2>
+											<hr>
+											<p> <strong>Agent</strong></p>
+											<ul>
+											<li>text1</li>
+											<li>text2<ul>
+											<li>text2-1<ul>
+											<li>text2-1-1</li>
+											<li>text2-1-2</li>
+											</ul>
+											</li>
+											<li>text 2-2</li>
+											</ul>
+											</li>
+											<li>text 3</li>
+											</ul>
+											<h2 id="-1-h2">内容1 h2</h2>
+											<hr>
+											<p>text</p>
+											<sample><div class="filename">new.html.erb</div><code class="ruby hljs">puts<span class="hljs-string">'Agent'</span>
+											</code></sample>
+											<h2 id="-2-h2">内容2 h2</h2>
+											<hr>
+											<table class="table table-hover"><thead><tr>
+											<th style="text-align:left">ID(left)</th>
+											<th style="text-align:right">Name(right)</th>
+											<th style="text-align:center">Agent(center)</th>
+											</tr>
+											</thead><tbody><tr>
+											<td style="text-align:left">1</td>
+											<td style="text-align:right">Agent</td>
+											<td style="text-align:center">Agentman</td>
+											</tr>
+											<tr>
+											<td style="text-align:left">2</td>
+											<td style="text-align:right">Chris</td>
+											<td style="text-align:center">SuperAgent</td>
+											</tr>
+											<tr>
+											<td style="text-align:left">3</td>
+											<td style="text-align:right">Anna</td>
+											<td style="text-align:center">Agentman</td>
+											</tr>
+											<tr>
+											<td style="text-align:left">4</td>
+											<td style="text-align:right">Gail</td>
+											<td style="text-align:center">Agentman</td>
+											</tr>
+											<tr>
+											<td style="text-align:left">5</td>
+											<td style="text-align:right">Mike</td>
+											<td style="text-align:center">SuperAgent</td>
+											</tr>
+											<tr>
+											<td style="text-align:left">6</td>
+											<td style="text-align:right">Emma</td>
+											<td style="text-align:center">Agentman</td>
+											</tr>
+											</tbody></table><h2 id="-">参考</h2>
+											<blockquote>
+											<p>text</p>
+											<blockquote>
+											<p>text</p>
+											</blockquote>
+											</blockquote>
+				      	    			</td>
+				      	    			<td>
+				      	    				<div class="markdown-content">
+				      	    					<textarea class="link_code" style="height: 1150px">## 見出し h2
+---
+ **Agent**
+- text1
+- text2
+ - text2-1
+   - text2-1-1
+   - text2-1-2
+ - text 2-2
+- text 3
+
+## 内容1 h2
+---
+text
+```ruby:new.html.erb
+puts'Agent'
+```
+## 内容2 h2
+---
+| ID(left) | Name(right) | Agent(center) |
+|:---|---:|:---:|
+| 1 | Agent | Agentman |
+| 2 | Chris | SuperAgent |
+| 3 | Anna | Agentman |
+| 4 | Gail | Agentman |
+| 5 | Mike | SuperAgent |
+| 6 | Emma | Agentman |
+
+## 参考
+> text
+>> text</textarea>
+				      	    				</div>
+				      	    			</td>
+				      	    		</tr>
+				      	    	</tbody>
+				      	    </table>
+				      	    </div>
+				        </div>
+
+				      </div>
+					</div>
+			</div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
