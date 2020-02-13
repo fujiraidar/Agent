@@ -48,7 +48,7 @@ renderer.table = function(header, body) {
 
 
 $(document).on("turbolinks:load",function(){
-
+console.log('こんにちは');
 	marked.setOptions({
 	// Githubっぽいmd形式にするか
 	gfm: true,
@@ -75,11 +75,15 @@ $(document).on("turbolinks:load",function(){
 
 	});
 
+	console.log('こんにちは');
+
     $('#edit').keyup(function() {
+    	console.log('こんにちは');
         var md = sanitize($(this).val());
         var html = marked(md)
         $('#preview').html(html);
         $('#preview pre code').each(function(i, e) {
+        	console.log('こんにちは');
             $(e).text(unsanitize($(e).text()));
             hljs.highlightBlock(e, e.className);
         });
