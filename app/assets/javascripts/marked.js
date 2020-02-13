@@ -92,10 +92,12 @@ console.log('こんにちは');
 });
 
 function sanitize(html) {
+	console.log('こんにちは1');
     return $('<div />').text(html).html().replace(/&gt;/g, ">");
 }
 function unsanitize(html) {
-    return $('<div />').html(html).text();
+	console.log('こんにちは2');
+    return $('<div />').html(html).text().replace(/&gt;/g, ">");;
 }
 
 

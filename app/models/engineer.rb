@@ -21,7 +21,6 @@ class Engineer < ApplicationRecord
 
     has_many :infos
     has_many :drafts, dependent: :destroy
-    has_many :comments
     has_many :offers, dependent: :destroy
     has_many :boxes, dependent: :destroy
 

@@ -43,7 +43,7 @@
                 <% end %>
             <% end %>
 
-                <%= link_to new_help_path, 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"質問をする" do %>
+                <%= link_to new_help_path, data: {"turbolinks" => false}, 'data-toggle' => "tooltip", 'data-placement'=>"bottom", title:"質問をする" do %>
                   <i class="fas fa-hands-helping"></i>
                 <% end %>
 
@@ -73,12 +73,12 @@
             <% if Engineer.where(id: current_user.id).exists? %>
               <li><%= link_to "MyAgent", engineer_path(current_user.id) %></li>
               <li><%= link_to "記事の投稿", new_info_path, data: {"turbolinks" => false} %></li>
-              <li><%= link_to "ヘルプの投稿", new_help_path %></li>
+              <li><%= link_to "ヘルプの投稿", new_help_path, data: {"turbolinks" => false}  %></li>
               <li><%= link_to "求人", jobs_path %></li>
               <li><%= link_to "企業", companies_path %></li>
             <% else %>
               <li><%= link_to "Agent登録", new_engineer_path %></li>
-              <li><%= link_to "ヘルプの投稿", new_help_path %></li>
+              <li><%= link_to "ヘルプの投稿", new_help_path, data: {"turbolinks" => false}  %></li>
             <% end %>
             <li><%= link_to "Agents", engineers_path %></li>
             <li><%= link_to "ガイド", top_about_path %></li>

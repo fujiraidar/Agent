@@ -32,7 +32,7 @@
                 </div>
             </td>
             <td>
-    			<%= link_to "Re:Start", edit_draft_path(d) %><br />
+    			<%= link_to "Re:Start", edit_draft_path(d), data: {"turbolinks" => false} %><br />
     			<%= link_to "Delete", draft_path(d), method: :delete %>
     		</td>
         </tr>

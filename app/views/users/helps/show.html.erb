@@ -39,7 +39,7 @@
             <div class="col-3">
                 <% if @user_id == current_user.id %>
 
-                    <p><%= link_to "このヘルプを編集する", edit_help_path(@help) %></p>
+                    <p><%= link_to "このヘルプを編集する", edit_help_path(@help), data: {"turbolinks" => false} %></p>
                     <p><%= link_to "このヘルプを削除する", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 
                 <% end %>

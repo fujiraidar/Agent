@@ -39,7 +39,7 @@
 			<div class="col-3">
 			    <% if @info.engineer_id == current_user.id %>
 
-			        <p><%= link_to "この記事を編集する", edit_info_path(@info) %></p>
+			        <p><%= link_to "この記事を編集する", edit_info_path(@info), data: {"turbolinks" => false} %></p>
 			        <p><%= link_to "この記事を削除する", info_path(@info), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 
 			    <% end %>
@@ -76,8 +76,9 @@
 
 <script>
 $(document).on("turbolinks:load",function(){
+	var md = sanitize('<%= j @info.body %>');
 	document.getElementById('content').innerHTML =
-	html = marked('<%= j @info.body %>');
+	html = marked(md);
 	$('#content').html(html);
 	$('#content pre code').each(function(i, e) {
 	    $(e).text(unsanitize($(e).text()));

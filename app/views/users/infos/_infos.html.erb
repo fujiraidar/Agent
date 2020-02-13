@@ -42,7 +42,7 @@
 				</div>
 				<% if user_signed_in? %>
 				<% if @engineer.id == current_user.id %>
-		            <%= link_to "編集", edit_info_path(i) %>
+		            <%= link_to "編集", edit_info_path(i), data: {"turbolinks" => false} %>
 		        <% end %>
 		        <% end %>
 		    </td>
