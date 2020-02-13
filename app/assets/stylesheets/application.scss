@@ -286,12 +286,12 @@ img {
 
 /* ------ プレビュー ------ */
 
-.editor {
+#editor {
   width: 100%;
   display: flex;
 }
 
-textarea#edit {
+.form-control {
     float: left;
     overflow: auto;
     width: 50%;
@@ -308,7 +308,7 @@ textarea#edit {
     overflow: auto;
 }
 
-div#preview {
+.right_preview {
     float: right;
     overflow: auto;
     width: 50%;

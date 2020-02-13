@@ -11,9 +11,11 @@
   	<%= f.text_field :language, placeholder: "プログラミング技術に関連するタグ(スペースで区切る)" %>
   </div>
   <%= render 'layouts/marked_usage' %>
-  <div class="form-group editor">
-        <%= f.text_area :body, rows: 30, class: 'form-control', id:"edit", placeholder:"input markdown text" %>
-        <div id="preview"></div>
+  <div class="form-group">
+    <div id="editor">
+      <%= f.text_area :body, rows: 30, class: 'form-control', id:"edit", placeholder:"input markdown text" %>
+      <div id="preview" class="right_preview"></div>
+    </div>
   </div>
 
   <div class="form-group row">
