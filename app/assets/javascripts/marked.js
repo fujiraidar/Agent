@@ -48,7 +48,7 @@ renderer.table = function(header, body) {
 
 
 $(document).on("turbolinks:load",function(){
-console.log('こんにちは');
+console.log('こんにちは1');
 	marked.setOptions({
 	// Githubっぽいmd形式にするか
 	gfm: true,
@@ -75,10 +75,10 @@ console.log('こんにちは');
 
 	});
 
-	console.log('こんにちは');
+	console.log('こんにちは2');
 
     $('#edit').keyup(function() {
-    	console.log('こんにちは');
+    	console.log($(this).val());
         var md = sanitize($(this).val());
         var html = marked(md)
         $('#preview').html(html);
@@ -92,13 +92,16 @@ console.log('こんにちは');
 });
 
 function sanitize(html) {
-	console.log('こんにちは1');
+	console.log(html);
     return $('<div />').text(html).html().replace(/&gt;/g, ">");
+    console.log(html);
 }
 function unsanitize(html) {
-	console.log('こんにちは2');
-    return $('<div />').html(html).text().replace(/&gt;/g, ">");;
+	console.log('こんにちはun');
+    return $('<div />').html(html).text()
 }
+
+
 
 
 

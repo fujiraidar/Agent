@@ -18,7 +18,7 @@
 
         <% if @helps.exists? %>
 
-            <%= search_form_for @q_help, url:helps_path, remote: true do |f| %>
+            <%= search_form_for @q_help, url: helps_path, remote: true do |f| %>
 
                 <div class="search_field">
                     <%= f.text_field :title_or_body_or_language_cont_any %>

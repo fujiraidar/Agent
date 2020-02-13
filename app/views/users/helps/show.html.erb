@@ -76,8 +76,9 @@
 
 <script>
 $(document).on("turbolinks:load",function(){
+    md = ('<%= j @info.body %>').replace(/&gt;/g, ">");;
     document.getElementById('content').innerHTML =
-    html = marked('<%= j @help.body %>');
+    html = marked(md);
     $('#content').html(html);
     $('#content pre code').each(function(i, e) {
         $(e).text(unsanitize($(e).text()));
