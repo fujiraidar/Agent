@@ -1,3 +1,15 @@
 // Place all the styles related to the users::marks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.mark__button {
+	background: linear-gradient(to right, #00fe75, #dbff00);
+    line-height: 42px;
+    color: #6d3701;
+    font-size: 14px;
+    display: inline-block;
+    padding: 0 18px;
+    border-radius: 100px;
+    font-weight: bold;
+}

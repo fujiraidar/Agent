@@ -3,11 +3,11 @@
 <div class="mark-link" id="mark-link-<%= company.id %>">
   <% if Engineer.find_by(id: current_user.id).marks.find_by(company_id: company.id) %>
     <%= link_to unmark_path(company.id), method: :delete, remote: true do %>
-        <div class = "mark__button">マーク中<%= company.marks.count %></div>
+        <div class = "mark__button">マーク中  <%= company.marks.count %></div>
     <% end %>
   <% else %>
     <%= link_to mark_path(company.id), method: :post, remote: true do %>
-        <div class = "mark__button">マークする<%= company.marks.count %></div>
+        <div class = "mark__button">マークする  <%= company.marks.count %></div>
     <% end %>
   <% end %>
 </div>

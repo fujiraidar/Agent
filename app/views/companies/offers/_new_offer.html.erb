@@ -10,10 +10,10 @@
         <div class="modal-content">
           <%= render 'layouts/error_messages', model: f.object %>
             <div class="modal-body">
-              <%= f.text_field :title, class: "form-control", placeholder: "タイトル(職種など)" %>
-              <%= f.text_field :salary, class: "form-control", placeholder: "給与" %>
-              <%= f.select :status, Offer.statuses.keys.to_a, class: "form-control" %>
-              <%= f.text_area :job, class: "form-control", placeholder: "仕事内容", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
+              <%= f.text_field :title, placeholder: "タイトル(職種など)" %>
+              <%= f.text_field :salary, placeholder: "給与" %>
+              <%= f.select :status, Offer.statuses.keys.to_a %>
+              <%= f.text_area :job,  placeholder: "仕事内容", 'data-provider': :summernote, src: "./js/summernote/lang/summernote-ja-JP.js" %>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

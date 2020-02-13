@@ -14,24 +14,22 @@ class Companies::CompanyPaymentsController < ApplicationController
 	    @company.with_lock do
 	      Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
 	      amount = 1200000
-	      if params['payjp-token'].empty?
-	      	redirect_to new_company_company_payment_path(current_company.id)
-	      else
-		      charge = Payjp::Charge.create(currency: 'jpy', amount: amount, card: params['payjp-token'])
-		      @company_payment.charge_id = charge['id']
-		      @company_payment.company_id = current_company.id
+	      charge = Payjp::Charge.create(currency: 'jpy', amount: amount, card: params['payjp-token'])
+	      @company_payment.charge_id = charge['id']
+	      @company_payment.company_id = current_company.id
 
-		      respond_to do |format|
-		        if @company_payment.save
-		          format.html { redirect_to company_path(@company), notice: '購入しました。' }
-		        end
-		      end
-		    end
-		    rescue Payjp::CardError
-		      respond_to do |format|
-		          format.html { redirect_to company_path(@company), notice: 'カードエラーが発生しました' }
-		    end
-		  end
+	      respond_to do |format|
+	        if @company_payment.save
+	          format.html { redirect_to company_path(@company) }
+	          flash[:notice] = '購入しました。'
+	        end
+	      end
+	    end
+	    rescue Payjp::CardError
+	      respond_to do |format|
+	          format.html { redirect_to company_path(@company) }
+	          flash[:notice] = 'カードエラーが発生しました'
+	    end
 	end
 
   private
@@ -46,10 +44,5 @@ class Companies::CompanyPaymentsController < ApplicationController
     	end
     end
 
-    def company_paymented?
-    	unless current_company.company_payments.exists?
-    		redirect_to new_company_company_payment_path(current_company.id)
-    	end
-    end
 
 end
