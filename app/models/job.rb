@@ -16,4 +16,6 @@ class Job < ApplicationRecord
 		日雇い: 4,
 		その他: 5,
     }
+
+    acts_as_taggable
 end

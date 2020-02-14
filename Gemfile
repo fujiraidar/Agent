@@ -81,9 +81,8 @@ gem 'summernote-rails', '~> 0.8.10.0'
 
 gem 'ransack'
 
-gem 'redcarpet', '~> 2.3.0'
-gem 'rouge'
-gem 'coderay'
+gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on'
+
 gem 'marked-rails'
 
 gem 'payjp'

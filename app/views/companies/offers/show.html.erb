@@ -23,10 +23,10 @@
 			    <% end %>
 		    <% elsif user_signed_in? %>
 		        <% if @offer.engineer_id == current_user.id %>
-				    <%= form_for @box, remote: true, url:boxes_path, method: :post do |f| %>
-				    <%= f.hidden_field :company_id, value: @offer.company_id %>
-				    <%= f.hidden_field :engineer_id, value: @offer.engineer_id %>
-				    <%= f.submit :返答 %>
+				    <%= form_for @box, url:boxes_path, method: :post do |f| %>
+					    <%= f.hidden_field :company_id, value: @offer.company_id %>
+					    <%= f.hidden_field :engineer_id, value: @offer.engineer_id %>
+					    <%= f.submit :返答 %>
 				    <% end %>
 				<% end %>
 			<% else %>

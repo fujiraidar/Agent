@@ -40,7 +40,7 @@ class Users::DraftsController < ApplicationController
 	private
 
 	def draft_params
-		params.require(:draft).permit(:engineer_id, :language, :title, :body)
+		params.require(:draft).permit(:engineer_id, :title, :body, :tag_list)
 	end
 
 	def correct_user

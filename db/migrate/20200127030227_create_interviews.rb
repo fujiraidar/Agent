@@ -4,6 +4,7 @@ class CreateInterviews < ActiveRecord::Migration[5.2]
 
       t.integer :box_id, null: false
       t.text :message, null: false
+      t.string :name, null: false
       t.timestamps
     end
   end

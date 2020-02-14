@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     patch '/evolution/:id' => 'engineers#evolution', as: 'evolution'
     resources :boxes, only: [:show, :create, :destroy]
     resources :interviews, only: [:create, :destroy]
+    get 'infos/tags/:tag', to: 'infos#index', as: :info_tag
+    get 'helps/tags/:tag', to: 'helps#index', as: :help_tag
   end
 
   scope module: :companies do
@@ -36,6 +38,8 @@ Rails.application.routes.draw do
   	resources :jobs
   	resources :topics
   	resources :offers, only: [:new, :show, :create, :destroy]
+  	get 'topics/tags/:tag', to: 'topics#index', as: :topic_tag
+  	get 'jobs/tags/:tag', to: 'jobs#index', as: :job_tag
   end
 
   namespace :admins do

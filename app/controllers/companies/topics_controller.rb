@@ -12,8 +12,10 @@ class Companies::TopicsController < ApplicationController
 	end
 
 	def index
-		if params[:q] != nil
-            params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
+		if params[:tag]
+	        @topics = Topic.tagged_with(params[:tag]).page(params[:page]).per(10).order("created_at DESC")
+		elsif params[:q] != nil
+            params[:q]['title_or_body_or_tags_name_cont_any'] = params[:q]['title_or_body_or_tags_name_cont_any'].split(/[\p{blank}\s]+/)
             @q_topic = Topic.ransack(params[:q])
             @topics = @q_topic.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
@@ -56,7 +58,7 @@ class Companies::TopicsController < ApplicationController
 	private
 
 	def topic_params
-		params.require(:topic).permit(:company_id, :language, :title, :body)
+		params.require(:topic).permit(:company_id, :title, :body, :tag_list)
 	end
 
 	def signed_in?

@@ -1,6 +1,7 @@
 class Users::BoxesController < ApplicationController
 
-    before_action :correct_user
+    before_action :authenticate_user!, only: [:create]
+    before_action :correct_user, only: [:show, :destroy]
 
 	def show
 		@box = Box.find(params[:id])
@@ -19,6 +20,7 @@ class Users::BoxesController < ApplicationController
 	def destroy
 		@box = Box.find(params[:id])
 		@box.destroy
+		redirect_to engineer_path(current_user.id)
 	end
 
 	private

@@ -21,7 +21,7 @@
             <%= search_form_for @q_help, url: helps_path, remote: true do |f| %>
 
                 <div class="search_field">
-                    <%= f.text_field :title_or_body_or_language_cont_any %>
+                    <%= f.text_field :title_or_body_or_tags_name_cont_any %>
                     <%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button" do %>
                         <i class="fa fa-search"></i>
                     <% end %>

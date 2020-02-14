@@ -32,9 +32,11 @@
 
 	    <div class="row">
 	    	<div class="col-7 offset-2">
-	    		<div class="info_created_at tag">
-			    	<%= @info.language %>
-			    </div>
+			    	<% @info.tag_list.each do |tag| %>
+				    	<%= link_to info_tag_path(tag) do %>
+							<code><%= tag %></code>
+						<% end %>
+					<% end %>
 			</div>
 			<div class="col-3">
 			    <% if @info.engineer_id == current_user.id %>
@@ -56,7 +58,7 @@
 
 	    <% end %>
 
-	    <%= link_to "記事の一覧へ", users_path %>
+	    <%= link_to "記事の一覧へ", infos_path %>
 
 
 	</div>

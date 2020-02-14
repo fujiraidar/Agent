@@ -15,7 +15,7 @@
       <%= search_form_for @q, url:jobs_path do |f| %>
 
         <div class="search_field">
-        <%= f.text_field :title_or_status_or_salary_or_job_cont_any %>
+        <%= f.text_field :title_or_status_or_salary_or_job_or_tags_name_cont_any %>
 
       	<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button", id: "search_button" do %>
       	    <i class="fa fa-search"></i>
@@ -43,6 +43,11 @@
       		<p class="card-text col-10 offset-1 info_created_at tag">
       			・<%= j.status %><br />
       			・<%= j.salary %>
+            <% j.tag_list.each do |tag| %>
+                <%= link_to job_tag_path(tag) do %>
+                    <code><%= tag %></code>
+                <% end %>
+            <% end %>
       		</p>
       		<p class="card-text col-10 offset-1 info_created_at">
       			<%= link_to company_path(j.company) do %>

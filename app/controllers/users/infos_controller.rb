@@ -14,8 +14,11 @@ class Users::InfosController < ApplicationController
 	end
 
 	def index
-		if params[:q] != nil
-            params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
+		if params[:tag]
+	        @infos = Info.tagged_with(params[:tag]).page(params[:page]).per(10).order("created_at DESC")
+	        @q_info = Info.ransack(params[:q])
+		elsif params[:q] != nil
+            params[:q]['title_or_body_or_tags_name_cont_any'] = params[:q]['title_or_body_or_tags_name_cont_any'].split(/[\p{blank}\s]+/)
             @q_info = Info.ransack(params[:q])
             @infos = @q_info.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
@@ -71,7 +74,7 @@ class Users::InfosController < ApplicationController
 	private
 
 	def info_params
-		params.require(:info).permit(:engineer_id, :language, :title, :body,)
+		params.require(:info).permit(:engineer_id, :title, :body, :tag_list)
 	end
 
 	def signed_in?

@@ -25,8 +25,12 @@
                         <%= h.title %>
                     </div>
                     <% end %>
-                    <div class="info_created_at tag">
-                        <%= h.language %>
+                    <div class="info_created_at">
+                        <% h.tag_list.each do |tag| %>
+                            <%= link_to help_tag_path(tag), remote: true do %>
+                                <code><%= tag %></code>
+                            <% end %>
+                        <% end %>
                     </div>
                 </td>
                 <td>

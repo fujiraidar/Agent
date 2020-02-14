@@ -14,8 +14,10 @@ class Companies::JobsController < ApplicationController
 	end
 
 	def index
-		if params[:q] != nil
-            params[:q]['title_or_status_or_salary_or_job_cont_any'] = params[:q]['title_or_status_or_salary_or_job_cont_any'].split(/[\p{blank}\s]+/)
+		if params[:tag]
+	        @jobs = Job.tagged_with(params[:tag]).page(params[:page]).per(10).order("created_at DESC")
+		elsif params[:q] != nil
+            params[:q]['title_or_status_or_salary_or_job_or_tags_name_cont_any'] = params[:q]['title_or_status_or_salary_or_job_or_tags_name_cont_any'].split(/[\p{blank}\s]+/)
             @q = Job.ransack(params[:q])
             @jobs = @q.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
@@ -55,7 +57,7 @@ class Companies::JobsController < ApplicationController
 	private
 
 	def job_params
-		params.require(:job).permit(:company_id, :job_image, :title, :job, :salary, :status)
+		params.require(:job).permit(:company_id, :job_image, :title, :job, :salary, :status, :tag_list)
 	end
 
 	def signed_in?

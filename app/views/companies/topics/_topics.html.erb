@@ -22,7 +22,11 @@
 			  </div>
 			<% end %>
 			<div class="info_created_at tag">
-		        <%= t.language %>
+		        <% t.tag_list.each do |tag| %>
+                    <%= link_to topic_tag_path(tag) do %>
+                        <code><%= tag %></code>
+                    <% end %>
+                <% end %>
 		    </div>
 		</td>
 		<td class="col-md-1">

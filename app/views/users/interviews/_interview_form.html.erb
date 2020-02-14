@@ -1,9 +1,16 @@
 
 
 
-	<%= form_for interview, remote: true, url:interviews_path, method: :post do |f| %>
+	<%= form_for interview, url:interviews_path, method: :post, remote: true do |f| %>
 	    <div class='form-group toping'>
 	      <%= f.text_area :message , size: "12x3"%> <%= f.submit :送信 %>
+
+	      <% if user_signed_in? %>
+	      	<%= f.hidden_field :name, value: @engineer.surname + " " + @engineer.name %>
+	      <% end %>
+	      <% if company_signed_in? %>
+	      	<%= f.hidden_field :name, value: @company.company_name + " " + @company.surname + " " + @company.name %>
+	      <% end %>
 	      <%= f.hidden_field :box_id, value: box.id %>
 	    </div>
 	<% end %>

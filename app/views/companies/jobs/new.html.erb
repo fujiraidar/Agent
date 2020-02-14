@@ -25,7 +25,11 @@
         <div class="form-group">
             <%= f.select :status, Job.statuses.keys.to_a, placeholder:" 雇用形態の選択" %>
         </div>
+        <div class="form-group">
+            <%= f.text_field :tag_list, placeholder: "プログラミング技術に関連するタグ(スペースで区切る)" %>
+        </div>
       </div>
+
 
       <div class="col-12 toping">
         <div class="form-group">

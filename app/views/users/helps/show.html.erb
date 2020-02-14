@@ -32,15 +32,19 @@
 
         <div class="row">
             <div class="col-7 offset-2">
-                <div class="info_created_at tag">
-                    <%= @help.language %>
+                <div class="info_created_at">
+                    <% @help.tag_list.each do |tag| %>
+                        <%= link_to help_tag_path(tag) do %>
+                            <code><%= tag %></code>
+                        <% end %>
+                    <% end %>
                 </div>
             </div>
             <div class="col-3">
-                <% if @user_id == current_user.id %>
+                <% if @user.id == current_user.id %>
 
-                    <p><%= link_to "このヘルプを編集する", edit_help_path(@help), data: {"turbolinks" => false} %></p>
-                    <p><%= link_to "このヘルプを削除する", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+                    <p><%= link_to "編集", edit_help_path(@help), data: {"turbolinks" => false} %></p>
+                    <p><%= link_to "削除", help_path(@help), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
 
                 <% end %>
             </div>
@@ -76,7 +80,7 @@
 
 <script>
 $(document).on("turbolinks:load",function(){
-    md = ('<%= j @info.body %>').replace(/&gt;/g, ">");;
+    md = ('<%= j @help.body %>').replace(/&gt;/g, ">");;
     document.getElementById('content').innerHTML =
     html = marked(md);
     $('#content').html(html);

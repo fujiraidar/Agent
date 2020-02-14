@@ -15,8 +15,11 @@ class Users::HelpsController < ApplicationController
 	end
 
 	def index
-		if params[:q] != nil
-            params[:q]['title_or_body_or_language_cont_any'] = params[:q]['title_or_body_or_language_cont_any'].split(/[\p{blank}\s]+/)
+		if params[:tag]
+	        @helps = Help.tagged_with(params[:tag]).page(params[:page]).per(10).order("created_at DESC")
+	        @q_help = Help.ransack(params[:q])
+		elsif params[:q] != nil
+            params[:q]['title_or_body_or_tags_name_cont_any'] = params[:q]['title_or_body_or_tags_name_cont_any'].split(/[\p{blank}\s]+/)
             @q_help = Help.ransack(params[:q])
             @helps = @q_help.result(distinct: true).page(params[:page]).per(10).order("created_at DESC")
         else
@@ -57,7 +60,7 @@ class Users::HelpsController < ApplicationController
 	private
 
 	def help_params
-		params.require(:help).permit(:user_id, :language, :title, :body)
+		params.require(:help).permit(:user_id, :title, :body, :tag_list)
 	end
 
 	def signed_in?

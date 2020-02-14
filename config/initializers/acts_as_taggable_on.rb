@@ -1,0 +1,2 @@
+
+ActsAsTaggableOn.delimiter = ' '

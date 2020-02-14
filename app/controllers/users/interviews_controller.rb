@@ -8,7 +8,7 @@ class Users::InterviewsController < ApplicationController
         @interviews = Interview.where(box_id: @box.id)
         if @interview.save
             @interview = Interview.new
-            # render :create
+            redirect_to box_path(@box.id)
         end
     end
 
@@ -21,7 +21,7 @@ class Users::InterviewsController < ApplicationController
     private
 
     def interview_params
-    	params.require(:interview).permit(:box_id, :message)
+    	params.require(:interview).permit(:box_id, :message, :name)
     end
 
     def signed_in?
