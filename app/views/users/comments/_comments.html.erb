@@ -20,6 +20,6 @@
 	</div>
 	<% end %>
 	<div class="max-area">
-		<%= simple_format(c.comment) %><br />
+		<%= text_url_to_link(simple_format(c.comment)).html_safe %><br />
 	</div><br />
 <% end %>
