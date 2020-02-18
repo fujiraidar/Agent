@@ -2,72 +2,31 @@
 
 <div class="container">
 
-  <div class="row">
+    <div class="row">
 
-    <div class="col-2 toping sideright">
-      <%= render 'layouts/sidebar' %>
+        <div class="col-2 toping sideright">
+            <%= render 'layouts/sidebar' %>
+        </div>
+
+        <div class="col-10 whiting toping">
+
+
+            <%= search_form_for @q, url:jobs_path do |f| %>
+
+              <div class="search_field">
+              <%= f.text_field :title_or_status_or_salary_or_job_or_tags_name_cont_any %>
+
+              <%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button", id: "search_button" do %>
+                  <i class="fa fa-search"></i>
+              <% end %>
+              </div>
+
+            <% end %>
+
+            <div class='topic toping container'>
+                <%= render 'companies/jobs/jobs', jobs: @jobs %>
+            </div>
+
+        </div>
     </div>
-
-  <div class="col-10 whiting toping">
-
-    <% if @jobs.exists? %>
-
-      <%= search_form_for @q, url:jobs_path do |f| %>
-
-        <div class="search_field">
-        <%= f.text_field :title_or_status_or_salary_or_job_or_tags_name_cont_any %>
-
-      	<%= button_tag :type => "submit", class: "btn btn-default btn-s-md s-button", id: "search_button" do %>
-      	    <i class="fa fa-search"></i>
-      	<% end %>
-        </div>
-
-      <% end %>
-
-
-      <div class="row bottoming">
-
-        <% @jobs.each do |j| %>
-
-        <div class="col-12 col-md-6 col-lg-3 toping">
-        <div class="card">
-            <%= link_to company_path(j.company) do %>
-              <%= attachment_image_tag j, :job_image, fallback: "no_image.jpg", class: "card-img-top job-images" %>
-            <% end %>
-            <div class="card-body row">
-                <div class="card-title col-12 ">
-                  	<%= link_to job_path(j) do %>
-                    	<%= j.title %>
-                  	<% end %>
-                </div>
-      		<p class="card-text col-10 offset-1 info_created_at tag">
-      			・<%= j.status %><br />
-      			・<%= j.salary %>
-            <% j.tag_list.each do |tag| %>
-                <%= link_to job_tag_path(tag) do %>
-                    <code><%= tag %></code>
-                <% end %>
-            <% end %>
-      		</p>
-      		<p class="card-text col-10 offset-1 info_created_at">
-      			<%= link_to company_path(j.company) do %>
-      				<%= j.company.company_name %>
-      			<% end %>
-      		</p>
-      	</div>
-      </div>
-        </div>
-        <% end %>
-        </div>
-
-      <% else %>
-
-        <div class="toping">
-          <h5 class="toping gocenter">There are no jobs</h5>
-        </div>
-
-      <% end %>
-  </div>
-  </div>
 </div>
-

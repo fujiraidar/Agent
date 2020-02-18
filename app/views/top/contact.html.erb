@@ -1,0 +1,34 @@
+
+
+<div class="container">
+    <div class="mx-auto toping">
+
+    	<%= form_for @contact, url: contacting_path , method: :post do |f| %>
+
+			<%= render 'layouts/error_messages', model: f.object %>
+
+            <% if user_signed_in? %>
+            	<p>登録しているメールアドレスに返答いたします。</p>
+            	<%= f.hidden_field :email, value: current_user.email %>
+            <% elsif company_signed_in? %>
+                <p>登録しているメールアドレスに返答いたします。</p>
+            	<%= f.hidden_field :email, value: current_company.email %>
+            <% else %>
+	        	<%= f.text_field :email, placeholder: "メールアドレス" %>
+	        <% end %>
+
+	        <%= f.text_area :content, placeholder: "お問い合わせ内容" , style:"height:400px;"%>
+
+	        <%= f.submit "お問い合わせを送信する", class: "btn btn-success" %>
+
+	    <% end %>
+
+	    <% if user_signed_in? %>
+		    <div class="hidding">
+		    	<%= link_to "退会はこちら", withdraw_path(current_user.id)%>
+		    </div>
+	    <% end %>
+
+
+    </div>
+</div>

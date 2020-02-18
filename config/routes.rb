@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :admins
-  devise_for :companies
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
+  devise_for :admins, controllers: {
     sessions: 'users/sessions'
   }
+  devise_for :companies
+  devise_for :users
 
   scope module: :users do
   	resources :infos
@@ -43,7 +42,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admins do
-  	resources :admins, only: [:index]
+  	resources :admins, only: [:index, :show, :destroy]
   	resources :users, only: [:index, :update, :destroy]
   	resources :engineers, only: [:index, :update, :destroy]
   	resources :companies, only: [:index, :update, :destroy]
@@ -56,5 +55,7 @@ Rails.application.routes.draw do
 
   root 'top#top'
   get 'top/about'
+  get '/contact' => 'top#contact', as: 'contact'
+  post '/contacting' => 'top#contacting', as: 'contacting'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

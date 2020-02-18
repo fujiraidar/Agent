@@ -14,6 +14,7 @@ class Companies::TopicsController < ApplicationController
 	def index
 		if params[:tag]
 	        @topics = Topic.tagged_with(params[:tag]).page(params[:page]).per(10).order("created_at DESC")
+	        @q_topic = Topic.ransack(params[:q])
 		elsif params[:q] != nil
             params[:q]['title_or_body_or_tags_name_cont_any'] = params[:q]['title_or_body_or_tags_name_cont_any'].split(/[\p{blank}\s]+/)
             @q_topic = Topic.ransack(params[:q])

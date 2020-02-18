@@ -83,21 +83,24 @@
         <ul>
           <% if user_signed_in? %>
             <li><%= link_to "MyPage", user_path(current_user.id) %></li>
-            <li><%= link_to "記事の一覧", infos_path %></li>
             <% if Engineer.where(id: current_user.id).exists? %>
               <li><%= link_to "MyAgent", engineer_path(current_user.id) %></li>
               <li><%= link_to "記事の投稿", new_info_path, data: {"turbolinks" => false} %></li>
-              <li><%= link_to "ヘルプの投稿", new_help_path, data: {"turbolinks" => false}  %></li>
-              <li><%= link_to "求人", jobs_path %></li>
-              <li><%= link_to "企業", companies_path %></li>
             <% else %>
               <li><%= link_to "Agent登録", new_engineer_path %></li>
-              <li><%= link_to "ヘルプの投稿", new_help_path, data: {"turbolinks" => false}  %></li>
             <% end %>
+            <li><%= link_to "ヘルプの投稿", new_help_path, data: {"turbolinks" => false}  %></li>
+            <li><%= link_to "記事", infos_path %></li>
+            <li><%= link_to "ランキング", ranking_path %></li>
+            <li><%= link_to "ヘルプ", helps_path %></li>
             <li><%= link_to "Agents", engineers_path %></li>
+            <% if Engineer.where(id: current_user.id).exists? %>
+              <li><%= link_to "求人", jobs_path %></li>
+              <li><%= link_to "企業", companies_path %></li>
+            <% end %>
             <li><%= link_to "ガイド", top_about_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-            <li><%= link_to "その他", withdraw_path(current_user.id) %></li>
+            <li><%= link_to "お問い合わせ", contact_path %></li>
           <% elsif company_signed_in? %>
             <li><%= link_to "マイページ", company_path(current_company.id) %></li>
             <li><%= link_to "Agent一覧", engineers_path %></li>
@@ -105,10 +108,9 @@
             <li><%= link_to "求人の投稿", new_job_path %></li>
             <li><%= link_to "求人の一覧", jobs_path %></li>
             <li><%= link_to "企業の一覧", companies_path %></li>
-            <li><%= link_to "記事の一覧", infos_path %></li>
-            <li><%= link_to "ガイド", top_about_path %></li>
-            <li><%= link_to "ログアウト",destroy_company_session_path, method: :delete %></li>
-            <li><%= link_to "お問い合わせ",destroy_company_session_path %></li>
+            <li><%= link_to "ユーザーガイド", top_about_path %></li>
+            <li><%= link_to "ログアウト", destroy_company_session_path, method: :delete %></li>
+            <li><%= link_to "お問い合わせ", contact_path %></li>
           <% elsif admin_signed_in? %>
             <li><%= link_to "お問い合わせ", admins_admins_path %></li>
             <li><%= link_to "企業の期限", admins_company_payments_path %></li>
@@ -121,6 +123,7 @@
             <li><%= link_to "新規会員登録", new_user_registration_path %></li>
             <li><%= link_to "TOP", root_path %></li>
             <li><%= link_to "About", top_about_path %></li>
+            <li><%= link_to "お問い合わせ", contact_path %></li>
           <% end %>
         </ul>
       </div>
@@ -147,7 +150,7 @@
         <div class="row">
           <div class="col-md-4">
             <h2 class="header-title">Agent</h2>
-              <%= link_to "Click here for companies", new_company_registration_path, class: "header-title"%>
+              <%= link_to "Click here for companies", new_company_session_path, class: "header-title"%>
           </div>
           <div class="col-md-4 offset-md-3">
             <%= link_to "About", top_about_path, class: "header-title" %>

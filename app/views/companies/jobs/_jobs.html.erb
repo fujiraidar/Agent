@@ -3,7 +3,7 @@
 
 <% if jobs.exists? %>
 
-<table class="table table-hover table-sm toping">
+<table class="table table-sm">
 
 	<% jobs.each do |j| %>
 
@@ -17,17 +17,26 @@
 			        が<%= j.created_at.strftime('%Y/%m/%d') %>に登録
 			</div>
 			<%= link_to job_path(j) do %>
-			  <div class="index-title">
+			  <strong class="index-title">
 			    <%= j.title %>
-			  </div>
+			  </strong>
 			<% end %>
-			<div class="info_created_at tag">
-		        ・<%= j.status %>・<%= j.salary %>
+			<div class="info_created_at">
+		        ・<%= j.status %>・<%= j.salary %>・
+
+		        <% j.tag_list.each do |tag| %>
+                <%= link_to job_tag_path(tag) do %>
+                    <code><%= tag %></code>
+                <% end %>
+
+            <% end %>
 		    </div>
 		</td>
 		<td class="col-md-1">
+			<% if company_signed_in? %>
 			<% if j.company == current_company %>
 	            <%= link_to "編集", edit_job_path(j) %>
+	        <% end %>
 	        <% end %>
 	    </td>
 	</tr>

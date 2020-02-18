@@ -1,5 +1,12 @@
 
 
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+
 <div class="demo">
   <div class="content">
     <div id="large-header" class="large-header">
@@ -26,6 +33,70 @@
 <div class="container toping showtime">
 
 	<h2>function</h2>
+
+    <% if company_signed_in? %>
+    <h4>- company`s function</h4>
+
+    <div class="row bottoming">
+    	<div class="col-2 offset-2">
+		    <strong>・マイページ</strong>
+		</div>
+		<div class="col-8 showtime">
+			<p></p>
+			<p>マイページ左側の「編集する」から、企業様のイメージ画像と会社紹介が登録可能です。</p>
+			<p>担当者名の変更も可能です。</p>
+		</div>
+	</div>
+
+    <div class="row bottoming">
+    	<div class="col-2 offset-2">
+		    <strong>・検索機能</strong>
+		</div>
+		<div class="col-8 showtime">
+			<p></p>
+			<p>オファー待ちのユーザー情報やトピックの検索ができます。</p>
+			<p>オファーは、有料プランになります。</p>
+		</div>
+	</div>
+
+    <div class="row bottoming">
+    	<div class="col-2 offset-2">
+		    <strong>・トピック投稿機能</strong>
+		</div>
+		<div class="col-8 showtime">
+			<p></p>
+			<p>最新のニュースやお知らせしたい事を配信することができます。</p>
+			<p>無料でご利用できます。求人を直接、募集するのは、お控えください。</p>
+			<p>求人を直接、募集した内容がある場合、ご利用を停止させていただく場合がございます。</p>
+			<p>求人をご利用の場合は、有料プランになります。マイページの「お支払い」を選択ください。</p>
+		</div>
+	</div>
+
+	<div class="row bottoming">
+    	<div class="col-2 offset-2">
+		    <strong>・求人投稿機能</strong>
+		</div>
+		<div class="col-8 showtime">
+			<p></p>
+			<p>求人情報の投稿が可能です。有料プランになります。</p>
+			<p>ここでは、直接外部リンクなどを貼ったり、メールアドレスを載せるなど、可能になっております。</p>
+		</div>
+	</div>
+
+	<div class="row bottoming">
+    	<div class="col-2 offset-2">
+		    <strong>・オファー機能</strong>
+		</div>
+		<div class="col-8 showtime">
+			<p></p>
+			<p>オファー待ちのユーザーを直接、オファーしスカウトすることができます。</p>
+			<p>ユーザーが気に入れば、ユーザーがメッセージルームを開くことが可能になっております。</p>
+		</div>
+	</div>
+
+    <h4>- user`s function</h4>
+
+    <% end %>
 
 	<div class="row bottoming">
     	<div class="col-2 offset-2">

@@ -3,7 +3,7 @@
 
 <% if topics.exists? %>
 
-<table class="table table-hover table-sm toping">
+<table class="table table-sm">
 
 	<% topics.each do |t| %>
 
@@ -21,7 +21,7 @@
 			    <%= t.title %>
 			  </div>
 			<% end %>
-			<div class="info_created_at tag">
+			<div class="info_created_at">
 		        <% t.tag_list.each do |tag| %>
                     <%= link_to topic_tag_path(tag) do %>
                         <code><%= tag %></code>

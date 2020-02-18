@@ -3,6 +3,7 @@ class Admins::AdminsController < ApplicationController
 	before_action :admin?
 
 	def index
+		@contacts = Contact.all.page(params[:page]).per(10).order("created_at DESC")
 	end
 
 	private

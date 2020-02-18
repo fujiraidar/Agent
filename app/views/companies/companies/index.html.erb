@@ -27,7 +27,7 @@
 
     <% @companies.each do |c| %>
 
-    <table class="table table-hover table-sm">
+    <table class="table table-sm">
       <tr class="row">
         <td class="col-1">
           <%= link_to company_path(c) do %>
@@ -36,7 +36,7 @@
         </td>
         <td class="col-3">
           <%= link_to company_path(c) do %>
-            <strong><%= c.company_name %></strong>
+            <h4><strong><%= c.company_name %></strong></h4>
           <% end %>
           <div class="info_created_at">
               マーク数<%= c.marks_count %>

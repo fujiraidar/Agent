@@ -1,0 +1,17 @@
+
+
+
+<div class="container">
+    <div class="mx-auto toping">
+
+        <div class="info_created_at tag">
+        	<%= @contact.email %>
+        </div>
+        <div class="toping">
+        	<%= simple_format(@contact.content) %>
+        </div>
+        <div class="toping">
+        	<p><%= link_to "このお問い合わせを削除する", admins_admin_path(@contact), method: :delete, "data-confirm" => "本当に削除しますか？" %></p>
+        </div>
+    </div>
+</div>

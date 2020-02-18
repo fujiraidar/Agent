@@ -16,6 +16,7 @@ class Companies::JobsController < ApplicationController
 	def index
 		if params[:tag]
 	        @jobs = Job.tagged_with(params[:tag]).page(params[:page]).per(10).order("created_at DESC")
+	        @q = Job.ransack(params[:q])
 		elsif params[:q] != nil
             params[:q]['title_or_status_or_salary_or_job_or_tags_name_cont_any'] = params[:q]['title_or_status_or_salary_or_job_or_tags_name_cont_any'].split(/[\p{blank}\s]+/)
             @q = Job.ransack(params[:q])
