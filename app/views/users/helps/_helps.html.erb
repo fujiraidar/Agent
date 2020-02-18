@@ -20,7 +20,7 @@
                         <% end %>
                             が<%= h.created_at.strftime('%Y/%m/%d') %>にヘルプ
                     </div>
-                    <%= link_to help_path(h) do %>
+                    <%= link_to help_path(h), data: {"turbolinks" => false} do %>
                     <div class="index-title">
                         <%= h.title %>
                     </div>

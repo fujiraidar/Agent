@@ -27,7 +27,7 @@
 		            <% end %>
 				        が<%= i.created_at.strftime('%Y/%m/%d') %>に投稿
 				</div>
-				<%= link_to info_path(i) do %>
+				<%= link_to info_path(i), data: {"turbolinks" => false} do %>
 				  <div class="index-title">
 		    		<%= i.title %>
 				  </div>

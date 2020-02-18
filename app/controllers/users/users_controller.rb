@@ -2,7 +2,7 @@ class Users::UsersController < ApplicationController
 
     before_action :authenticate_user!, only: [:show, :create, :update, :destroy ,:withdraw]
     before_action :signed_in?, only: [:show]
-    before_action :correct_user, only: [:update, :destroy ,:withdraw]
+    before_action :correct_user, only: [:show, :update, :destroy ,:withdraw]
 
 	def show
         @user = User.find(params[:id])
