@@ -1,6 +1,6 @@
 class Users::UsersController < ApplicationController
 
-    before_action :authenticate_user!, only: [:show, :create, :update, :destroy ,:withdraw]
+    before_action :authenticate_user!, only: [:show, :index, :create, :update, :destroy ,:withdraw]
     before_action :signed_in?, only: [:show]
     before_action :correct_user, only: [:show, :update, :destroy ,:withdraw]
 
@@ -18,6 +18,10 @@ class Users::UsersController < ApplicationController
         @favorites = @user.favorites.page(params[:page]).per(10).order("created_at DESC")
         @follows = @user.follows.page(params[:page]).per(10).order("created_at DESC")
 	end
+
+    def index
+        @rooms = current_user.rooms
+    end
 
 	def update
         if @user.update(user_params)

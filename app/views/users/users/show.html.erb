@@ -31,6 +31,9 @@
 		<% if user_signed_in? %>
 			<% if @user == current_user %>
 				<tr>
+					<th><div class="draft_link col-7 offset-5"><%= link_to "User Chat Room", users_path %></div></th>
+				</tr>
+				<tr>
 					<th>
 						<%= form_for @user, url: user_path, method: :patch do |f| %>
 						<%= f.text_field :name %>

@@ -1,1 +1,18 @@
 
+<div class="container toping room">
+  <%= link_to "My Page", user_path(current_user.id) %>
+  <div class="toping room">
+  <% @rooms.each do |r| %>
+   <%= link_to room_path(r) do %>
+    <div class="row">
+      <div class="roomname col-1"><%= r.name %></div>
+      <% entryuser = r.entries.where.not(user_id: current_user.id).last %>
+      <% @you_user = User.find_by(id: entryuser.user_id ) %>
+      <div class="roomname col-1"><%= @you_user.name %></div>
+      <% @last_message = r.direct_messages.last %>
+      <div class="roomname col-9 offset-1 info_created_at tag"><%= @last_message.name %></div>
+    </div>
+   <% end %>
+  <% end %>
+  </div>
+</div>
