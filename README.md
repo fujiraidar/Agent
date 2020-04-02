@@ -14,18 +14,6 @@
 　メールアドレス：test@com
 　パスワード： testtest
 
-・テスト企業
-　メールアドレス：test@com
-　パスワード： testtest
-- テストクレジット情報
-　カード番号: 4242 4242 4242 4242
-    有効期限: 現在より1年後以上
-　その他: 空欄以外可能
-
-・管理者
-　メールアドレス：agent@admin.com
-　パスワード： testtest
-
 企業:(http://agent.bar/companies/sign_in)
 
 ・テスト企業
