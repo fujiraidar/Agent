@@ -2,6 +2,6 @@
   "name": "Agent",
   "private": true,
   "dependencies": {
-    "highlight.js": "^9.18.0"
+    "highlight.js": "^10.1.2"
   }
 }
